@@ -15,3 +15,24 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.wrap {
+width: 100%;
+}
+
+.floatleft {
+    float:left;
+    width: 30%;
+    background-image: url('left_background.png');
+    height: 800px;
+}
+
+.floatright {
+float: right;
+    height: 800px;
+    width: 70%;
+}
+
+.floatright h1 {
+  text-align: center;
+}
