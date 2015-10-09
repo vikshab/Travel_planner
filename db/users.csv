@@ -1,0 +1,5 @@
+user_name,email,password,password_confirmation,phone
+one,one@email.com,1234,1234,6198223260
+two,two@email.com,1234,1234
+three,three@email.com,1234,1234
+five,five@email.com,1234,1234
