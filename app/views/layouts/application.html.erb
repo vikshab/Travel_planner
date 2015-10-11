@@ -7,8 +7,80 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="wrapper">
+      <div class="box">
+          <div class="row">
+              <!-- sidebar -->
+              <div class="column col-sm-3" id="sidebar">
+                  <ul class="nav">
 
-<%= yield %>
+                    <li>
+                      <div class="col-sm-12">
 
-</body>
+                      <% if session[:user_id].nil?  %>
+                        <div class="page-header text-muted divider">
+                          <center><h4>TripPlanner</h4>
+                        </div>
+                        <% else %>
+
+                        <div class="page-header text-muted divider">
+                          <center><small><%= @current_user.user_name %></small>
+                        </div>
+
+                        <% end %>
+
+                        <% if session[:user_id].nil?  %>
+
+                          <center><small class="text-muted"><%= link_to "Create a new account", new_users_path %></small><br>
+                          <center><small class="text-muted"><%= link_to "Sign up with Facebook", "/auth/facebook/" %></small>
+                        <% else %>
+                          <center><small class="text-muted"><%= link_to "Logout", logout_path, method: :delete %></small>
+                        <% end %>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div class="col-sm-12">
+                        <% if session[:user_id].nil? %>
+
+                            <center><small class="text-muted"><%= link_to "Log in", '/login', :method => "get" %></small><br>
+
+                          <!-- <% if current_page?('/login') %>
+
+                            <div class="page-header text-muted divider">
+                              <small>Login</small>
+                            </div>
+
+                          <% end %> -->
+                        <% end %>
+                      </div>
+                    </li>
+
+                  </ul>
+                  <ul class="nav hidden-xs" id="sidebar-footer">
+                      <li>
+                      <small class="text-muted"><%= link_to "About app", about_path%></small>
+                      </li>
+                      <small class="text-muted">©Copyright Victoria Shabunia</small>
+                  </ul>
+              </div>
+
+              <% if flash[:success] %>
+                <div class="alert alert-success">
+                  <p><%= flash[:success] %></p>
+                </div>
+              <% end %>
+
+              <% if flash[:error] %>
+                <div class="alert alert-danger">
+                  <p><%= flash[:error] %></p>
+                </div>
+              <% end %>
+
+              <!-- /sidebar -->
+            <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
