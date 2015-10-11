@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
-  def index; end
+  before_action :current_user
 
-  def about
-    # current_user
-  end
+  def index;end
+
+  def about;end
 end
