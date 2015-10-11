@@ -1,4 +1,7 @@
 class WelcomeController < ApplicationController
-  def index
+  def index; end
+
+  def about
+    # current_user
   end
 end
