@@ -357,9 +357,10 @@ hoverblk {
 .weather h1 {
   color: #fff;
   font-family: weather;
-  font-size: 20px;
-  font-weight: normal;
-  line-height: 1.0;
+  margin: -8px 0 8px;
+  font-size: 32px;
+  // font-weight: normal;
+  // line-height: 1.0;
 }
 //
 .weather h1.icon-0:before { content: ":"; }
@@ -412,20 +413,21 @@ hoverblk {
 .weather h1.icon-47:before { content: "S"; }
 
 .weather h2 {
-  margin: -50px 0 8px;
+  margin: -5px 0 3px;
   color: #fff;
-  font-size: 20px;
-  font-weight: 10px;
-  text-align: center;
+  font-size: 10px;
+  // font-weight: 10px;
+  // text-align: center;
 }
 
 .weather p {
-  font-size: 8px;
+  font-size: 9px;
   color: white;
+
 }
 .weather p.temp {
-  font-size: 10px;
-  margin: -50px;
+  font-size: 30px;
+  margin: -35px;
 }
 // WEATHER END------------------------------------------------------------------
 .name {
