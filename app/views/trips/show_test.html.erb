@@ -1,0 +1,61 @@
+<div id="nav_wrap">
+  <div id="logo">
+    <div class="weather"></div>
+  </div>
+  <nav role='navigation'>
+    <%= link_to "Back", id:"home" %><!--
+    ---><a href="#" id="Things_todo">Things to do</a><!--
+    ---><a href="#" id="Budget">Budget</a><!--
+    ---><a href="#" id="Wardrobe">Wardrobe</a>
+  </nav>
+  <div id="social">
+    <div class="icon-facebook-sign"><%= link_to "Logout", logout_path, method: :delete %></div>
+  </div><!--/social-->
+</div><!--/nav_wrap-->
+
+<section class="trips">
+  <div id="mainlogo">
+    <span class="destination_input">
+      <h1 class="name"><%= @trip.destination.capitalize%></h1>
+    </span>
+  <br />
+    <div id="mainsocial">
+      <div class="icon-facebook-sign"></div>
+      <div class="icon-twitter-sign"></div>
+    </div>
+  </div>
+</section><!--/home-->
+
+<section id="things_todo" class="bodysec show">
+  <div id="copy">
+    <div class="box-table">
+      <table data-fn="contacts">
+
+      <table class="calendar-table">
+        <tr class="calendar-header"><%= @trip.destination.capitalize %>
+          <th colspan="7">December</th>
+        </tr>
+        <tr>
+          <% @calendar.each do |date| %>
+          <td class="calendar-header-day"><%= date %><span class="remove"><%= link_to "x"%></span></td>
+          <span class="remove"><%= link_to "x"%></span>
+        <% end %>
+        </tr>
+      </table>
+    </div>
+    </div>
+
+    <!-- <div class="box-table">
+      <table data-fn="contacts">
+        <tbody>
+          <% @calendar.each do |date| %>
+            <tr>
+              <td><%= date %></td>
+              <td><span class="remove"><%= link_to "x"%></span></td>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div> -->
+  </div>
+</section>

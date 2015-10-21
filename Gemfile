@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 
 gem 'bootstrap-sass'
-
+gem 'bootstrap-datepicker-rails'
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'google-webfonts'

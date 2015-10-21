@@ -1,0 +1,63 @@
+<div id="nav_wrap">
+  <div id="logo">
+    <div class="weather"></div>
+  </div>
+  <nav role='navigation'>
+    <%= link_to "Back", id:"home" %><!--
+    ---><a href="#" id="Things_todo">Things to do</a><!--
+    ---><a href="#" id="Budget">Budget</a><!--
+    ---><a href="#" id="Wardrobe">Wardrobe</a>
+  </nav>
+  <div id="social">
+    <div class="icon-facebook-sign"><%= link_to "Logout", logout_path, method: :delete %></div>
+  </div><!--/social-->
+</div><!--/nav_wrap-->
+
+<section class="trips">
+  <div id="mainlogo">
+    <span class="destination_input">
+      <h1 class="name"><%= @trip.destination.capitalize%></h1>
+    </span>
+  <br />
+    <div id="mainsocial">
+      <div class="icon-facebook-sign"></div>
+      <div class="icon-twitter-sign"></div>
+    </div>
+  </div>
+</section><!--/home-->
+
+<section id="things_todo" class="bodysec">
+  <div id="copy">
+    <h1>Things to do</h1>
+  </div>
+</section>
+
+<section id="budget" class="bodysec">
+  <div id="copy">
+    <h1>Budget</h1>
+    <div class="center large"><div class="icon-quote-left"></div><div class="icon-quote-right"></div></div>
+      <div id="iconrow">
+        <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-lightbulb icon-light"></i>
+        </span>
+
+        <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-calendar icon-light"></i>
+        </span>
+
+         <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-cogs icon-light"></i>
+        </span>
+      </div>
+  </div>
+</section>
+
+<section id="wardrobe">
+  <div id="copy">
+    <h1>Wardrobe</h1>
+    <p></p>
+  </div>
+</section>

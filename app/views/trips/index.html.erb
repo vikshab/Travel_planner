@@ -1,0 +1,72 @@
+<div id="nav_wrap">
+  <div id="user_name"><%= current_user.user_name.capitalize %>
+  </div>
+  <nav role='navigation'>
+    <%= link_to "Back", id:"home" %><!--
+    ---><a href="#" id="Things_todo">All trips</a><!--
+    --->
+    <!-- <a href="#" id="Budget"></a> -->
+    <!--
+    --->
+    <!-- <a href="#" id="Wardrobe"></a> -->
+  </nav>
+  <div id="social">
+    <div class="icon-facebook-sign"><%= link_to "Logout", logout_path, method: :delete %></div>
+  </div><!--/social-->
+</div><!--/nav_wrap-->
+
+
+<section class="trips">
+  <!-- <% if flash[:error] %>
+    <span class="error"><div><%= flash[:error] %><div></span>
+  <% end %> -->
+  <div id="new_trip_box">
+    <h1>New trip</h1>
+
+    <div class="new_trip">
+      <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), method: "post" do |f| %>
+      <%= f.search_field :destination, placeholder: "Destination..." %>
+    <div class="new_trip_datepicker">
+      <%= f.date_field :start_date, class: 'datepicker' %>
+    </div>
+    <div class="new_trip_datepicker">
+      <%= f.date_field :end_date, class: 'datepicker' %>
+    </div>
+    <div class="new_trip">
+      <%= f.submit "Add", class: "button"%>
+    </div>
+      <% end %>
+    </div>
+
+  </div>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  <br />
+</section><!--/home-->
+
+<section id="things_todo" class="bodysec">
+  <div id="copy">
+  <% if !@trips.empty?  %>
+    <div class="box-table">
+      <table data-fn="contacts">
+        <tbody>
+          <% @trips.each do |trip| %>
+            <tr>
+              <td class="Destination_image"><%= image_tag("pin.png", size: "30x30")%></td>
+              <td><%= trip.destination.capitalize %></td>
+              <td><%= trip.start_date %></td>
+              <td><%= trip.end_date %></td>
+              <td><%= link_to "See details", trip_path(trip.id) %></td>
+              <td><span class="delete"><%= link_to "Delete", "/" + current_user.user_name + "/trips/" + trip.id.to_s %></span></td>
+              <td><span class="remove"><%= link_to "x"%></span></td>
+            </tr>
+        <% end %>
+        </tbody>
+        </table>
+      </div>
+      <% else %>
+      <p>You don't have any trips yet.</p>
+    <% end %>
+  </div>
+</section>
