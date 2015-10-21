@@ -1,0 +1,83 @@
+<div id="nav_wrap">
+  <div id="logo">
+    <div class="weather"></div>
+  </div>
+  <nav role='navigation'>
+    <%= link_to "Back", id:"home" %><!--
+    ---><a href="#" id="Things_todo">Things to do</a><!--
+    ---><a href="#" id="Budget">Budget</a><!--
+    ---><a href="#" id="Wardrobe">Wardrobe</a>
+  </nav>
+  <div id="social">
+    <div class="icon-facebook-sign"><%= link_to "Logout", logout_path, method: :delete %></div>
+  </div><!--/social-->
+</div><!--/nav_wrap-->
+
+<section class="trips">
+  <div id="mainlogo">
+    <span class="destination_input">
+      <h1 class="name"><%= @trip.destination.capitalize %></h1>
+    </span>
+  <br />
+    <div id="mainsocial">
+      <div class="icon-facebook-sign"></div>
+      <div class="icon-twitter-sign"></div>
+    </div>
+  </div>
+</section><!--/home-->
+
+<section id="things_todo" class="bodysec">
+  <div id="copy">
+  <% if @popular_things_todo != nil  %>
+    <div class="box-table">
+      <table data-fn="contacts">
+        <tbody>
+          <% @popular_things_todo.each do |activity| %>
+          <% if activity != nil%>
+            <tr>
+              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "10x10")%></td>
+              <td><%= activity["title"] %></td>
+              <td><%= activity["fromPrice"] %></td>
+              <td><%= activity["duration"] %></td>
+              <td><span class="remove"><%= link_to "x"%></span></td>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+        </table>
+      </div>
+      <% else %>
+      <p>Unfortunately, no activities were found in <%= @trip.destination.capitalize %></p>
+    <% end %>
+  </div>
+</section>
+
+<section id="budget" class="bodysec">
+  <div id="copy">
+    <h1>Budget</h1>
+    <div class="center large"><div class="icon-quote-left"></div><div class="icon-quote-right"></div></div>
+      <div id="iconrow">
+        <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-lightbulb icon-light"></i>
+        </span>
+
+        <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-calendar icon-light"></i>
+        </span>
+
+         <span class="icon-stack">
+          <i class="icon-circle icon-stack-base"></i>
+          <i class="icon-cogs icon-light"></i>
+        </span>
+      </div>
+  </div>
+</section>
+
+<section id="wardrobe">
+  <div id="copy">
+    <h1>Wardrobe</h1>
+    <p></p>
+  </div>
+</section>

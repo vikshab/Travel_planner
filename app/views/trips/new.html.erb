@@ -1,0 +1,43 @@
+<div class="column col-sm-3" id="sidebar">
+  <ul class="nav">
+    <div class="row">
+       <div class="col-sm-8">
+         <%= current_user.user_name.capitalize %>
+       </div>
+       <div class="col-sm-4">
+         <small class="text-muted"><%= link_to "Logout", logout_path, method: :delete %></small>
+       </div>
+    </div>
+    <li>
+      <div class="col-sm-12">
+         <div class="search_bar">
+           <fieldset>
+             <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), method: "post" do |f| %>
+               <%= f.search_field :destination, placeholder: "Destination..." %><p>
+               <%= f.date_field :start_date, class: 'datepicker' %>
+               <%= f.date_field :end_date, class: 'datepicker' %>
+               <p id="btn"><%= f.submit "Add" , class: "btn btn-info" %><p>
+             <% end %>
+           </fieldset>
+         </div>
+       </div>
+    </li>
+  </ul>
+
+  <%= render partial: "shared/footer.html.erb" %>
+
+  <div class="column col-sm-9" id="main">
+    <div class="full col-sm-9">
+      <%= link_to "Back", user_trips_path(current_user.user_name) %>
+
+      <% if !current_user.trips.empty?  %>
+        <p>Here is a list of all your trips:</p>
+        <% current_user.trips.each do |trip| %>
+          <%= image_tag(trip.image_url, size: "30x30") %>
+          <%= trip.destination.capitalize %>
+        <% end %>
+      <% else %>
+        <p>You don't have any trips yet.</p>
+      <% end %>
+    </div>
+  </div>
