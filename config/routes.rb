@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   get '/:user/trips', to: "trips#index", as: "user_trips"
-  get '/:user/trips/new', to: "trips#new", as: "new_trip"
+  # get '/:user/trips/new', to: "trips#new", as: "new_trip"
   post '/:user/trips', to: "trips#create"
   get '/trips/:id', to: "trips#show", as: "trip_path"
   delete '/:user/trips/:id', to: "trips#destroy"
