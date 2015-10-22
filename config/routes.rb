@@ -23,6 +23,14 @@ Rails.application.routes.draw do
 
   resources :trips, except: [:new, :create, :show, :destroy]
 
+
+  get "/:user/:trip/tasks", to: "trips#show_tasks"
+  # get "/:user/:trip/tasks", to: "tasks#index"
+  # resources :tasks
+
+  get "/:user/:trip/tasks/new", to: "tasks#new"
+  post "/:user/:trip/tasks", to: "tasks#create"
+  # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

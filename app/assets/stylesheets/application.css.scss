@@ -526,8 +526,8 @@ hoverblk {
   // border: 1px solid #fff;
   // color: white;
 
-  // background:#95a5a6;
-  // background:#ecf0f1;
+  background:#95a5a6;
+  background:#ecf0f1;
   // color:#95a5a6;
 }
 .box-table table tbody tr:nth-child(even){
@@ -536,8 +536,8 @@ hoverblk {
   // border: 1px solid #fff;
   // color: white;
 
-  // background:#bdc3c7;
-  // color:#7f8c8d;
+  background:#bdc3c7;
+  color:#7f8c8d;
 }
 .box-table table tbody tr a{
   color: white;
@@ -559,7 +559,7 @@ hoverblk {
 
 /* = Responsive table
 ------------------------*/
-@media only screen and (max-width: 800px){
+// @media only screen and (max-width: 800px){
   .box-table table{
     width:100%;
     border-collapse:collapse;
@@ -614,9 +614,9 @@ hoverblk {
     border-right:0;
     border-bottom:0;
   }
-}
+// }
 
-.remove {
+.delete {
   text-decoration: none;
   color: #ffffff;
   font-weight: bold;
@@ -636,7 +636,7 @@ hoverblk {
   display: inline-block;
   padding: 35px;
   position: absolute;
-  top: 50%;
+  top: 70%;
   margin-top: -180px;
   left: 50%;
   margin-left: -250px;
@@ -733,6 +733,21 @@ hoverblk {
   outline: 0;
 }
 
+#submitButtonId {
+  border: 0;
+  padding: 0;
+  // cursor: pointer;
+  height: 40px;
+  width: 370px;
+  color: #fff;
+  background: transparent;
+}
+
+.active {
+  background: #fff;
+  color-:#444;
+  cursor: pointer;
+}
 
 .name {
   font-size: 30px;
@@ -754,11 +769,20 @@ hoverblk {
 div.alert.alert-error {
   color: red;
   background: rgba(0,0,0,.2);
-  // border-radius:  3px;
-  // border: 1px solid #fff;
-  background: transparent;
+
 }
 
-.error {
-  background-color: red;
-}
+// .add {
+//   text-decoration: none;
+//   font-weight: bold;
+//   background: #e0e0e0;
+//   padding: .5em;
+//   font-size: .75em;
+//   display: inline-block;
+//   border-radius: 100%;
+//   line-height: .85;
+//    @include transition(all, .25s, linear);
+//   &:hover {
+//     background: #00FF99;
+//   }
+// }

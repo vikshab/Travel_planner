@@ -8,7 +8,7 @@ class Trip < ActiveRecord::Base
   validate :start_date_cannot_be_greater_than_end_date, :start_date_cannot_be_in_the_past
 
 
-  scope :lattest, -> { order('end_date DESC') }
+  scope :lattest, -> { order('created_at DESC') }
 
 
   def start_date_cannot_be_greater_than_end_date

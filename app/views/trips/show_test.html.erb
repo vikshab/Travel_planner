@@ -5,7 +5,7 @@
   <nav role='navigation'>
     <%= link_to "Back", id:"home" %><!--
     ---><a href="#" id="Things_todo">Things to do</a><!--
-    ---><a href="#" id="Budget">Budget</a><!--
+    ---><a href="#" id="Budget">Tasks</a><!--
     ---><a href="#" id="Wardrobe">Wardrobe</a>
   </nav>
   <div id="social">
@@ -14,9 +14,10 @@
 </div><!--/nav_wrap-->
 
 <section class="trips">
+  <div id="copy">
   <div id="mainlogo">
     <span class="destination_input">
-      <h1 class="name"><%= @trip.destination.capitalize%></h1>
+      <h1 class="name"><%= @trip.destination.capitalize %></h1>
     </span>
   <br />
     <div id="mainsocial">
@@ -24,38 +25,93 @@
       <div class="icon-twitter-sign"></div>
     </div>
   </div>
+
+    </div>
 </section><!--/home-->
 
-<section id="things_todo" class="bodysec show">
+<section id="things_todo" class="bodysec">
   <div id="copy">
+  <% if @popular_things_todo != nil  %>
     <div class="box-table">
       <table data-fn="contacts">
-
-      <table class="calendar-table">
-        <tr class="calendar-header"><%= @trip.destination.capitalize %>
-          <th colspan="7">December</th>
-        </tr>
-        <tr>
-          <% @calendar.each do |date| %>
-          <td class="calendar-header-day"><%= date %><span class="remove"><%= link_to "x"%></span></td>
-          <span class="remove"><%= link_to "x"%></span>
+        <tbody>
+          <% @popular_things_todo.each do |activity| %>
+          <% if activity != nil%>
+            <tr>
+              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "30x30")%></td>
+              <td><%= activity["title"] %></td>
+              <td><%= activity["fromPrice"] %></td>
+              <td><%= activity["duration"] %></td>
+              <td><span class="add"><%= link_to "√"%></span></td>
+            </tr>
+          <% end %>
         <% end %>
-        </tr>
-      </table>
-    </div>
-    </div>
+        </tbody>
+        </table>
+      </div>
+      <% else %>
+      <p>Unfortunately, no activities were found in <%= @trip.destination.capitalize %></p>
+    <% end %>
+  </div>
+</section>
 
-    <!-- <div class="box-table">
-      <table data-fn="contacts">
+<section id="budget" class="bodysec">
+<span class="hide">CLICK ME TO HIDE</span>
+
+  <div id="copy">
+    <span class='tasks'></span>
+    <% if @tasks != nil %>
+      <% @tasks.each do |task| %>
+      <%= task.title %>
+      <%= task.description %>
+      <%= task.date %>
+      <% end %>
+    <% end %>
+
+    <!-- <span class="see_tasks"><%= link_to "Show Tasks", "/" + current_user.user_name + "/" + @trip.id.to_s +  "/tasks" %></span> -->
+  </div>
+
+  <div class="box-table">
+    <!-- <table data-fn="contacts"> -->
+      <table class="calendar-table">
+        <tr class="calendar-header"><span class="destination_input"><%= @trip.destination.capitalize %></span></tr>
         <tbody>
           <% @calendar.each do |date| %>
             <tr>
-              <td><%= date %></td>
-              <td><span class="remove"><%= link_to "x"%></span></td>
+              <td class="calendar-header-day"><%= date %></td>
             </tr>
-            <% end %>
+          <% end %>
         </tbody>
       </table>
-    </div> -->
+    <!-- </table> -->
+  </div>
+  <br><br>
+
+  <!-- <div class="form-group hide"> -->
+    <div class="form-horizontal">
+      <%= form_for(Task.new, url: "/" + current_user.user_name + "/" + @trip.id.to_s + "/tasks") do |f| %>
+        <div class="form-group">
+          <label class="col-xs-1 control-label">Task(s)</label>
+          <div class="col-xs-3">
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          <div class="col-xs-3">
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+          <div class="col-xs-4">
+            <span class="glyphicon glyphicon-calendar"></span>
+            <%= f.date_field :date, class: 'datepicker' %>
+            <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <!-- </div> -->
+</section>
+
+<section id="wardrobe">
+  <div id="copy">
+    <h1>Wardrobe</h1>
+    <p></p>
   </div>
 </section>

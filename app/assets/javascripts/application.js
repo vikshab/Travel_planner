@@ -77,7 +77,12 @@ var $window   = $(window),
   remove();
   installDelete();
   weather();
-
+  // addNewTrip();
+  // addNewTask();
+  disableButtonIfFieldsAreEmpty();
+  // hideCalendar();
+  // installShowTasks();
+  // createTask();
 });
 
 function remove() {
@@ -88,14 +93,55 @@ function remove() {
   $(this).parent().parent().hide( 400 );
 });
 }
-// function removeDeleted() {
-//   $('.delete').click(function(){
+//
+// function addNewTrip() {
+//   $('#submitButtonId').click(function(){
 //   event.preventDefault();
+//
 //   var button = $(this);
-//   console.log(button);
-//   $(this).parent().parent().hide( 400 );
+//   var url = '/Victoria%20Shabunia/trips';
+//   // var url = $(this).children('a').attr('href');
+//     $.ajax({
+//       url: url,
+//       method: "POST"
+//       // data: { title: "new", destination: "new", date: "new" }
+//     }).done(function() {
+//         console.log("data saved");
+//         // var trip = $("just_created_trip");
+//         // var icon = $("<td class='Destination_image'><%= image_tag('pin.png', size: '30x30'%></td>");
+//         // var destination = $("<td>New Trip</td>");
+//         // var start_date = $("<td>Start</td>");
+//         // var end_date = $("<td>End</td>");
+//         // var details = $("<td>See details</td>");
+//         // var deleteTrip = $("<td>Delete</td>");
+//         //
+//         // $('.just_created_trip').append(trip, icon, destination, start_date, end_date, details, deleteTrip);
+//
+//     });
+//   });
+// }
+//
+// function hideCalendar() {
+//   $('.hide').click(function(){
+//   event.preventDefault();
+//
+//   // var button = $(this);
+//
+//   $('.box-table').hide( 400 );
 // });
 // }
+
+function disableButtonIfFieldsAreEmpty() {
+  if($('#text_field').val() ==  "")
+    $('#submitButtonId').attr('disabled', true);
+
+    $('#text_field').keyup(function(){
+      if($('#text_field').val() !=  "")
+         $('#submitButtonId').attr('disabled', false);
+  else
+     $('#submitButtonId').attr('disabled', true);
+   });
+}
 
 function installDelete() {
   $('.delete').click(function(){
@@ -118,25 +164,14 @@ function weather() {
     location: $('.destination_input').text(),
     unit: 'f',
     success: function(weather) {
-      // if(weather.temp > 75) {
-      //   $('.weather').animate({background: '#F7AC57'});
-      // } else {
-      //
-      //   $('#logo').animate({background: '#0091c2'});
-      // }
       var icon = $('<h1 class="icon-'+weather.code+'"></h1>');
       var degree = $('<p class="temp">'+weather.temp+'&deg;</p>');
-      // html += '<p>'+weather.city+' '+weather.region+'</p>';
+      var city = $('<p>'+weather.city+' '+weather.region+'</p>');
       var currently =  $('<p class="currently">'+weather.currently+'</p>');
-      // html += '<li>'+weather.tempAlt+'&deg;C</li></ul>';
-      // var timestamp = moment(weather.updated);
-      // html += '<p class="updated">Updated '+moment(timestamp).fromNow()+'</p>';
-
       var result = $(".weather").append(icon, degree, currently);
     },
     error: function(error) {
       $(".weather").html('<p>'+error+'</p>');
     }
   });
-  return result
 }
