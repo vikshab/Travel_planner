@@ -10,23 +10,13 @@ module TripPlannerAPIs
       if result != nil
         i = 0
         array = []
-          while i <= 10 do
+          while i <= 30 do
             array.push(result[i])
             i += 1
           end
           return array
       end
     end
-
-    # def self.limit(limit)
-    #   i = 0
-    #   array = []
-    #   while i <= limit
-    #     array[i].push(result[i])
-    #     i ++
-    #   end
-    #   retun array
-    # end
 
     private
 
