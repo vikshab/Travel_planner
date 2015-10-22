@@ -29,14 +29,17 @@ class TripsController < ApplicationController
       # end_date = @trip.end_date
       # @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
       # @calendar = draw_calendar(@trip)
-      redirect_to :back
+      render partial: 'new_trip'
+      # render json: @trip
+      # redirect_to :back
       # render "show_test"
       # render 'trip'
       # redirect_to user_trips_path(current_user.user_name)
       # render 'show_test'
     else
-      flash[:error] = "Please, check the dates you enter"
-      redirect_to :back
+      @error = "Please, check the dates you enter"
+      render partial: 'error', :status => 400
+      # redirect_to :back
     end
   end
 
@@ -63,6 +66,7 @@ class TripsController < ApplicationController
   def destroy
     trip = Trip.find(params[:id])
     trip.destroy
+    render nothing: true
     # trip.unassociate_user
     # redirect_to user_trips_path(current_user.user_name)
   end
