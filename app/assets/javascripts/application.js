@@ -19,6 +19,43 @@
 //
 $(document).ready(function() {
 
+// DISABLED BUTTON
+  if($('#text_field').val() ==  "")
+    $('#submitButtonId').attr('disabled', true);
+
+    $('#text_field').keyup(function(){
+      if($('#text_field').val() !=  "")
+         $('#submitButtonId').attr('disabled', false);
+      else
+     $('#submitButtonId').attr('disabled', true);
+   });
+
+// POST NEW TRIP ON THE SAME PAGE
+  $('#new_trip').submit(function(event){
+  event.preventDefault();
+  var error = $('.error_new_trip');
+  error.empty();
+
+  var formUrl = $(this).attr('action');
+  var postData = $(this).serializeArray();
+
+    $.ajax({
+      url: formUrl,
+      method: "POST",
+      data: postData,
+    }).done(function(data) {
+      // console.log(data)
+      var new_trip = $(data);
+      $('.all_trips').prepend(new_trip);
+      installDelete(new_trip.find('.delete'));
+    }).fail(function(jqXHR){
+      error.prepend(jqXHR.responseText);
+
+    });
+
+  });
+
+// SCROLLING
 var $window   = $(window),
     height    = $window.height(),
     width     = $window.width(),
@@ -74,77 +111,56 @@ var $window   = $(window),
       scrollTop : $('section').eq(menuPlace).offset().top - $('nav').height()
     }, 700);
   });
-  remove();
-  installDelete();
+
+  // remove();
+  installDelete($('.delete'));
   weather();
+  // disableButtonIfFieldsAreEmpty();
   // addNewTrip();
+  // hideAllTrips();
+  // showAllTrips();
   // addNewTask();
-  disableButtonIfFieldsAreEmpty();
   // hideCalendar();
   // installShowTasks();
   // createTask();
 });
 
-function remove() {
-  $('.delete').click(function(){
-  event.preventDefault();
-  var button = $(this);
-  console.log(button);
-  $(this).parent().parent().hide( 400 );
-});
-}
-//
-// function addNewTrip() {
-//   $('#submitButtonId').click(function(){
+// function remove() {
+//   $('.remove').click(function(){
 //   event.preventDefault();
-//
 //   var button = $(this);
-//   var url = '/Victoria%20Shabunia/trips';
-//   // var url = $(this).children('a').attr('href');
-//     $.ajax({
-//       url: url,
-//       method: "POST"
-//       // data: { title: "new", destination: "new", date: "new" }
-//     }).done(function() {
-//         console.log("data saved");
-//         // var trip = $("just_created_trip");
-//         // var icon = $("<td class='Destination_image'><%= image_tag('pin.png', size: '30x30'%></td>");
-//         // var destination = $("<td>New Trip</td>");
-//         // var start_date = $("<td>Start</td>");
-//         // var end_date = $("<td>End</td>");
-//         // var details = $("<td>See details</td>");
-//         // var deleteTrip = $("<td>Delete</td>");
-//         //
-//         // $('.just_created_trip').append(trip, icon, destination, start_date, end_date, details, deleteTrip);
-//
-//     });
-//   });
-// }
-//
-// function hideCalendar() {
-//   $('.hide').click(function(){
-//   event.preventDefault();
-//
-//   // var button = $(this);
-//
-//   $('.box-table').hide( 400 );
+//   $(this).parent().parent().hide( 400 );
 // });
 // }
 
-function disableButtonIfFieldsAreEmpty() {
-  if($('#text_field').val() ==  "")
-    $('#submitButtonId').attr('disabled', true);
-
-    $('#text_field').keyup(function(){
-      if($('#text_field').val() !=  "")
-         $('#submitButtonId').attr('disabled', false);
-  else
-     $('#submitButtonId').attr('disabled', true);
-   });
+function hideAllTrips() {
+  $('.hide_all_trips').click(function(){
+  event.preventDefault();
+  $(this).siblings('#trips_table').hide(400);
+  $(this).hide(400);
+  })
 }
 
-function installDelete() {
-  $('.delete').click(function(){
+function showAllTrips() {
+  $('.show_all_trips').click(function(){
+    $(this).siblings().show(400);
+  })
+}
+
+// function disableButtonIfFieldsAreEmpty() {
+  // if($('#text_field').val() ==  "")
+  //   $('#submitButtonId').attr('disabled', true);
+  //
+  //   $('#text_field').keyup(function(){
+  //     if($('#text_field').val() !=  "")
+  //        $('#submitButtonId').attr('disabled', false);
+  // else
+  //    $('#submitButtonId').attr('disabled', true);
+  //  });
+// }
+
+function installDelete(element) {
+  element.click(function(){
   event.preventDefault();
 
   var button = $(this);
@@ -153,7 +169,8 @@ function installDelete() {
       url: url,
       method: "DELETE"
     }).done(function() {
-      remove();
+      button.parent().parent().hide( 400 );
+      // remove();
     });
   });
 }
