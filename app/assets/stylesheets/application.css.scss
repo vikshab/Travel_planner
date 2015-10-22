@@ -346,8 +346,8 @@ hoverblk {
     font-style: normal;
 }
 .weather {
-  width: 100px;
-  height: 100px;
+  width: 600px;
+  height: 400px;
   text-align: center;
   margin: 0px auto;
   text-align: center;
@@ -358,7 +358,9 @@ hoverblk {
   color: #fff;
   font-family: weather;
   margin: -8px 0 8px;
-  font-size: 32px;
+  font-size: 150px;
+
+  // font-size: 32px;
   // font-weight: normal;
   // line-height: 1.0;
 }
@@ -412,22 +414,25 @@ hoverblk {
 .weather h1.icon-46:before { content: "U"; }
 .weather h1.icon-47:before { content: "S"; }
 
-.weather h2 {
-  margin: -5px 0 3px;
-  color: #fff;
-  font-size: 10px;
-  // font-weight: 10px;
-  // text-align: center;
-}
-
+// .weather h2 {
+//   margin: -5px 0 3px;
+//   color: #fff;
+//   // font-size: 200px;
+//   // font-weight: 10px;
+//   // text-align: center;
+// }
+//
 .weather p {
-  font-size: 9px;
+  padding-top: -40px;
+  font-size: 50px;
   color: white;
-
 }
+
 .weather p.temp {
-  font-size: 30px;
-  margin: -35px;
+  font-size: 150px;
+  color: white;
+  // padding-top: 20px;
+  // margin: -35px;
 }
 // WEATHER END------------------------------------------------------------------
 .name {
@@ -772,17 +777,29 @@ div.alert.alert-error {
 
 }
 
-// .add {
-//   text-decoration: none;
-//   font-weight: bold;
-//   background: #e0e0e0;
-//   padding: .5em;
-//   font-size: .75em;
-//   display: inline-block;
-//   border-radius: 100%;
-//   line-height: .85;
-//    @include transition(all, .25s, linear);
-//   &:hover {
-//     background: #00FF99;
-//   }
-// }
+.destination_name {
+  font-size: 50px;
+}
+
+.add {
+  text-decoration: none;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .85;
+   @include transition(all, .25s, linear);
+  &:hover {
+    background: #00FF99;
+  }
+}
+
+.hide_all_trips {
+  color: white;
+}
+
+.show_all_trips {
+  color: white;
+}
