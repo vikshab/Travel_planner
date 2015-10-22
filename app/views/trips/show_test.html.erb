@@ -1,6 +1,6 @@
 <div id="nav_wrap">
   <div id="logo">
-    <div class="weather"></div>
+    <div class="icon-facebook-sign"><%= current_user.user_name %></div>
   </div>
   <nav role='navigation'>
     <%= link_to "Back", id:"home" %><!--
@@ -15,16 +15,17 @@
 
 <section class="trips">
   <div id="copy">
-  <div id="mainlogo">
+  <!-- <div id="mainlogo"> -->
     <span class="destination_input">
-      <h1 class="name"><%= @trip.destination.capitalize %></h1>
+      <h1 class="destination_name"><%= @trip.destination.capitalize %></h1>
     </span>
+        <div class="weather"></div>
   <br />
     <div id="mainsocial">
       <div class="icon-facebook-sign"></div>
       <div class="icon-twitter-sign"></div>
     </div>
-  </div>
+  <!-- </div> -->
 
     </div>
 </section><!--/home-->
