@@ -5,7 +5,7 @@
   <nav role='navigation'>
     <%= link_to "Back", id:"home" %><!--
     ---><a href="#" id="Things_todo">Things to do</a><!--
-    ---><a href="#" id="Budget">Tasks</a><!--
+    ---><a href="#" id="Budget">Budget</a><!--
     ---><a href="#" id="Wardrobe">Wardrobe</a>
   </nav>
   <div id="social">
@@ -52,42 +52,33 @@
         </table>
       </div>
       <% else %>
-      <p>Unfortunately, no activities were found in <%= @trip.destination.capitalize %></p>
+      <div class="box-table">
+        Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
+      </div>
     <% end %>
 
-    <div class="form-horizontal">
-      <%= form_for @task, url:("/trips/" + @trip.id.to_s + "/tasks"), id:"new_task_form" do |f| %>
-        <div class="form-group">
-          <label class="col-xs-1 control-label">Task(s)</label>
-          <div class="col-xs-3">
-            <%= f.text_field :title, class: "form-control" %>
+    <div class="box-table">
+      <div class="form-horizontal">
+        <%= form_for @task, url:("/trips/" + @trip.id.to_s + "/tasks"), id:"new_task_form" do |f| %>
+          <div class="form-group">
+            <label class="col-xs-1 control-label">Task(s)</label>
+            <div class="col-xs-3">
+              <%= f.text_field :title, class: "form-control" %>
+            </div>
+            <div class="col-xs-3">
+              <%= f.text_area :description, class: "form-control" %>
+            </div>
+            <div class="col-xs-4">
+              <span class="glyphicon glyphicon-calendar"></span>
+              <%= f.date_field :date, class: 'datepicker' %>
+              <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
+            </div>
           </div>
-          <div class="col-xs-3">
-            <%= f.text_area :description, class: "form-control" %>
-          </div>
-          <div class="col-xs-4">
-            <span class="glyphicon glyphicon-calendar"></span>
-            <%= f.date_field :date, class: 'datepicker' %>
-            <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+      <div class="error_new_task">
+      </div>
     </div>
-
-
-    <!-- <div id="new_trip_box">
-      <%= image_tag("pin.png", size: "30x30")%>
-      <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), id:"new_trip_form" do |f| %>
-        <%= f.search_field :destination, placeholder: "Destination...", id:"text_field" %>
-        <%= f.date_field :start_date, class: 'datepicker', id:"start_date_field" %>
-        <%= f.date_field :end_date, class: 'datepicker', id:"end_date_field" %>
-        <%= f.submit "Add", id:"submitButtonId" %>
-      <% end %>
-    </div>
-    <div class="error_new_trip">
-
-    </div> -->
-
 
       <div class="box-table">
         <table data-fn="contacts" id="tasks_table">
@@ -99,7 +90,7 @@
                 <td><%= task.date %></td>
                 <td><%= task.title %></td>
                 <!-- <td><%= task.description %></td> -->
-                <td><%= link_to "See details" %></td>
+                <td><span class="show_details"><%= link_to "See details",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
                 <td>Set a reminder</td>
                 <td>Edit</td>
                 <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
@@ -113,92 +104,23 @@
     <% else %>
       <p>You don't have any tasks yet.</p>
     <% end %>
-
+    <div class="box-table">
+      <div class="task_details">
+      </div>
+    </div>
 
   </div>
 </section>
 
 <section id="budget" class="bodysec">
-<!-- <span class="hide">CLICK ME TO HIDE</span> -->
-
   <div id="copy">
 
-    <!-- <% if !@tasks.empty?  %>
-      <div class="box-table">
-        <table data-fn="contacts" id="tasks_table">
-          <tbody class="all_tasks">
-            <span class="place_for_a_new_task"></span>
-            <% @tasks.each do |task| %>
-              <tr>
-                <td><%= task.title %></td>
-                <td><%= task.description %></td>
-                <td><%= task.date %></td>
-                <td><%= link_to "See details" %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
-        <span class="hide_all_tasks">Hide</span><br>
-        <span class="show_all_tasks">Show</span>
-      </div>
-    <% else %>
-      <p>You don't have any tasks yet.</p>
-    <% end %> -->
-
-
-    <!-- <span class='tasks'></span> -->
-    <!-- <% if @tasks != nil %>
-      <% @tasks.each do |task| %>
-      <%= task.title %>
-      <%= task.description %>
-      <%= task.date %>
-      <% end %>
-    <% end %> -->
   </div>
 
-    <!-- <span class="see_tasks"><%= link_to "Show Tasks", "/" + current_user.user_name + "/" + @trip.id.to_s +  "/tasks" %></span> -->
-
-  <!-- <div class="box-table">
-    <table data-fn="contacts">
-      <table class="calendar-table">
-        <tr class="calendar-header"><span class="destination_input"><%= @trip.destination.capitalize %></span></tr>
-        <tbody>
-          <% @calendar.each do |date| %>
-            <tr>
-              <td class="calendar-header-day"><%= date %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </table>
-  </div> -->
-  <br><br>
-
-  <!-- <div class="form-group hide"> -->
-    <!-- <div class="form-horizontal">
-      <%= form_for(Task.new, url: "/" + current_user.user_name + "/" + @trip.id.to_s + "/tasks") do |f| %>
-        <div class="form-group">
-          <label class="col-xs-1 control-label">Task(s)</label>
-          <div class="col-xs-3">
-            <%= f.text_field :title, class: "form-control" %>
-          </div>
-          <div class="col-xs-3">
-            <%= f.text_area :description, class: "form-control" %>
-          </div>
-          <div class="col-xs-4">
-            <span class="glyphicon glyphicon-calendar"></span>
-            <%= f.date_field :date, class: 'datepicker' %>
-            <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
-          </div>
-        </div>
-      <% end %>
-    </div> -->
-  <!-- </div> -->
 </section>
 
 <section id="wardrobe">
   <div id="copy">
     <h1>Wardrobe</h1>
-    <p></p>
   </div>
 </section>

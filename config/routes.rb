@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   # get "/:user/:trip/tasks/new", to: "tasks#new"
   # post "/:user/:trip/tasks", to: "tasks#create"
   post "/trips/:id/tasks", to: "tasks#create"
-
+  get "/trips/:id/tasks/:id", to: "tasks#show"
   delete "/trips/:id/tasks/:id", to: "tasks#destroy"
   # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.

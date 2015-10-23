@@ -2,29 +2,22 @@ class TasksController < ApplicationController
   before_action :require_login
   before_action :current_user
 
-  # def index
-    # @trip = Trip.find(params["trip"])
-    # raise
-    # @tasks = @trip.tasks
-    # user = User.find(params[:id])
-    # @tasks = user.tasks
-  # end
-
-  # def new
-  #   @task = Task.new
-  # end
-
   def create
     @task = Task.new(task_params)
     @task.trip_id = params[:id]
 
     if @task.save
-      # render json: @task
       render partial: 'new_task'
     else
-      @error = "Error"
+      @error = "Make sure you enter the title and date"
       render partial: 'error', :status => 400
     end
+  end
+
+  def show
+    @task = Task.find(params[:id])
+    # render json: @task
+    render partial: 'show_task'
   end
 
 

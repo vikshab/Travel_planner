@@ -52,14 +52,13 @@ $(document).ready(function() {
       error.prepend(jqXHR.responseText);
 
     });
-
   });
 
   // POST NEW TASK ON THE SAME PAGE
     $('#new_task').submit(function(event){
     event.preventDefault();
-    // var error = $('.error_new_trip');
-    // error.empty();
+    var error = $('.error_new_task');
+    error.empty();
 
     var formUrl = $(this).attr('action');
     var postData = $(this).serializeArray();
@@ -72,13 +71,12 @@ $(document).ready(function() {
         var new_task = $(data);
         $('.all_tasks').prepend(new_task);
         installDelete(new_task.find('.delete'));
+        showDetails(new_task.find('.show_details'));
       }).fail(function(jqXHR){
+        console.log("got error")
         error.prepend(jqXHR.responseText);
-
       });
-
     });
-
 
 
 // SCROLLING
@@ -138,9 +136,10 @@ var $window   = $(window),
     }, 700);
   });
 
-  // remove();
+  // removeDetails();
   installDelete($('.delete'));
   weather();
+  showDetails($('.show_details'));
   // disableButtonIfFieldsAreEmpty();
   // addNewTrip();
   // hideAllTrips();
@@ -151,13 +150,13 @@ var $window   = $(window),
   // createTask();
 });
 
-// function remove() {
-//   $('.remove').click(function(){
-//   event.preventDefault();
-//   var button = $(this);
-//   $(this).parent().parent().hide( 400 );
-// });
-// }
+function removeDetails() {
+  $('.remove').click(function(){
+  event.preventDefault();
+  this.parents('.show_task_details').hide( 400 );
+  });
+}
+
 
 function hideAllTrips() {
   $('.hide_all_trips').click(function(){
@@ -200,6 +199,36 @@ function installDelete(element) {
     });
   });
 }
+
+// SHOW TASK DETAILS ON THE SAME PAGE
+function showDetails(element) {
+  element.click(function(){
+  event.preventDefault();
+  var details = $('.task_details');
+  details.empty();
+
+  var url = $(this).children('a').attr('href');
+  console.log(url);
+
+    $.ajax({
+      url: url,
+      method: "GET"
+      // data: postData,
+    }).done(function(data) {
+      console.log(data);
+      $('.task_details').prepend(data);
+      // console.log(data);
+      // var details = $(data);
+      // $('.task_details').prepend(details);
+      // installDelete(new_task.find('.delete'));
+    });
+    // }).fail(function(jqXHR){
+    //   error.prepend(jqXHR.responseText);
+    // });
+  });
+}
+
+
 
 function weather() {
   $.simpleWeather({

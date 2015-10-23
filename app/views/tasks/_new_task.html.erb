@@ -1,7 +1,7 @@
 <tr>
   <td><%= @task.date %></td>
   <td><%= @task.title %></td>
-  <td><%= link_to "See details" %></td>
+  <td><span class="show_details"><%= link_to "See details",  "/trips/" + params[:id] + "/tasks/" + @task.id.to_s %></span></td>
   <td>Set a reminder</td>
   <td>Edit</td>
   <td><span class="delete"><%= link_to "x", "/trips/" + params[:id] + "/tasks/" + @task.id.to_s %></span></td>
