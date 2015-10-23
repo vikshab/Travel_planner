@@ -15,9 +15,13 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
-    # render json: @task
-    render partial: 'show_task'
+    if Task.find(params[:id])
+      @task = Task.find(params[:id])
+      render partial: 'show_task'
+    else
+      @error = "Task is not found"
+      render partial: "error", :status => 400
+    end
   end
 
 

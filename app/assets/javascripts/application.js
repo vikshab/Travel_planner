@@ -135,53 +135,31 @@ var $window   = $(window),
       scrollTop : $('section').eq(menuPlace).offset().top - $('nav').height()
     }, 700);
   });
-
-  // removeDetails();
   installDelete($('.delete'));
   weather();
   showDetails($('.show_details'));
-  // disableButtonIfFieldsAreEmpty();
-  // addNewTrip();
-  // hideAllTrips();
-  // showAllTrips();
-  // addNewTask();
-  // hideCalendar();
-  // installShowTasks();
-  // createTask();
 });
 
-function removeDetails() {
-  $('.remove').click(function(){
+function removeDetails(element) {
+  element.click(function(){
   event.preventDefault();
-  this.parents('.show_task_details').hide( 400 );
+  element.parents('.details').hide( 400 );
   });
 }
 
 
-function hideAllTrips() {
-  $('.hide_all_trips').click(function(){
-  event.preventDefault();
-  $(this).siblings('#trips_table').hide(400);
-  $(this).hide(400);
-  })
-}
+// function hideAllTrips() {
+//   $('.hide_all_trips').click(function(){
+//   event.preventDefault();
+//   $(this).siblings('#trips_table').hide(400);
+//   $(this).hide(400);
+//   })
+// }
 
-function showAllTrips() {
-  $('.show_all_trips').click(function(){
-    $(this).siblings().show(400);
-  })
-}
-
-// function disableButtonIfFieldsAreEmpty() {
-  // if($('#text_field').val() ==  "")
-  //   $('#submitButtonId').attr('disabled', true);
-  //
-  //   $('#text_field').keyup(function(){
-  //     if($('#text_field').val() !=  "")
-  //        $('#submitButtonId').attr('disabled', false);
-  // else
-  //    $('#submitButtonId').attr('disabled', true);
-  //  });
+// function showAllTrips() {
+//   $('.show_all_trips').click(function(){
+//     $(this).siblings().show(400);
+//   })
 // }
 
 function installDelete(element) {
@@ -195,7 +173,6 @@ function installDelete(element) {
       method: "DELETE"
     }).done(function() {
       button.parent().parent().hide( 400 );
-      // remove();
     });
   });
 }
@@ -208,27 +185,19 @@ function showDetails(element) {
   details.empty();
 
   var url = $(this).children('a').attr('href');
-  console.log(url);
 
     $.ajax({
       url: url,
       method: "GET"
-      // data: postData,
     }).done(function(data) {
-      console.log(data);
-      $('.task_details').prepend(data);
-      // console.log(data);
-      // var details = $(data);
-      // $('.task_details').prepend(details);
-      // installDelete(new_task.find('.delete'));
+      var details = $(data);
+      $('.task_details').prepend(details);
+      removeDetails(details.find('.remove'));
+    }).fail(function(jqXHR){
+      error.prepend(jqXHR.responseText);
     });
-    // }).fail(function(jqXHR){
-    //   error.prepend(jqXHR.responseText);
-    // });
   });
 }
-
-
 
 function weather() {
   $.simpleWeather({

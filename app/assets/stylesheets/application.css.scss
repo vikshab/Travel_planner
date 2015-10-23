@@ -630,7 +630,7 @@ hoverblk {
   font-size: .75em;
   display: inline-block;
   border-radius: 100%;
-  line-height: .85;
+  line-height: .50;
    @include transition(all, .25s, linear);
   &:hover {
     background: #f30;
@@ -789,7 +789,7 @@ div.alert.alert-error {
   font-size: .75em;
   display: inline-block;
   border-radius: 100%;
-  line-height: .85;
+  line-height: .50;
    @include transition(all, .25s, linear);
   &:hover {
     background: #00FF99;
@@ -818,18 +818,24 @@ div.alert.alert-error {
   color:white;
 }
 
-// #close_details {
-//   text-decoration: none;
-//   color: #ffffff;
-//   font-weight: bold;
-//   background: #e0e0e0;
-//   padding: .5em;
-//   font-size: .75em;
-//   display: inline-block;
-//   border-radius: 100%;
-//   line-height: .85;
-//    @include transition(all, .25s, linear);
-//   &:hover {
-//     background: #f30;
-//   }
-// }
+.remove {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .50;
+   @include transition(all, .25s, linear);
+  &:hover {
+    background: #f30;
+  }
+}
+
+
+.details {
+  width: 70%;
+  transition: .5s;
+}

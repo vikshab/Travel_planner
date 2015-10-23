@@ -36,7 +36,7 @@
   <% if @popular_things_todo != nil  %>
     <div class="box-table">
       <table data-fn="contacts">
-        <tbody>
+        <tbody class="popular_things_todo">
           <% @popular_things_todo.each do |activity| %>
           <% if activity != nil%>
             <tr>
@@ -49,13 +49,13 @@
           <% end %>
         <% end %>
         </tbody>
-        </table>
-      </div>
-      <% else %>
-      <div class="box-table">
-        Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
-      </div>
-    <% end %>
+      </table>
+    </div>
+  <% else %>
+    <div class="box-table">
+      Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
+    </div>
+  <% end %>
 
     <div class="box-table">
       <div class="form-horizontal">
@@ -80,33 +80,30 @@
       </div>
     </div>
 
-      <div class="box-table">
-        <table data-fn="contacts" id="tasks_table">
-          <tbody class="all_tasks">
-            <span class="place_for_a_new_task"></span>
-            <% if !@tasks.empty?  %>
+  <% if !@tasks.empty?  %>
+    <div class="box-table">
+      <table data-fn="contacts" id="tasks_table">
+        <tbody class="all_tasks">
+          <span class="place_for_a_new_task"></span>
             <% @tasks.each do |task| %>
               <tr>
                 <td><%= task.date %></td>
                 <td><%= task.title %></td>
-                <!-- <td><%= task.description %></td> -->
                 <td><span class="show_details"><%= link_to "See details",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
                 <td>Set a reminder</td>
                 <td>Edit</td>
                 <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
               </tr>
           <% end %>
-          </tbody>
-        </table>
-        <!-- <span class="hide_all_tasks">Hide</span><br> -->
-        <!-- <span class="show_all_tasks">Show</span> -->
-      </div>
-    <% else %>
-      <p>You don't have any tasks yet.</p>
-    <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>You don't have any tasks yet.</p>
+  <% end %>
+
     <div class="box-table">
-      <div class="task_details">
-      </div>
+      <span class="task_details"></span>
     </div>
 
   </div>
