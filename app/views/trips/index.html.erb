@@ -17,6 +17,7 @@
                 <td><%= trip.end_date %></td>
                 <td><%= link_to "See details", trip_path(trip.id) %></td>
                 <td><span class="delete"><%= link_to "x", "/" + current_user.user_name + "/trips/" + trip.id.to_s %></span></td>
+                <!-- ,  data: { confirm: "Are you sure you want to delete?"} -->
               </tr>
           <% end %>
           </tbody>

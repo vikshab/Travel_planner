@@ -55,6 +55,32 @@ $(document).ready(function() {
 
   });
 
+  // POST NEW TASK ON THE SAME PAGE
+    $('#new_task').submit(function(event){
+    event.preventDefault();
+    // var error = $('.error_new_trip');
+    // error.empty();
+
+    var formUrl = $(this).attr('action');
+    var postData = $(this).serializeArray();
+
+      $.ajax({
+        url: formUrl,
+        method: "POST",
+        data: postData,
+      }).done(function(data) {
+        var new_task = $(data);
+        $('.all_tasks').prepend(new_task);
+        installDelete(new_task.find('.delete'));
+      }).fail(function(jqXHR){
+        error.prepend(jqXHR.responseText);
+
+      });
+
+    });
+
+
+
 // SCROLLING
 var $window   = $(window),
     height    = $window.height(),

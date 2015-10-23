@@ -15,9 +15,9 @@ class TripsController < ApplicationController
     @trip = Trip.new
   end
 
-  def new
-    @trip = Trip.new
-  end
+  # def new
+  #   @trip = Trip.new
+  # end
 
   def create
     @trip = Trip.new(trip_params)
@@ -44,12 +44,13 @@ class TripsController < ApplicationController
   end
 
   def show
+    @task = Task.new
     @trip = Trip.find(params[:id])
     destination = @trip.destination
     start_date = @trip.start_date
     end_date = @trip.end_date
     @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
-    @tasks = @trip.tasks
+    @tasks = @trip.tasks.lattest
     @calendar = draw_calendar(@trip)
     render "show_test"
     # redirect_to expedia_results_path(@trip.destination, @trip.start_date, @trip.end_date, @trip.id)
@@ -71,10 +72,10 @@ class TripsController < ApplicationController
     # redirect_to user_trips_path(current_user.user_name)
   end
 
-  def show_tasks
-    @trip = Trip.find(params["trip"])
-    @tasks = @trip.tasks
-  end
+  # def show_tasks
+  #   @trip = Trip.find(params["trip"])
+  #   @tasks = @trip.tasks
+  # end
 
   private
 

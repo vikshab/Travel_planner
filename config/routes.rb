@@ -18,18 +18,21 @@ Rails.application.routes.draw do
 
   # get '/:user/dashboard/things_todo', to: "users#things_todo"
 
-  post "/trips/search", to: "trips#search", as: "search"
-  get "/trips/:destination/:start_date/:end_date", to: "expedia#results", as: "expedia_results"
+  # post "/trips/search", to: "trips#search", as: "search"
+  # get "/trips/:destination/:start_date/:end_date", to: "expedia#results", as: "expedia_results"
 
   resources :trips, except: [:new, :create, :show, :destroy]
 
 
-  get "/:user/:trip/tasks", to: "trips#show_tasks"
+  # get "/:user/:trip/tasks", to: "trips#show_tasks"
   # get "/:user/:trip/tasks", to: "tasks#index"
   # resources :tasks
 
-  get "/:user/:trip/tasks/new", to: "tasks#new"
-  post "/:user/:trip/tasks", to: "tasks#create"
+  # get "/:user/:trip/tasks/new", to: "tasks#new"
+  # post "/:user/:trip/tasks", to: "tasks#create"
+  post "/trips/:id/tasks", to: "tasks#create"
+
+  delete "/trips/:id/tasks/:id", to: "tasks#destroy"
   # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

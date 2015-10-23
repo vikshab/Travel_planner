@@ -19,6 +19,7 @@
     <span class="destination_input">
       <h1 class="destination_name"><%= @trip.destination.capitalize %></h1>
     </span>
+      <%= link_to "Back to accout", user_trips_path(current_user.user_name) %>
         <div class="weather"></div>
   <br />
     <div id="mainsocial">
@@ -53,13 +54,40 @@
       <% else %>
       <p>Unfortunately, no activities were found in <%= @trip.destination.capitalize %></p>
     <% end %>
-  </div>
-</section>
 
-<section id="budget" class="bodysec">
-<!-- <span class="hide">CLICK ME TO HIDE</span> -->
+    <div class="form-horizontal">
+      <%= form_for @task, url:("/trips/" + @trip.id.to_s + "/tasks"), id:"new_task_form" do |f| %>
+        <div class="form-group">
+          <label class="col-xs-1 control-label">Task(s)</label>
+          <div class="col-xs-3">
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          <div class="col-xs-3">
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+          <div class="col-xs-4">
+            <span class="glyphicon glyphicon-calendar"></span>
+            <%= f.date_field :date, class: 'datepicker' %>
+            <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-  <div id="copy">
+
+    <!-- <div id="new_trip_box">
+      <%= image_tag("pin.png", size: "30x30")%>
+      <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), id:"new_trip_form" do |f| %>
+        <%= f.search_field :destination, placeholder: "Destination...", id:"text_field" %>
+        <%= f.date_field :start_date, class: 'datepicker', id:"start_date_field" %>
+        <%= f.date_field :end_date, class: 'datepicker', id:"end_date_field" %>
+        <%= f.submit "Add", id:"submitButtonId" %>
+      <% end %>
+    </div>
+    <div class="error_new_trip">
+
+    </div> -->
+
 
     <% if !@tasks.empty?  %>
       <div class="box-table">
@@ -68,20 +96,54 @@
             <span class="place_for_a_new_task"></span>
             <% @tasks.each do |task| %>
               <tr>
+                <td><%= task.date %></td>
                 <td><%= task.title %></td>
                 <!-- <td><%= task.description %></td> -->
+                <td><%= link_to "See details" %></td>
+                <td>Set a reminder</td>
+                <td>Edit</td>
+                <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <!-- <span class="hide_all_tasks">Hide</span><br> -->
+        <!-- <span class="show_all_tasks">Show</span> -->
+      </div>
+    <% else %>
+      <p>You don't have any tasks yet.</p>
+    <% end %>
+
+
+  </div>
+</section>
+
+<section id="budget" class="bodysec">
+<!-- <span class="hide">CLICK ME TO HIDE</span> -->
+
+  <div id="copy">
+
+    <!-- <% if !@tasks.empty?  %>
+      <div class="box-table">
+        <table data-fn="contacts" id="tasks_table">
+          <tbody class="all_tasks">
+            <span class="place_for_a_new_task"></span>
+            <% @tasks.each do |task| %>
+              <tr>
+                <td><%= task.title %></td>
+                <td><%= task.description %></td>
                 <td><%= task.date %></td>
                 <td><%= link_to "See details" %></td>
               </tr>
           <% end %>
           </tbody>
         </table>
-        <!-- <span class="hide_all_tasks">Hide</span><br>
-        <span class="show_all_tasks">Show</span> -->
+        <span class="hide_all_tasks">Hide</span><br>
+        <span class="show_all_tasks">Show</span>
       </div>
     <% else %>
       <p>You don't have any tasks yet.</p>
-    <% end %>
+    <% end %> -->
 
 
     <!-- <span class='tasks'></span> -->
@@ -113,7 +175,7 @@
   <br><br>
 
   <!-- <div class="form-group hide"> -->
-    <div class="form-horizontal">
+    <!-- <div class="form-horizontal">
       <%= form_for(Task.new, url: "/" + current_user.user_name + "/" + @trip.id.to_s + "/tasks") do |f| %>
         <div class="form-group">
           <label class="col-xs-1 control-label">Task(s)</label>
@@ -130,7 +192,7 @@
           </div>
         </div>
       <% end %>
-    </div>
+    </div> -->
   <!-- </div> -->
 </section>
 

@@ -2,13 +2,13 @@ class TasksController < ApplicationController
   before_action :require_login
   before_action :current_user
 
-  def index
-    @trip = Trip.find(params["trip"])
+  # def index
+    # @trip = Trip.find(params["trip"])
     # raise
-    @tasks = @trip.tasks
+    # @tasks = @trip.tasks
     # user = User.find(params[:id])
     # @tasks = user.tasks
-  end
+  # end
 
   # def new
   #   @task = Task.new
@@ -16,23 +16,21 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.trip_id = params["trip"]
+    @task.trip_id = params[:id]
 
     if @task.save
-      flash[:success] = "Saved"
-      # redirect_to :back
-      # @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
-      # @calendar = draw_calendar(@trip)
-      # render 'show_test'
+      # render json: @task
+      render partial: 'new_task'
     else
-      flash[:error] = "Error ocured"
-      redirect_to :back
+      @error = "Error"
+      render partial: 'error', :status => 400
     end
   end
 
-  def edit
-    @task = Task.find(params[:id])
-  end
+
+  # def edit
+  #   @task = Task.find(params[:id])
+  # end
 
   def update
     @task = Task.find(params[:id])
@@ -41,6 +39,13 @@ class TasksController < ApplicationController
     @date = task_params[:task][:date]
     @task.update(title: "#{@title}", description: "#{@description}", date: "#{@date}")
     @task.save
+  end
+
+
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    render nothing: true
   end
 
   private
