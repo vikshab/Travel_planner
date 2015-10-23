@@ -89,11 +89,11 @@
     </div> -->
 
 
-    <% if !@tasks.empty?  %>
       <div class="box-table">
         <table data-fn="contacts" id="tasks_table">
           <tbody class="all_tasks">
             <span class="place_for_a_new_task"></span>
+            <% if !@tasks.empty?  %>
             <% @tasks.each do |task| %>
               <tr>
                 <td><%= task.date %></td>
