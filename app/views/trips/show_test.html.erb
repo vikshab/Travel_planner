@@ -57,23 +57,47 @@
 </section>
 
 <section id="budget" class="bodysec">
-<span class="hide">CLICK ME TO HIDE</span>
+<!-- <span class="hide">CLICK ME TO HIDE</span> -->
 
   <div id="copy">
-    <span class='tasks'></span>
-    <% if @tasks != nil %>
+
+    <% if !@tasks.empty?  %>
+      <div class="box-table">
+        <table data-fn="contacts" id="tasks_table">
+          <tbody class="all_tasks">
+            <span class="place_for_a_new_task"></span>
+            <% @tasks.each do |task| %>
+              <tr>
+                <td><%= task.title %></td>
+                <!-- <td><%= task.description %></td> -->
+                <td><%= task.date %></td>
+                <td><%= link_to "See details" %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <!-- <span class="hide_all_tasks">Hide</span><br>
+        <span class="show_all_tasks">Show</span> -->
+      </div>
+    <% else %>
+      <p>You don't have any tasks yet.</p>
+    <% end %>
+
+
+    <!-- <span class='tasks'></span> -->
+    <!-- <% if @tasks != nil %>
       <% @tasks.each do |task| %>
       <%= task.title %>
       <%= task.description %>
       <%= task.date %>
       <% end %>
-    <% end %>
-
-    <!-- <span class="see_tasks"><%= link_to "Show Tasks", "/" + current_user.user_name + "/" + @trip.id.to_s +  "/tasks" %></span> -->
+    <% end %> -->
   </div>
 
-  <div class="box-table">
-    <!-- <table data-fn="contacts"> -->
+    <!-- <span class="see_tasks"><%= link_to "Show Tasks", "/" + current_user.user_name + "/" + @trip.id.to_s +  "/tasks" %></span> -->
+
+  <!-- <div class="box-table">
+    <table data-fn="contacts">
       <table class="calendar-table">
         <tr class="calendar-header"><span class="destination_input"><%= @trip.destination.capitalize %></span></tr>
         <tbody>
@@ -84,8 +108,8 @@
           <% end %>
         </tbody>
       </table>
-    <!-- </table> -->
-  </div>
+    </table>
+  </div> -->
   <br><br>
 
   <!-- <div class="form-group hide"> -->
