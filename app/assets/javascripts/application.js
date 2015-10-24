@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //
+
 $(document).ready(function() {
 
 // DISABLED BUTTON
@@ -72,11 +73,35 @@ $(document).ready(function() {
         $('.all_tasks').prepend(new_task);
         installDelete(new_task.find('.delete'));
         showDetails(new_task.find('.show_details'));
+        renderEditForm(new_task.find('.edit_task'));
       }).fail(function(jqXHR){
-        console.log("got error")
         error.prepend(jqXHR.responseText);
       });
     });
+
+    // EDIT TASK ON THE SAME PAGE
+      // $('.edit_task_form').submit(function(event){
+      // event.preventDefault();
+      // console.log("got here -edit")
+      // var error = $('.error_edit_task');
+      // error.empty();
+      // var formUrl = $(this).attr('action');
+      // var postData = $(this).serializeArray();
+      // console.log(postData)
+      //
+      //   $.ajax({
+      //     url: formUrl,
+      //     method: "PUT",
+      //     data: postData,
+      //   }).done(function(data) {
+      //     var edit_task = $(data)
+      //     $('.all_tasks').prepend(edit_task);
+      //     installDelete(edit_task.find('.delete'));
+      //     showDetails(edit_task.find('.show_details'));
+      //   }).fail(function(jqXHR){
+      //     error.prepend(jqXHR.responseText);
+      //   });
+      // });
 
 
 // SCROLLING
@@ -138,12 +163,14 @@ var $window   = $(window),
   installDelete($('.delete'));
   weather();
   showDetails($('.show_details'));
+  renderEditForm($('.edit_task'));
 });
 
 function removeDetails(element) {
   element.click(function(){
   event.preventDefault();
-  element.parents('.details').hide( 400 );
+  element.parents('.details').hide(400);
+  // element.parents('.details').hide( 400 );
   });
 }
 
@@ -195,6 +222,64 @@ function showDetails(element) {
       removeDetails(details.find('.remove'));
     }).fail(function(jqXHR){
       error.prepend(jqXHR.responseText);
+    });
+  });
+}
+
+function renderEditForm(element) {
+  element.click(function(){
+  event.preventDefault();
+  var error = $('.error_edit_task');
+  error.empty();
+
+  var editForm = $('.edit_task_form');
+  editForm.empty();
+
+  var url = $(this).children('a').attr('href');
+    $.ajax({
+      url: url,
+      method: "GET"
+    }).done(function(data) {
+      var form = $(data);
+      $('.edit_task_form').prepend(form);
+      var form_id = $(form.find('.edit_task')[0]).attr('id');
+
+      $('#' + form_id).submit(function(event){
+      event.preventDefault();
+
+
+      var formUrl = $(this).attr('action');
+      var postData = $(this).serializeArray();
+
+        $.ajax({
+          url: formUrl,
+          method: "PUT",
+          data: postData,
+        }).done(function(data) {
+          var error = $('.error_edit_task');
+          error.empty();
+          var edit_task = $(data);
+          console.log("IM IN DONE ")
+          console.log(edit_task.attr('id'));
+          var task_id = edit_task.attr('id');
+          var old_task = $('.all_tasks').find('#' + task_id );
+          old_task.hide();
+          $('.all_tasks').prepend(edit_task);
+          installDelete(edit_task.find('.delete'));
+          showDetails(edit_task.find('.show_details'));
+
+        }).fail(function(jqXHR){
+          error.empty();
+          error.prepend(jqXHR.responseText);
+          console.log("FAIL")
+        });
+      });
+      removeDetails(form.find('.remove'));
+
+    }).fail(function(jqXHR){
+      error.prepend(jqXHR.responseText);
+      console.log("FAIL again")
+
     });
   });
 }

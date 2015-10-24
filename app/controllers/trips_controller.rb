@@ -45,7 +45,7 @@ class TripsController < ApplicationController
 
   def show
     @task = Task.new
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
     destination = @trip.destination
     start_date = @trip.start_date
     end_date = @trip.end_date
@@ -65,7 +65,7 @@ class TripsController < ApplicationController
   # end
 
   def destroy
-    trip = Trip.find(params[:id])
+    trip = Trip.find(params[:trip_id])
     trip.destroy
     render nothing: true
     # trip.unassociate_user

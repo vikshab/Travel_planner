@@ -479,7 +479,8 @@ hoverblk {
   margin:0 auto;
   display:block;
   width:95%;
-  padding:2.5%;
+  padding:1.5%;
+  // padding:2.5%;
   // border-radius:  3px;
   // border: 1px solid #fff;
 }
@@ -834,8 +835,7 @@ div.alert.alert-error {
   }
 }
 
-
 .details {
-  width: 70%;
+  width: 100%;
   transition: .5s;
 }
