@@ -79,29 +79,7 @@ $(document).ready(function() {
       });
     });
 
-    // EDIT TASK ON THE SAME PAGE
-      // $('.edit_task_form').submit(function(event){
-      // event.preventDefault();
-      // console.log("got here -edit")
-      // var error = $('.error_edit_task');
-      // error.empty();
-      // var formUrl = $(this).attr('action');
-      // var postData = $(this).serializeArray();
-      // console.log(postData)
-      //
-      //   $.ajax({
-      //     url: formUrl,
-      //     method: "PUT",
-      //     data: postData,
-      //   }).done(function(data) {
-      //     var edit_task = $(data)
-      //     $('.all_tasks').prepend(edit_task);
-      //     installDelete(edit_task.find('.delete'));
-      //     showDetails(edit_task.find('.show_details'));
-      //   }).fail(function(jqXHR){
-      //     error.prepend(jqXHR.responseText);
-      //   });
-      // });
+
 
 
 // SCROLLING
@@ -164,16 +142,20 @@ var $window   = $(window),
   weather();
   showDetails($('.show_details'));
   renderEditForm($('.edit_task'));
+  addActivityToTasks($('.add'));
+  // addActivityToTasks($('#add_activity_to_tasks'));
 });
 
 function removeDetails(element) {
   element.click(function(){
   event.preventDefault();
-  element.parents('.details').hide(400);
+  element.parents('.details').hide();
+  $('#new_task_field').show();
+  $('.error_edit_task').empty();
+
   // element.parents('.details').hide( 400 );
   });
 }
-
 
 // function hideAllTrips() {
 //   $('.hide_all_trips').click(function(){
@@ -200,6 +182,14 @@ function installDelete(element) {
       method: "DELETE"
     }).done(function() {
       button.parent().parent().hide( 400 );
+      var editForm = $('.edit_task_form');
+      var details = $('.task_details');
+      var edit_error = $('.error_edit_task');
+      details.empty();
+      editForm.empty();
+      edit_error.empty();
+      $('#new_task_field').show();
+
     });
   });
 }
@@ -231,6 +221,7 @@ function renderEditForm(element) {
   event.preventDefault();
   var error = $('.error_edit_task');
   error.empty();
+  $('.error_new_task').empty();
 
   var editForm = $('.edit_task_form');
   editForm.empty();
@@ -243,6 +234,7 @@ function renderEditForm(element) {
       var form = $(data);
       $('.edit_task_form').prepend(form);
       var form_id = $(form.find('.edit_task')[0]).attr('id');
+      $('#new_task_field').hide();
 
       $('#' + form_id).submit(function(event){
       event.preventDefault();
@@ -259,14 +251,15 @@ function renderEditForm(element) {
           var error = $('.error_edit_task');
           error.empty();
           var edit_task = $(data);
-          console.log("IM IN DONE ")
-          console.log(edit_task.attr('id'));
           var task_id = edit_task.attr('id');
           var old_task = $('.all_tasks').find('#' + task_id );
           old_task.hide();
           $('.all_tasks').prepend(edit_task);
           installDelete(edit_task.find('.delete'));
           showDetails(edit_task.find('.show_details'));
+          renderEditForm(edit_task.find('.edit_task'));
+          editForm.empty();
+          $('#new_task_field').show();
 
         }).fail(function(jqXHR){
           error.empty();
@@ -283,6 +276,43 @@ function renderEditForm(element) {
     });
   });
 }
+
+// POST NEW TASK FROM THINGS ON THE SAME PAGE
+function addActivityToTasks(element) {
+  element.click(function(event){
+    event.preventDefault();
+    console.log("getting here")
+  // var error = $('.error_new_task');
+  // error.empty();
+
+  var formUrl = $(this).attr('action');
+  var postData = $(this).serializeArray();
+
+    $.ajax({
+      url: formUrl,
+      method: "POST",
+      data: postData,
+    }).done(function(data) {
+      var new_task = $(data);
+      console.log(new_task);
+      $('.all_tasks').prepend(new_task);
+      installDelete(new_task.find('.delete'));
+      showDetails(new_task.find('.show_details'));
+      renderEditForm(new_task.find('.edit_task'));
+
+
+      var activity_id = new_task.attr('id');
+      var activity = $('.popular_things_todo').find('#' + activity_id );
+      activity.hide();
+
+    }).fail(function(jqXHR){
+      console.log("error")
+      // error.prepend(jqXHR.responseText);
+    });
+  });
+}
+
+
 
 function weather() {
   $.simpleWeather({

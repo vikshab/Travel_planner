@@ -49,7 +49,7 @@ class TripsController < ApplicationController
     destination = @trip.destination
     start_date = @trip.start_date
     end_date = @trip.end_date
-    # @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
+    @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
     @tasks = @trip.tasks.lattest
     # @calendar = draw_calendar(@trip)
     render "show_test"

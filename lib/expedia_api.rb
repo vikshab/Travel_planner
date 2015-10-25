@@ -14,7 +14,9 @@ module TripPlannerAPIs
             array.push(result[i])
             i += 1
           end
-          return array
+          # sort_me.sort_by { |k| k["value"]}
+          return array.sort_by! {|activity| activity[:fromPrice] if activity != nil}
+          # return array.sort_by { |activity| activity[:fromPrice] }
       end
     end
 

@@ -39,12 +39,12 @@
         <tbody class="popular_things_todo">
           <% @popular_things_todo.each do |activity| %>
           <% if activity != nil%>
-            <tr>
-              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "30x30")%></td>
+            <tr id=<%= activity["id"] %>>
+              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "30x30")%> <%= activity["fromPrice"] %></td>
               <td><%= activity["title"] %></td>
-              <td><%= activity["fromPrice"] %></td>
+              <!-- <td><%= activity["fromPrice"] %></td> -->
               <td><%= activity["duration"] %></td>
-              <td><span class="add"><%= link_to "√"%></span></td>
+              <td><span class="add" id="add_activity_to_tasks"><%= link_to "√" , new_task_from_things_todo_path(@trip.id, activity["id"], activity["title"], activity["fromPrice"], activity["duration"]), method: "post" %></span></td>
             </tr>
           <% end %>
         <% end %>
@@ -58,7 +58,7 @@
   <% end %>
 
     <div class="box-table">
-      <div class="form-horizontal">
+      <div class="form-horizontal" id="new_task_field">
         <%= form_for @task, url:("/trips/" + @trip.id.to_s + "/tasks"), id:"new_task_form" do |f| %>
           <div class="form-group">
             <label class="col-xs-1 control-label">Task(s)</label>
@@ -110,7 +110,7 @@
               </tr>
               <% end %>
           <% else %>
-            <p>You don't have any tasks yet.</p>
+            <span class="no_tasks"></span>
           <% end %>
         </tbody>
       </table>

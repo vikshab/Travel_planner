@@ -14,6 +14,26 @@ class TasksController < ApplicationController
     end
   end
 
+
+  def create_from_things_todo
+    title = "Fun Time"
+    description = params[:activity_title] + " " + params[:activity_price] + " " + params[:activity_duration]
+    id = params[:activity_id]
+    date = Date.today.to_s
+    trip_id = params[:trip_id]
+    @task = Task.first_or_create!(id: id, title: title, description: description, date: date, trip_id: trip_id)
+
+    if @task.save
+      # render json: @task
+      render partial: 'new_task'
+    else
+      @error = "You have added this activity already"
+      # render partial: 'error', :status => 400
+      render json: "YOU HAVE THIS"
+    end
+
+  end
+
   def show
     if Task.find(params[:task_id])
       @task = Task.find(params[:task_id])
@@ -25,14 +45,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    # if Task.find(params[:task_id])
-      @task = Task.find(params[:task_id])
-      # render json: @task
-      render partial: 'edit_task'
-    # else
-      # @error = "Edit form error"
-      # render partial: 'error'
-    # end
+    @task = Task.find(params[:task_id])
+    render partial: 'edit_task'
   end
 
   def update
@@ -45,8 +59,6 @@ class TasksController < ApplicationController
 
     if @task.save
       render partial: 'updated_task'
-      # render nothing: true
-      # render json: "success"
     else
       @error = "Make sure date is entered"
       render partial: 'error', :status => 400
