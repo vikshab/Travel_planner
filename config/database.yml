@@ -25,7 +25,7 @@ test:
   <<: *default
   database: travel_test
 
- production:
+production:
   adapter: postgresql
   encoding: unicode
   database: <%= ENV['RDS_DB_NAME'] %>
