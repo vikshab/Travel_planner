@@ -124,40 +124,6 @@ $(document).ready(function() {
       });
     });
 
-    // $('#add_activity_to_tasks').click(function(event){
-    //   event.preventDefault();
-    //   console.log("getting here")
-    //   var error = $('.error_new_task');
-    //   error.empty();
-    //
-    // // var formUrl = $(this).attr('action');
-    // var url = $(this).children('a').attr('href');
-    // // var postData = $(this).serializeArray();
-    //
-    //   $.ajax({
-    //     url: url,
-    //     method: "GET",
-    //     // data: postData,
-    //   }).done(function(data) {
-    //     console.log(data);
-    //     var task = $(data);
-    //     console.log(task);
-    //     $('.all_tasks').prepend(task);
-    //     installDelete(task.find('.delete'));
-    //     showDetails(task.find('.show_details'));
-    //     renderEditForm(task.find('.edit_task'));
-    //
-    //     var activity_id = task.attr('id');
-    //     var activity = $('.popular_things_todo').find('#' + activity_id );
-    //     activity.hide();
-    //
-    //   }).fail(function(jqXHR){
-    //     // console.log("error")
-    //     error.prepend(jqXHR.responseText);
-    //   });
-    // });
-
-
 // SCROLLING
 var $window   = $(window),
     height    = $window.height(),
@@ -218,7 +184,6 @@ var $window   = $(window),
   weather();
   showDetails($('.show_details'));
   renderEditForm($('.edit_task'));
-  // addActivityToTasks($('.add'));
   addActivityToTasks($('.add'));
 });
 
@@ -339,21 +304,16 @@ function renderEditForm(element) {
 function addActivityToTasks(element) {
   element.click(function(event){
     event.preventDefault();
-    console.log("getting here")
-  // var error = $('.error_new_task');
-  // error.empty();
-    var url = $(this).children('a').attr('href');
-    console.log(url);
+    // var error = $('.error_new_task');
+    // error.empty();
 
-  // var formUrl = $(this).attr('action');
-  // var postData = $(this).serializeArray();
+    var url = $(this).children('a').attr('href');
 
     $.ajax({
       url: url,
       method: "POST",
     }).done(function(data) {
       var new_task = $(data);
-      console.log(new_task);
       $('.all_tasks').prepend(new_task);
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));

@@ -17,7 +17,11 @@ module TripPlannerAPIs
             end
           end
       end
-      sorted_result = array.sort_by { |activity| activity["fromPrice"].gsub(/(\$|,)/, "").to_i }
+      if array != nil
+        sorted_result = array.sort_by { |activity| activity["fromPrice"].gsub(/(\$|,)/, "").to_i }
+      else
+        sorted_result = []
+      end
       return sorted_result
     end
 
