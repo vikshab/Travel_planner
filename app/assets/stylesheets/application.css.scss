@@ -63,7 +63,7 @@ section {
 }
 
 #things_todo {
-  background-image: url(image-path(‘4.jpeg’));
+  background-image: url("4.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -75,7 +75,7 @@ section {
 }
 
 #budget {
-  background-image: url(image-path(‘4.jpeg’));
+  background-image: url("4.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -83,7 +83,7 @@ section {
 }
 
 #wardrobe {
-  background-image: url(image-path(‘4.jpeg’));
+  background-image: url("4.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -96,7 +96,7 @@ section {
 
 #homesec {
   // background: lighten(black, 8);
-  background-image: url(image-path(‘background.png’));
+  background-image: url("background.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -104,7 +104,7 @@ section {
 }
 
 .trips {
-  background-image: url(image-path(‘4.jpeg’));
+  background-image: url("4.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -114,7 +114,7 @@ section {
 .homepage {
   // background: lighten(black, 8);
   // height: 100%;
-  background-image: url(image-path(‘background.png’));
+  background-image: url("background.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
