@@ -3,43 +3,55 @@ require "#{ Rails.root }/lib/expedia_api"
 include TripPlannerAPIs
 
 class TripsController < ApplicationController
-  before_action :user_signed_in?
-  # before_action :current_user
-  LIMIT = 10
+  before_action :require_login
+  before_action :current_user
+
+  LIMIT = 50
 
   def index
     user_trips = current_user.trips
-    @trips = user_trips
-    # @trips = user_trips.lattest.limit(LIMIT)
+    # @trips = user_trips
+    @trips = user_trips.lattest.limit(LIMIT)
     @trip = Trip.new
   end
 
-  def new
-    @trip = Trip.new
-  end
+  # def new
+  #   @trip = Trip.new
+  # end
 
   def create
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
     @trip.image_url = 'pin.png'
     if @trip.save
-      destination = @trip.destination
-      start_date = @trip.start_date
-      end_date = @trip.end_date
-      @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
-      @calendar = draw_calendar(@trip)
-      render 'trip'
+      # destination = @trip.destination
+      # start_date = @trip.start_date
+      # end_date = @trip.end_date
+      # @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
+      # @calendar = draw_calendar(@trip)
+      render partial: 'new_trip'
+      # render json: @trip
+      # redirect_to :back
+      # render "show_test"
+      # render 'trip'
       # redirect_to user_trips_path(current_user.user_name)
-      # render 'show'
+      # render 'show_test'
     else
-      flash[:error] = "Error ocured"
-      redirect_to :back
+      @error = "Please, check the dates you enter"
+      render partial: 'error', :status => 400
+      # redirect_to :back
     end
   end
 
   def show
-    @trip = Trip.find(params[:id])
-    @tasks = @trip.tasks
+    @items = Wardrobe.all
+    @task = Task.new
+    @trip = Trip.find(params[:trip_id])
+    destination = @trip.destination
+    start_date = @trip.start_date
+    end_date = @trip.end_date
+    @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
+    @tasks = @trip.tasks.lattest
     @calendar = draw_calendar(@trip)
     render "show_test"
     # redirect_to expedia_results_path(@trip.destination, @trip.start_date, @trip.end_date, @trip.id)
@@ -54,22 +66,22 @@ class TripsController < ApplicationController
   # end
 
   def destroy
-    trip = Trip.find(params[:id])
+    trip = Trip.find(params[:trip_id])
     trip.destroy
+    render nothing: true
     # trip.unassociate_user
     # redirect_to user_trips_path(current_user.user_name)
   end
+
+  # def show_tasks
+  #   @trip = Trip.find(params["trip"])
+  #   @tasks = @trip.tasks
+  # end
 
   private
 
   def trip_params
     params.require(:trip).permit(:destination, :start_date, :end_date)
-  end
-
-  def user_signed_in?
-    if !session[:user_id]
-      redirect_to root_path
-    end
   end
 
   def draw_calendar(trip)

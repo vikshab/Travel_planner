@@ -10,19 +10,36 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   get '/:user/trips', to: "trips#index", as: "user_trips"
-  get '/:user/trips/new', to: "trips#new", as: "new_trip"
+  # get '/:user/trips/new', to: "trips#new", as: "new_trip"
   post '/:user/trips', to: "trips#create"
-  get '/trips/:id', to: "trips#show", as: "trip_path"
-  delete '/:user/trips/:id', to: "trips#destroy"
+  get '/trips/:trip_id', to: "trips#show", as: "trip_path"
+  delete '/:user/trips/:trip_id', to: "trips#destroy"
   # get '/:user/trips', to: "users#show", as: "dashboard"
 
   # get '/:user/dashboard/things_todo', to: "users#things_todo"
 
-  post "/trips/search", to: "trips#search", as: "search"
-  get "/trips/:destination/:start_date/:end_date", to: "expedia#results", as: "expedia_results"
+  # post "/trips/search", to: "trips#search", as: "search"
+  # get "/trips/:destination/:start_date/:end_date", to: "expedia#results", as: "expedia_results"
 
   resources :trips, except: [:new, :create, :show, :destroy]
 
+
+  # get "/:user/:trip/tasks", to: "trips#show_tasks"
+  # get "/:user/:trip/tasks", to: "tasks#index"
+  # resources :tasks
+
+  # get "/:user/:trip/tasks/new", to: "tasks#new"
+  # post "/:user/:trip/tasks", to: "tasks#create"
+  post "/trips/:trip_id/tasks", to: "tasks#create"
+  get "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#create_from_things_todo", as: "new_task_from_things_todo"
+  # get "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#new", as: "new_task_from_things_todo"
+  # post '/trips/:trip_id/tasks', to: "tasks#create_from_things_todo"
+
+  get "/trips/:trip_id/tasks/:task_id", to: "tasks#show"
+  delete "/trips/:trip_id/tasks/:task_id", to: "tasks#destroy"
+  get "/trips/:trip_id/tasks/:task_id/edit", to: "tasks#edit"
+  put "/trips/:trip_id/tasks/:task_id", to: "tasks#update"
+  # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

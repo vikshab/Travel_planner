@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015223737) do
+ActiveRecord::Schema.define(version: 20151026010140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 20151015223737) do
     t.integer  "user_id"
   end
 
+  create_table "trips_wardrobes", id: false, force: :cascade do |t|
+    t.integer "trip_id",     null: false
+    t.integer "wardrobe_id", null: false
+  end
+
+  add_index "trips_wardrobes", ["trip_id", "wardrobe_id"], name: "index_trips_wardrobes_on_trip_id_and_wardrobe_id", using: :btree
+  add_index "trips_wardrobes", ["wardrobe_id", "trip_id"], name: "index_trips_wardrobes_on_wardrobe_id_and_trip_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "user_name"
     t.string   "email"
@@ -43,6 +51,16 @@ ActiveRecord::Schema.define(version: 20151015223737) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "uid"
+  end
+
+  create_table "wardrobes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "quantity"
+    t.boolean  "reminder"
+    t.string   "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "date"
   end
 
 end

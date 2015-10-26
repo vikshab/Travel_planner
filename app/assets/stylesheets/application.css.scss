@@ -346,8 +346,8 @@ hoverblk {
     font-style: normal;
 }
 .weather {
-  width: 100px;
-  height: 100px;
+  width: 600px;
+  height: 400px;
   text-align: center;
   margin: 0px auto;
   text-align: center;
@@ -357,9 +357,12 @@ hoverblk {
 .weather h1 {
   color: #fff;
   font-family: weather;
-  font-size: 20px;
-  font-weight: normal;
-  line-height: 1.0;
+  margin: -8px 0 8px;
+  font-size: 150px;
+
+  // font-size: 32px;
+  // font-weight: normal;
+  // line-height: 1.0;
 }
 //
 .weather h1.icon-0:before { content: ":"; }
@@ -411,21 +414,25 @@ hoverblk {
 .weather h1.icon-46:before { content: "U"; }
 .weather h1.icon-47:before { content: "S"; }
 
-.weather h2 {
-  margin: -50px 0 8px;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 10px;
-  text-align: center;
-}
-
+// .weather h2 {
+//   margin: -5px 0 3px;
+//   color: #fff;
+//   // font-size: 200px;
+//   // font-weight: 10px;
+//   // text-align: center;
+// }
+//
 .weather p {
-  font-size: 8px;
+  padding-top: -40px;
+  font-size: 50px;
   color: white;
 }
+
 .weather p.temp {
-  font-size: 10px;
-  margin: -50px;
+  font-size: 150px;
+  color: white;
+  // padding-top: 20px;
+  // margin: -35px;
 }
 // WEATHER END------------------------------------------------------------------
 .name {
@@ -472,7 +479,8 @@ hoverblk {
   margin:0 auto;
   display:block;
   width:95%;
-  padding:2.5%;
+  padding:1.5%;
+  // padding:2.5%;
   // border-radius:  3px;
   // border: 1px solid #fff;
 }
@@ -524,8 +532,8 @@ hoverblk {
   // border: 1px solid #fff;
   // color: white;
 
-  // background:#95a5a6;
-  // background:#ecf0f1;
+  background:#95a5a6;
+  background:#ecf0f1;
   // color:#95a5a6;
 }
 .box-table table tbody tr:nth-child(even){
@@ -534,8 +542,8 @@ hoverblk {
   // border: 1px solid #fff;
   // color: white;
 
-  // background:#bdc3c7;
-  // color:#7f8c8d;
+  background:#bdc3c7;
+  color:#7f8c8d;
 }
 .box-table table tbody tr a{
   color: white;
@@ -557,7 +565,7 @@ hoverblk {
 
 /* = Responsive table
 ------------------------*/
-@media only screen and (max-width: 800px){
+// @media only screen and (max-width: 800px){
   .box-table table{
     width:100%;
     border-collapse:collapse;
@@ -600,7 +608,7 @@ hoverblk {
   }
   .box-table td{
     display:block;
-    min-height:1.25em;
+    min-height:2.25em;
     text-align:left;
   }
   .box-table th{
@@ -612,9 +620,9 @@ hoverblk {
     border-right:0;
     border-bottom:0;
   }
-}
+// }
 
-.remove {
+.delete {
   text-decoration: none;
   color: #ffffff;
   font-weight: bold;
@@ -623,7 +631,7 @@ hoverblk {
   font-size: .75em;
   display: inline-block;
   border-radius: 100%;
-  line-height: .85;
+  line-height: .50;
    @include transition(all, .25s, linear);
   &:hover {
     background: #f30;
@@ -634,7 +642,7 @@ hoverblk {
   display: inline-block;
   padding: 35px;
   position: absolute;
-  top: 50%;
+  top: 70%;
   margin-top: -180px;
   left: 50%;
   margin-left: -250px;
@@ -731,6 +739,21 @@ hoverblk {
   outline: 0;
 }
 
+#submitButtonId {
+  border: 0;
+  padding: 0;
+  // cursor: pointer;
+  height: 40px;
+  width: 370px;
+  color: #fff;
+  background: transparent;
+}
+
+.active {
+  background: #fff;
+  color-:#444;
+  cursor: pointer;
+}
 
 .name {
   font-size: 30px;
@@ -752,11 +775,82 @@ hoverblk {
 div.alert.alert-error {
   color: red;
   background: rgba(0,0,0,.2);
-  // border-radius:  3px;
-  // border: 1px solid #fff;
-  background: transparent;
+
 }
 
-.error {
-  background-color: red;
+.destination_name {
+  font-size: 50px;
+}
+
+.add {
+  text-decoration: none;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .50;
+   @include transition(all, .25s, linear);
+  &:hover {
+    background: #00FF99;
+  }
+}
+
+.hide_all_trips {
+  color: white;
+}
+
+.show_all_trips {
+  color: white;
+}
+
+.show_task_details {
+  border: 0;
+  padding: 0;
+  // cursor: pointer;
+  height: 40px;
+  width: 100%;
+  // width: 170px;
+  // text-align: justify;
+  // color: #fff;
+  background: transparent;
+  // background:#bdc3c7;
+  color:white;
+}
+
+.remove {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .50;
+   @include transition(all, .25s, linear);
+  &:hover {
+    background: #f30;
+  }
+}
+
+.details {
+  width: 100%;
+  transition: .5s;
+}
+
+.add_to_budget {
+  text-decoration: none;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .50;
+   @include transition(all, .25s, linear);
+  &:hover {
+    background: #00FF99;
+  }
 }

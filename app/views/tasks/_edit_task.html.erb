@@ -1,0 +1,21 @@
+<div class = "details">
+  <div class="form-horizontal">
+    <%= form_for @task, url:("/trips/" + params[:trip_id] + "/tasks/" + params[:task_id]), id:"edit_task_form", method: "put" do |f| %>
+      <div class="form-group">
+        <label class="col-xs-1 control-label">Edit</label>
+        <div class="col-xs-3">
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="col-xs-3">
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+        <div class="col-xs-4">
+          <span class="glyphicon glyphicon-calendar"></span>
+          <%= f.date_field :date, class: 'datepicker' %>
+          <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <span class="remove"><%= link_to "-", id:"close_details" %></span>
+</div>

@@ -1,0 +1,16 @@
+<div class="details">
+  <div class="show_task_details">
+    <%= @task.title.capitalize %><br>
+  </div>
+  <div class="show_task_details">
+    <%= @task.date %>
+  </div>
+  <div class="show_task_details">
+    <% if @task.description != "" %>
+      <%= @task.description %>
+    <% else %>
+      No Details
+    <% end %>
+  <span class="remove"><%= link_to "-", id:"close_details" %></span>
+  </div>
+</div>

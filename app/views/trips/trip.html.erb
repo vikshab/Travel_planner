@@ -14,7 +14,23 @@
 </div><!--/nav_wrap-->
 
 <section class="trips">
-  <div id="mainlogo">
+  <div id="copy">
+    <div class="box-table">
+      <table data-fn="contacts">
+
+      <table class="calendar-table">
+
+        <tr class="calendar-header"><span class="destination_input"><%= @trip.destination.capitalize %></span>
+          <th colspan="7">December</th>
+        </tr>
+        <tr>
+          <% @calendar.each do |date| %>
+          <td class="calendar-header-day"><%= date %></td>
+        <% end %>
+        </tr>
+      </table>
+    </div>
+  <!-- <div id="mainlogo">
     <span class="destination_input">
       <h1 class="name"><%= @trip.destination.capitalize %></h1>
     </span>
@@ -23,7 +39,7 @@
       <div class="icon-facebook-sign"></div>
       <div class="icon-twitter-sign"></div>
     </div>
-  </div>
+  </div> -->
 </section><!--/home-->
 
 <section id="things_todo" class="bodysec">
@@ -35,7 +51,7 @@
           <% @popular_things_todo.each do |activity| %>
           <% if activity != nil%>
             <tr>
-              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "10x10")%></td>
+              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "30x30")%></td>
               <td><%= activity["title"] %></td>
               <td><%= activity["fromPrice"] %></td>
               <td><%= activity["duration"] %></td>

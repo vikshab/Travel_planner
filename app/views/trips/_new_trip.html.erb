@@ -1,0 +1,8 @@
+<tr>
+  <td class='Destination_image'><%= image_tag('pin.png', size: '30x30')%></td>
+  <td><%= @trip.destination %></td>
+  <td><%= @trip.start_date %></td>
+  <td><%= @trip.end_date %></td>
+  <td><%= link_to "See details", trip_path(@trip.id) %></td>
+  <td><span class="delete"><%= link_to "x", "/" + current_user.user_name + "/trips/" + @trip.id.to_s %></span></td>
+</tr>

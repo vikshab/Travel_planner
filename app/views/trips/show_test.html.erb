@@ -1,11 +1,11 @@
 <div id="nav_wrap">
   <div id="logo">
-    <div class="weather"></div>
+    <div class="icon-facebook-sign"><%= current_user.user_name %></div>
   </div>
   <nav role='navigation'>
     <%= link_to "Back", id:"home" %><!--
-    ---><a href="#" id="Things_todo">Things to do</a><!--
-    ---><a href="#" id="Budget">Budget</a><!--
+    ---><a href="#" id="Things_todo">Organize tasks</a><!--
+    ---><a href="#" id="Budget">PlanBudget</a><!--
     ---><a href="#" id="Wardrobe">Wardrobe</a>
   </nav>
   <div id="social">
@@ -14,48 +14,154 @@
 </div><!--/nav_wrap-->
 
 <section class="trips">
-  <div id="mainlogo">
+  <div id="copy">
+  <!-- <div id="mainlogo"> -->
     <span class="destination_input">
-      <h1 class="name"><%= @trip.destination.capitalize%></h1>
+      <h1 class="destination_name"><%= @trip.destination.capitalize %></h1>
     </span>
+      <%= link_to "Back to accout", user_trips_path(current_user.user_name) %>
+        <div class="weather"></div>
   <br />
     <div id="mainsocial">
       <div class="icon-facebook-sign"></div>
       <div class="icon-twitter-sign"></div>
     </div>
-  </div>
+  <!-- </div> -->
+
+    </div>
 </section><!--/home-->
 
-<section id="things_todo" class="bodysec show">
+<section id="things_todo" class="bodysec">
   <div id="copy">
+
     <div class="box-table">
-      <table data-fn="contacts">
-
-      <table class="calendar-table">
-        <tr class="calendar-header"><%= @trip.destination.capitalize %>
-          <th colspan="7">December</th>
-        </tr>
-        <tr>
-          <% @calendar.each do |date| %>
-          <td class="calendar-header-day"><%= date %><span class="remove"><%= link_to "x"%></span></td>
-          <span class="remove"><%= link_to "x"%></span>
+      <div class="form-horizontal" id="new_task_field">
+        <%= form_for @task, url:("/trips/" + @trip.id.to_s + "/tasks"), id:"new_task_form" do |f| %>
+          <div class="form-group">
+            <label class="col-xs-1 control-label">Task(s)</label>
+            <div class="col-xs-3">
+              <%= f.text_field :title, class: "form-control" %>
+            </div>
+            <div class="col-xs-3">
+              <%= f.text_area :description, class: "form-control" %>
+            </div>
+            <div class="col-xs-4">
+              <span class="glyphicon glyphicon-calendar"></span>
+              <%= f.date_field :date, class: 'datepicker' %>
+              <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
+            </div>
+          </div>
         <% end %>
-        </tr>
-      </table>
+      </div>
+      <div class="error_new_task">
+      </div>
+      <div class="error_edit_task">
+      </div>
     </div>
+    <div class="box-table">
+      <span class="edit_task_form"></span>
     </div>
 
-    <!-- <div class="box-table">
-      <table data-fn="contacts">
-        <tbody>
-          <% @calendar.each do |date| %>
-            <tr>
-              <td><%= date %></td>
-              <td><span class="remove"><%= link_to "x"%></span></td>
-            </tr>
-            <% end %>
+    <div class="box-table">
+      <table data-fn="contacts" id="tasks_table">
+        <tbody class="all_tasks">
+          <!-- <span class="place_for_a_new_task"></span> -->
+          <% if !@tasks.empty?  %>
+            <% @tasks.each do |task| %>
+              <tr id=<%= task.id %>>
+                <td><%= task.date %></td>
+                <td><%= task.title %></td>
+                <td><span class="show_details"><%= link_to "See details",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
+                <td>Set a reminder</td>
+                <td><span class="edit_task"><%= link_to "Edit",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s + "/edit" %></span></td>
+                <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
+              </tr>
+              <% end %>
+          <% else %>
+            <span class="no_tasks"></span>
+          <% end %>
         </tbody>
       </table>
-    </div> -->
+    </div>
+
+    <div class="box-table">
+      <span class="task_details"></span>
+    </div>
+  </div>
+</section>
+
+<section id="budget" class="bodysec">
+  <div id="copy">
+    <div class="box-table">
+
+    <% if @popular_things_todo != nil  %>
+      These are activities we found in <%= @trip.destination.capitalize %>
+        <table data-fn="contacts">
+          <tbody class="popular_things_todo">
+            <% @popular_things_todo.each do |activity| %>
+            <% if activity != nil%>
+              <tr id=<%= activity["id"] %>>
+                <td class="Destination_image"><%= image_tag(activity["imageUrl"], width: "300")%></td>
+                <td><% if activity["fromPrice"] != nil  %>
+                    <%= activity["fromPrice"] %>
+                    <% else %>
+                    Price is not available
+                  <% end %>
+                </td>
+                <td><%= activity["title"] %></td>
+                <td>
+                  <% if activity["duration"] != nil %>
+                    <%= activity["duration"] %>
+                  <% else %>
+                  Duration is not available
+                  <% end %>                  
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+    <% else %>
+        Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
+    <% end %>
+    </div>
+  </div>
+</section>
+
+<section id="wardrobe">
+  <div id="copy">
+    <h1>Wardrobe</h1>
+    <div class="box-table">
+      <table data-fn="contacts" id="tasks_table">
+        <tbody class="wardrobe">
+          <% if !@calendar.empty?  %>
+            <% @calendar.each do |date| %>
+              <tr>
+                <td><%= date %></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <% end %>
+          <% else %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="box-table">
+      <table data-fn="contacts" id="tasks_table">
+        <tbody class="wardrobe">
+          <% if !@items.empty?  %>
+            <% @items.each do |item| %>
+              <tr>
+                <td><%= item.name %></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <% end %>
+          <% else %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>

@@ -10,23 +10,16 @@ module TripPlannerAPIs
       if result != nil
         i = 0
         array = []
-          while i <= 10 do
-            array.push(result[i])
-            i += 1
+          while i <= 30 do
+            if result[i] != nil
+              array.push(result[i])
+              i += 1
+            end
           end
-          return array
       end
+      sorted_result = array.sort_by { |activity| activity["fromPrice"].gsub(/(\$|,)/, "").to_i }
+      return sorted_result
     end
-
-    # def self.limit(limit)
-    #   i = 0
-    #   array = []
-    #   while i <= limit
-    #     array[i].push(result[i])
-    #     i ++
-    #   end
-    #   retun array
-    # end
 
     private
 
