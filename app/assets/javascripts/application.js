@@ -359,9 +359,9 @@ function addActivityToTasks(element) {
       showDetails(new_task.find('.show_details'));
       renderEditForm(new_task.find('.edit_task'));
 
-      var activity_id = new_task.attr('id');
-      var activity = $('.popular_things_todo').find('#' + activity_id );
-      activity.hide();
+      // var activity_id = new_task.attr('id');
+      // var activity = $('.popular_things_todo').find('#' + activity_id );
+      // activity.hide();
 
     }).fail(function(jqXHR){
       console.log("error")
@@ -372,7 +372,7 @@ function addActivityToTasks(element) {
 
 function weather() {
   $.simpleWeather({
-    // woeid: '2357536', //2357536
+    woeid: '2357536', //2357536
     location: $('.destination_input').text(),
     unit: 'f',
     success: function(weather) {
