@@ -21,16 +21,16 @@
 $(document).ready(function() {
 
        // Add button click handler
-      $('#surveyForm').on('click', '.addButton', function() {
-           var $template = $('#optionTemplate'),
-               $clone    = $template
-                               .clone()
-                               .removeClass('hide')
-                               .removeAttr('id')
-                               .insertBefore($template),
-               $option   = $clone.find('[name="option[]"]');
-           // Add new field
-       })
+      // $('#surveyForm').on('click', '.addButton', function() {
+      //      var $template = $('#optionTemplate'),
+      //          $clone    = $template
+      //                          .clone()
+      //                          .removeClass('hide')
+      //                          .removeAttr('id')
+      //                          .insertBefore($template),
+      //          $option   = $clone.find('[name="option[]"]');
+      //      // Add new field
+      //  })
 
       //  // Remove button click handler
       //  $('#surveyForm').on('click', '.removeButton', function() {
@@ -124,38 +124,38 @@ $(document).ready(function() {
       });
     });
 
-    $('#add_activity_to_tasks').click(function(event){
-      event.preventDefault();
-      console.log("getting here")
-      var error = $('.error_new_task');
-      error.empty();
-
-    // var formUrl = $(this).attr('action');
-    var url = $(this).children('a').attr('href');
-    // var postData = $(this).serializeArray();
-
-      $.ajax({
-        url: url,
-        method: "GET",
-        // data: postData,
-      }).done(function(data) {
-        console.log(data);
-        var task = $(data);
-        console.log(task);
-        $('.all_tasks').prepend(task);
-        installDelete(task.find('.delete'));
-        showDetails(task.find('.show_details'));
-        renderEditForm(task.find('.edit_task'));
-
-        var activity_id = task.attr('id');
-        var activity = $('.popular_things_todo').find('#' + activity_id );
-        activity.hide();
-
-      }).fail(function(jqXHR){
-        // console.log("error")
-        error.prepend(jqXHR.responseText);
-      });
-    });
+    // $('#add_activity_to_tasks').click(function(event){
+    //   event.preventDefault();
+    //   console.log("getting here")
+    //   var error = $('.error_new_task');
+    //   error.empty();
+    //
+    // // var formUrl = $(this).attr('action');
+    // var url = $(this).children('a').attr('href');
+    // // var postData = $(this).serializeArray();
+    //
+    //   $.ajax({
+    //     url: url,
+    //     method: "GET",
+    //     // data: postData,
+    //   }).done(function(data) {
+    //     console.log(data);
+    //     var task = $(data);
+    //     console.log(task);
+    //     $('.all_tasks').prepend(task);
+    //     installDelete(task.find('.delete'));
+    //     showDetails(task.find('.show_details'));
+    //     renderEditForm(task.find('.edit_task'));
+    //
+    //     var activity_id = task.attr('id');
+    //     var activity = $('.popular_things_todo').find('#' + activity_id );
+    //     activity.hide();
+    //
+    //   }).fail(function(jqXHR){
+    //     // console.log("error")
+    //     error.prepend(jqXHR.responseText);
+    //   });
+    // });
 
 
 // SCROLLING
@@ -219,7 +219,7 @@ var $window   = $(window),
   showDetails($('.show_details'));
   renderEditForm($('.edit_task'));
   // addActivityToTasks($('.add'));
-  // addActivityToTasks($('#add_activity_to_tasks'));
+  addActivityToTasks($('.add'));
 });
 
 function removeDetails(element) {
@@ -336,38 +336,39 @@ function renderEditForm(element) {
 }
 
 // POST NEW TASK FROM THINGS ON THE SAME PAGE
-// function addActivityToTasks(element) {
-  // element.click(function(event){
-  //   event.preventDefault();
-  //   console.log("getting here")
-  // // var error = $('.error_new_task');
-  // // error.empty();
-  //
+function addActivityToTasks(element) {
+  element.click(function(event){
+    event.preventDefault();
+    console.log("getting here")
+  // var error = $('.error_new_task');
+  // error.empty();
+    var url = $(this).children('a').attr('href');
+    console.log(url);
+
   // var formUrl = $(this).attr('action');
   // var postData = $(this).serializeArray();
-  //
-  //   $.ajax({
-  //     url: formUrl,
-  //     method: "POST",
-  //     data: postData,
-  //   }).done(function(data) {
-  //     var new_task = $(data);
-  //     console.log(new_task);
-  //     $('.all_tasks').prepend(new_task);
-  //     installDelete(new_task.find('.delete'));
-  //     showDetails(new_task.find('.show_details'));
-  //     renderEditForm(new_task.find('.edit_task'));
-  //
-  //     // var activity_id = new_task.attr('id');
-  //     // var activity = $('.popular_things_todo').find('#' + activity_id );
-  //     // activity.hide();
-  //
-  //   }).fail(function(jqXHR){
-  //     console.log("error")
-  //     // error.prepend(jqXHR.responseText);
-  //   });
-  // });
-// }
+
+    $.ajax({
+      url: url,
+      method: "POST",
+    }).done(function(data) {
+      var new_task = $(data);
+      console.log(new_task);
+      $('.all_tasks').prepend(new_task);
+      installDelete(new_task.find('.delete'));
+      showDetails(new_task.find('.show_details'));
+      renderEditForm(new_task.find('.edit_task'));
+
+      var activity_id = new_task.attr('id');
+      var activity = $('.popular_things_todo').find('#' + activity_id );
+      activity.hide();
+
+    }).fail(function(jqXHR){
+      console.log("error")
+      // error.prepend(jqXHR.responseText);
+    });
+  });
+}
 
 function weather() {
   $.simpleWeather({

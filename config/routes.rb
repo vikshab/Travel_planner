@@ -30,8 +30,8 @@ Rails.application.routes.draw do
 
   # get "/:user/:trip/tasks/new", to: "tasks#new"
   # post "/:user/:trip/tasks", to: "tasks#create"
+  post "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#create_from_things_todo", as: "new_task_from_things_todo"
   post "/trips/:trip_id/tasks", to: "tasks#create"
-  get "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#create_from_things_todo", as: "new_task_from_things_todo"
   # get "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#new", as: "new_task_from_things_todo"
   # post '/trips/:trip_id/tasks', to: "tasks#create_from_things_todo"
 
