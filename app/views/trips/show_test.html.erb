@@ -117,7 +117,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <span class="add" id="add_activity_to_tasks"><%= link_to "+", new_task_from_things_todo_path(@trip.id, activity["id"], activity["title"], activity["fromPrice"], activity["duration"] ) %></span>
+                  <span class="add" id="add_activity_to_tasks"><%= link_to "+", new_task_from_things_todo_path(@trip.id, activity["id"], activity["title"], activity["fromPrice"], activity["duration"], method: "post" ) %></span>
                 </td>
               </tr>
             <% end %>
