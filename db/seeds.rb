@@ -22,12 +22,19 @@ CSV.foreach("db/users.csv", headers: true) do |row|
      )
     end
 
-    CSV.foreach("db/tasks.csv", headers: true) do |row|
+  CSV.foreach("db/tasks.csv", headers: true) do |row|
 
-       Task.create(
-         title: row[0],
-         description: row[1],
-         date: row[2],
-         trip_id: row[3]
+     Task.create(
+       title: row[0],
+       description: row[1],
+       date: row[2],
+       trip_id: row[3]
+     )
+    end
+
+    CSV.foreach("db/wardrobes.csv", headers: true) do |row|
+
+       Wardrobe.create(
+         name: row[0]
        )
       end

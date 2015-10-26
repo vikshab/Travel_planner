@@ -44,6 +44,7 @@ class TripsController < ApplicationController
   end
 
   def show
+    @items = Wardrobe.all
     @task = Task.new
     @trip = Trip.find(params[:trip_id])
     destination = @trip.destination
@@ -51,7 +52,7 @@ class TripsController < ApplicationController
     end_date = @trip.end_date
     @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
     @tasks = @trip.tasks.lattest
-    # @calendar = draw_calendar(@trip)
+    @calendar = draw_calendar(@trip)
     render "show_test"
     # redirect_to expedia_results_path(@trip.destination, @trip.start_date, @trip.end_date, @trip.id)
   end
@@ -83,20 +84,20 @@ class TripsController < ApplicationController
     params.require(:trip).permit(:destination, :start_date, :end_date)
   end
 
-  # def draw_calendar(trip)
-  #   trip_beginning = trip.start_date
-  #   trip_end = trip.end_date
-  #
-  #   start_date = Date.strptime(trip_beginning, "%Y-%m-%d")
-  #   end_date = Date.strptime(trip_end, "%Y-%m-%d")
-  #
-  #   calendar = []
-  #   date = start_date
-  #
-  #   while date <= end_date do
-  #     calendar.push(date.strftime("%Y-%m-%d"))
-  #     date += 1
-  #   end
-  #   return calendar
-  # end
+  def draw_calendar(trip)
+    trip_beginning = trip.start_date
+    trip_end = trip.end_date
+
+    start_date = Date.strptime(trip_beginning, "%Y-%m-%d")
+    end_date = Date.strptime(trip_end, "%Y-%m-%d")
+
+    calendar = []
+    date = start_date
+
+    while date <= end_date do
+      calendar.push(date.strftime("%Y-%m-%d"))
+      date += 1
+    end
+    return calendar
+  end
 end

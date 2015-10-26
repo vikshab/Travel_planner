@@ -1,5 +1,10 @@
 <section class="homepage">
   <div class="row">
+
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    
     <div class="signup">
       <div class="col-sm-4"></div>
       <div class="col-sm-4">

@@ -13,23 +13,21 @@ class TasksController < ApplicationController
       render partial: 'error', :status => 400
     end
   end
-
-
+  
   def create_from_things_todo
     title = "Fun Time"
     description = params[:activity_title] + " " + params[:activity_price] + " " + params[:activity_duration]
-    id = params[:activity_id]
+    # id = params[:activity_id]
     date = Date.today.to_s
     trip_id = params[:trip_id]
-    @task = Task.first_or_create!(id: id, title: title, description: description, date: date, trip_id: trip_id)
+    @task = Task.new(title: title, description: description, date: date, trip_id: trip_id)
 
     if @task.save
       # render json: @task
       render partial: 'new_task'
     else
       @error = "You have added this activity already"
-      # render partial: 'error', :status => 400
-      render json: "YOU HAVE THIS"
+      render partial: 'error', :status => 400
     end
 
   end

@@ -2,13 +2,14 @@
   <center>Welcome to TripPlanner, <%= current_user.user_name.capitalize %>
   <center><%= link_to "Logout", logout_path, method: :delete %>
 </div>
+
  <section id="things_todo" class="bodysec">
   <div id="copy">
-    <% if !@trips.empty?  %>
       <div class="box-table">
         <table data-fn="contacts" id="trips_table">
           <tbody class="all_trips">
             <span class="place_for_a_new_trip"></span>
+            <% if !@trips.empty?  %>
             <% @trips.each do |trip| %>
               <tr>
                 <td class="Destination_image"><%= image_tag("pin.png", size: "30x30")%></td>
@@ -17,32 +18,28 @@
                 <td><%= trip.end_date %></td>
                 <td><%= link_to "See details", trip_path(trip.id) %></td>
                 <td><span class="delete"><%= link_to "x", "/" + current_user.user_name + "/trips/" + trip.id.to_s %></span></td>
-                <!-- ,  data: { confirm: "Are you sure you want to delete?"} -->
               </tr>
           <% end %>
+    <% else %>
+      <p>You don't have any trips yet.</p>
+    <% end %>
           </tbody>
         </table><br><br>
         <!-- <span class="hide_all_trips">Hide</span><br>
         <span class="show_all_trips">Show</span> -->
       </div>
-    <% else %>
-      <p>You don't have any trips yet.</p>
-    <% end %>
-
-  <div id="new_trip_box">
-    <%= image_tag("pin.png", size: "30x30")%>
-    <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), id:"new_trip_form" do |f| %>
-      <%= f.search_field :destination, placeholder: "Destination...", id:"text_field" %>
-      <%= f.date_field :start_date, class: 'datepicker', id:"start_date_field" %>
-      <%= f.date_field :end_date, class: 'datepicker', id:"end_date_field" %>
-      <%= f.submit "Add", id:"submitButtonId" %>
-    <% end %>
+  <div class="box-table">
+    <div id="new_trip_box">
+      <%= image_tag("pin.png", size: "30x30")%>
+      <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), id:"new_trip_form" do |f| %>
+        <%= f.search_field :destination, placeholder: "Destination...", id:"text_field" %>
+        <%= f.date_field :start_date, class: 'datepicker', id:"start_date_field" %>
+        <%= f.date_field :end_date, class: 'datepicker', id:"end_date_field" %>
+        <%= f.submit "Add", id:"submitButtonId" %>
+      <% end %>
+    </div>
   </div>
-  <div class="error_new_trip">
+  <div class="error_new_trip"></div>
 
-  </div>
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
-</div>
+ </div>
 </section>

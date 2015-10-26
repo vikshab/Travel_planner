@@ -11,13 +11,14 @@ module TripPlannerAPIs
         i = 0
         array = []
           while i <= 30 do
-            array.push(result[i])
-            i += 1
+            if result[i] != nil
+              array.push(result[i])
+              i += 1
+            end
           end
-          # sort_me.sort_by { |k| k["value"]}
-          return array.sort_by! {|activity| activity[:fromPrice] if activity != nil}
-          # return array.sort_by { |activity| activity[:fromPrice] }
       end
+      sorted_result = array.sort_by { |activity| activity["fromPrice"].gsub(/(\$|,)/, "").to_i }
+      return sorted_result
     end
 
     private

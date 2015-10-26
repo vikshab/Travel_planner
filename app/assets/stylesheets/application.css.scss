@@ -608,7 +608,7 @@ hoverblk {
   }
   .box-table td{
     display:block;
-    min-height:1.25em;
+    min-height:2.25em;
     text-align:left;
   }
   .box-table th{
@@ -838,4 +838,19 @@ div.alert.alert-error {
 .details {
   width: 100%;
   transition: .5s;
+}
+
+.add_to_budget {
+  text-decoration: none;
+  font-weight: bold;
+  background: #e0e0e0;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .50;
+   @include transition(all, .25s, linear);
+  &:hover {
+    background: #00FF99;
+  }
 }

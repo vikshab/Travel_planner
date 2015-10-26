@@ -4,8 +4,8 @@
   </div>
   <nav role='navigation'>
     <%= link_to "Back", id:"home" %><!--
-    ---><a href="#" id="Things_todo">Things to do</a><!--
-    ---><a href="#" id="Budget">Budget</a><!--
+    ---><a href="#" id="Things_todo">Organize tasks</a><!--
+    ---><a href="#" id="Budget">PlanBudget</a><!--
     ---><a href="#" id="Wardrobe">Wardrobe</a>
   </nav>
   <div id="social">
@@ -33,29 +33,6 @@
 
 <section id="things_todo" class="bodysec">
   <div id="copy">
-  <% if @popular_things_todo != nil  %>
-    <div class="box-table">
-      <table data-fn="contacts">
-        <tbody class="popular_things_todo">
-          <% @popular_things_todo.each do |activity| %>
-          <% if activity != nil%>
-            <tr id=<%= activity["id"] %>>
-              <td class="Destination_image"><%= image_tag(activity["imageUrl"], size: "30x30")%> <%= activity["fromPrice"] %></td>
-              <td><%= activity["title"] %></td>
-              <!-- <td><%= activity["fromPrice"] %></td> -->
-              <td><%= activity["duration"] %></td>
-              <td><span class="add" id="add_activity_to_tasks"><%= link_to "√" , new_task_from_things_todo_path(@trip.id, activity["id"], activity["title"], activity["fromPrice"], activity["duration"]), method: "post" %></span></td>
-            </tr>
-          <% end %>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% else %>
-    <div class="box-table">
-      Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
-    </div>
-  <% end %>
 
     <div class="box-table">
       <div class="form-horizontal" id="new_task_field">
@@ -96,15 +73,6 @@
                 <td><%= task.title %></td>
                 <td><span class="show_details"><%= link_to "See details",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
                 <td>Set a reminder</td>
-                <!-- <td data-toggle="collapse" data-target="#<%= task.id.to_s %>" aria-expanded="true" aria-controls="Task">
-                    Details
-                  <div class="collapse" id="<%= task.id.to_s %>">
-                    <div class="well">
-                      <%= task.description %>
-                    </div>
-                  </div>
-                </td> -->
-
                 <td><span class="edit_task"><%= link_to "Edit",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s + "/edit" %></span></td>
                 <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
               </tr>
@@ -119,33 +87,81 @@
     <div class="box-table">
       <span class="task_details"></span>
     </div>
-    <!-- <div class="box-table">
-      <span class="edit_task_form"></span>
-    </div> -->
   </div>
 </section>
 
 <section id="budget" class="bodysec">
   <div id="copy">
+    <div class="box-table">
 
+    <% if @popular_things_todo != nil  %>
+      These are activities we found in <%= @trip.destination.capitalize %>
+        <table data-fn="contacts">
+          <tbody class="popular_things_todo">
+            <% @popular_things_todo.each do |activity| %>
+            <% if activity != nil%>
+              <tr id=<%= activity["id"] %>>
+                <td class="Destination_image"><%= image_tag(activity["imageUrl"], width: "300")%></td>
+                <td><% if activity["fromPrice"] != nil  %>
+                    <%= activity["fromPrice"] %>
+                    <% else %>
+                    Price is not available
+                  <% end %>
+                </td>
+                <td><%= activity["title"] %></td>
+                <td>
+                  <% if activity["duration"] != nil %>
+                    <%= activity["duration"] %>
+                  <% else %>
+                  Duration is not available
+                  <% end %>                  
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+    <% else %>
+        Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
+    <% end %>
+    </div>
   </div>
-
 </section>
 
 <section id="wardrobe">
   <div id="copy">
     <h1>Wardrobe</h1>
-
-    <!-- <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Link with href
-    </a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Button with data-target
-    </button>
-    <div class="collapse" id="collapseExample">
-      <div class="well">
-        ...
-      </div>
-    </div> -->
+    <div class="box-table">
+      <table data-fn="contacts" id="tasks_table">
+        <tbody class="wardrobe">
+          <% if !@calendar.empty?  %>
+            <% @calendar.each do |date| %>
+              <tr>
+                <td><%= date %></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <% end %>
+          <% else %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="box-table">
+      <table data-fn="contacts" id="tasks_table">
+        <tbody class="wardrobe">
+          <% if !@items.empty?  %>
+            <% @items.each do |item| %>
+              <tr>
+                <td><%= item.name %></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <% end %>
+          <% else %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>

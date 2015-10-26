@@ -1,5 +1,11 @@
 <section class="homepage">
   <div class="row">
+    <% if flash[:error] %>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    <% end %>
+
     <div class="signup">
       <div class="col-sm-4"></div>
       <div class="col-sm-4">

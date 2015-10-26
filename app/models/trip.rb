@@ -3,9 +3,10 @@ require 'date'
 class Trip < ActiveRecord::Base
   belongs_to :user
   has_many :tasks
+  has_and_belongs_to_many :wardrobes
 
   validates :destination, :start_date, :end_date, presence: true
-  validate :start_date_cannot_be_greater_than_end_date, :start_date_cannot_be_in_the_past
+  # validate :start_date_cannot_be_greater_than_end_date, :start_date_cannot_be_in_the_past
 
   scope :lattest, -> { order('created_at DESC') }
 
