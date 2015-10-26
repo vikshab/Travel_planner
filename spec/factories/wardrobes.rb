@@ -5,5 +5,4 @@ FactoryGirl.define do
     reminder false
     image_url "image"
   end
-
 end
