@@ -15,7 +15,6 @@
 
 <section class="trips">
   <div id="copy">
-  <!-- <div id="mainlogo"> -->
     <span class="destination_input">
       <h1 class="destination_name"><%= @trip.destination.capitalize %></h1>
     </span>
@@ -26,7 +25,6 @@
       <div class="icon-facebook-sign"></div>
       <div class="icon-twitter-sign"></div>
     </div>
-  <!-- </div> -->
 
     </div>
 </section><!--/home-->
@@ -95,7 +93,7 @@
     <div class="box-table">
 
     <% if !@popular_things_todo.empty?  %>
-      These are activities we found in <%= @trip.destination.capitalize %>
+        <center><h1>These are activities we found in <%= @trip.destination.capitalize %></h1>
         <table data-fn="contacts">
           <tbody class="popular_things_todo">
             <% @popular_things_todo.each do |activity| %>

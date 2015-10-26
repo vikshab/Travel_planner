@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :wardrobe do
-    name "MyString"
-quantity 1
-reminder false
-image_url "MyString"
+    name "jacket"
+    quantity 1
+    reminder false
+    image_url "image"
   end
 
 end
