@@ -13,7 +13,7 @@ class TasksController < ApplicationController
       render partial: 'error', :status => 400
     end
   end
-  
+
   def create_from_things_todo
     title = "Fun Time"
     description = params[:activity_title] + " " + params[:activity_price] + " " + params[:activity_duration]
