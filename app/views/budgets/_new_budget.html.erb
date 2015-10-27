@@ -1,0 +1,12 @@
+<% if !@expances_per_day.empty?  %>
+  <% @expances_per_day.each do |amount| %>
+  <% if amount.date != nil %>
+    <tr id=<%= amount.id %>>
+      <td><%= amount["date"] %></td>
+      <td>$<%= amount["total"] %></td>
+      <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/budget/" + amount["id"].to_s %></span></td>
+    </tr>
+    <% end %>
+  <% end %>
+<% else %>
+<% end %>

@@ -124,6 +124,33 @@ $(document).ready(function() {
       });
     });
 
+
+    // POST BUDGET ON THE SAME PAGE
+      $('#new_budget').submit(function(event){
+      event.preventDefault();
+      var error = $('.error_new_budget');
+      error.empty();
+      console.log("hello")
+
+      var formUrl = $(this).attr('action');
+      var postData = $(this).serializeArray();
+
+        $.ajax({
+          url: formUrl,
+          method: "POST",
+          data: postData,
+        }).done(function(data) {
+          var new_budget = $(data);
+          $('.budget').prepend(new_budget);
+          installDelete(new_budget.find('.delete'));
+          // showDetails(new_task.find('.show_details'));
+          // renderEditForm(new_task.find('.edit_task'));
+        }).fail(function(jqXHR){
+          error.prepend(jqXHR.responseText);
+        });
+      });
+
+
 // SCROLLING
 var $window   = $(window),
     height    = $window.height(),
@@ -321,10 +348,10 @@ function addActivityToTasks(element) {
       activity.hide(600);
       $('.all_tasks').prepend(new_task);
 
-      var budget = $(".money").attr('data-val');
-      var setNewBudget = $('.money').attr('data-val', parseInt(price) + parseInt(budget));
+      var budget = $("#money").attr('data-val');
+      var setNewBudget = $('#money').attr('data-val', parseInt(price) + parseInt(budget));
       budget = setNewBudget;
-      $('.money').text($(".money").attr('data-val'))
+      $('#money').text($("#money").attr('data-val'))
 
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));

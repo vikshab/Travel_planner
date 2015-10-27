@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   delete "/trips/:trip_id/tasks/:task_id", to: "tasks#destroy"
   get "/trips/:trip_id/tasks/:task_id/edit", to: "tasks#edit"
   put "/trips/:trip_id/tasks/:task_id", to: "tasks#update"
+
+  post "/trips/:trip_id/budget", to: "budgets#create"
+  delete "/trips/:trip_id/budget/:budget_id", to: "budgets#destroy"
+
   # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
