@@ -325,13 +325,7 @@ function addActivityToTasks(element) {
       var setNewBudget = $('.money').attr('data-val', parseInt(price) + parseInt(budget));
       budget = setNewBudget;
       $('.money').text($(".money").attr('data-val'))
-      // var newBudget = $('.money').attr('data-val');
-      // console.log("add" + newBudget);
-      // budget = parseInt(budget) + parseInt(newBudget);
-      // console.log("new" + budget)
-      // $('.money').text(total);
 
-      // $('.budget_for_activities').prepend('<h1>'+ price +'</h1>')
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));
       renderEditForm(new_task.find('.edit_task'));
