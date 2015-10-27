@@ -73,6 +73,9 @@
                 <td>Set a reminder</td>
                 <td><span class="edit_task"><%= link_to "Edit",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s + "/edit" %></span></td>
                 <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
+                <!-- <div title="Delete task?" class="confirmation" >
+                  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This task will be permanently deleted and cannot be recovered. Are you sure?</p>
+                </div> -->
               </tr>
               <% end %>
           <% else %>
@@ -100,7 +103,7 @@
             <% if activity != nil%>
               <tr id=<%= activity["id"] %>>
                 <td class="Destination_image"><%= image_tag(activity["imageUrl"], width: "300")%></td>
-                <td><% if activity["fromPrice"] != nil  %>
+                <td class="price"><% if activity["fromPrice"] != nil  %>
                     <%= activity["fromPrice"] %>
                     <% else %>
                     Price is not available
@@ -121,6 +124,9 @@
             <% end %>
           <% end %>
           </tbody>
+            <div class="money" data-val="0">
+
+            </div>
         </table>
     <% else %>
         Unfortunately, no activities were found in <%= @trip.destination.capitalize %>

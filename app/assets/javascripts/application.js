@@ -305,34 +305,36 @@ function addActivityToTasks(element) {
   element.click(function(event){
     event.preventDefault();
     var this_element = $(this);
-    // var error = $('.error_new_task');
-    // error.empty();
-      console.log(this_element)
+
+    // console.log(this_element)
+    var price = (this_element.parents('tr').children('.price').text());
 
     var url = $(this).children('a').attr('href');
-    console.log(url)
     $.ajax({
       url: url,
       method: "POST",
     }).done(function(data) {
       var new_task = $(data);
-
       var activity_id = this_element.parents('tr').attr('id');
-      console.log(activity_id)
       var activity = $('.popular_things_todo').find('#' + activity_id );
       this_element.toggleClass('added')
-
-      // activity.hide();
-
-      // $(activity).toggleClass('added');
+      activity.hide(600);
       $('.all_tasks').prepend(new_task);
+
+      var budget = $(".money").attr('data-val');
+      var setNewBudget = $('.money').attr('data-val', parseInt(price) + parseInt(budget));
+      budget = setNewBudget;
+      $('.money').text($(".money").attr('data-val'))
+      // var newBudget = $('.money').attr('data-val');
+      // console.log("add" + newBudget);
+      // budget = parseInt(budget) + parseInt(newBudget);
+      // console.log("new" + budget)
+      // $('.money').text(total);
+
+      // $('.budget_for_activities').prepend('<h1>'+ price +'</h1>')
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));
       renderEditForm(new_task.find('.edit_task'));
-
-      // var activity_id = new_task.attr('id');
-      // var activity = $('.popular_things_todo').find('#' + activity_id );
-      // activity.hide();
 
     }).fail(function(jqXHR){
       console.log("error")
