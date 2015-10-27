@@ -304,16 +304,27 @@ function renderEditForm(element) {
 function addActivityToTasks(element) {
   element.click(function(event){
     event.preventDefault();
+    var this_element = $(this);
     // var error = $('.error_new_task');
     // error.empty();
+      console.log(this_element)
 
     var url = $(this).children('a').attr('href');
-
+    console.log(url)
     $.ajax({
       url: url,
       method: "POST",
     }).done(function(data) {
       var new_task = $(data);
+
+      var activity_id = this_element.parents('tr').attr('id');
+      console.log(activity_id)
+      var activity = $('.popular_things_todo').find('#' + activity_id );
+      this_element.toggleClass('added')
+
+      // activity.hide();
+
+      // $(activity).toggleClass('added');
       $('.all_tasks').prepend(new_task);
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));

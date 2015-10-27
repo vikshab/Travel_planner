@@ -659,6 +659,17 @@ div.alert.alert-error {
   }
 }
 
+.added {
+  text-decoration: none;
+  font-weight: bold;
+  background: red;
+  padding: .5em;
+  font-size: .75em;
+  display: inline-block;
+  border-radius: 100%;
+  line-height: .50;
+}
+
 .hide_all_trips {
   color: white;
 }
