@@ -10,7 +10,7 @@ class WardrobesController < ApplicationController
     if @wardrobe.save
       render partial: 'new_wardrobe'
     else
-      @error = "Enter name"
+      @error = "Enter wardrobe item"
       render partial: 'error', :status => 400
     end
   end
