@@ -1,11 +1,15 @@
 <section class="homepage">
   <div class="row">
-
     <div class="signup">
       <div class="col-sm-4"></div>
       <div class="col-sm-4">
         <h2>Log in</h2>
           <%= form_for(:session) do |f| %>
+
+            <% if flash[:error] %>
+              <div class="alert alert-error"><%= flash[:error] %></div>
+            <% end %>
+
             <div class="form-group">
               <%= f.text_field :user_name, placeholder:"Enter your username", class: "form-control"%>
             </div>
@@ -15,11 +19,8 @@
             </div>
               <%= f.submit "Log in", class: "btn btn-primary" %>
           <% end %>
-          <% if flash[:error] %>
-            <div class="alert alert-error"><%= flash[:error] %></div>
-          <% end %>
 
-          </div>
+          <%= render "shared/footer" %>
       </div>
       <div class="col-sm-4"></div>
     </div>

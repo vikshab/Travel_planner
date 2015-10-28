@@ -12,13 +12,15 @@ module TripPlannerAPIs
         array = []
           while i <= 30 do
             if result[i] != nil
+              result[i]["fromPrice"] = result[i]["fromPrice"].gsub(/(\$|,)/, "").to_i
+              result[i]["title"] = result[i]["title"].gsub(".", "")
               array.push(result[i])
               i += 1
             end
           end
       end
       if array != nil
-        sorted_result = array.sort_by { |activity| activity["fromPrice"].gsub(/(\$|,)/, "").to_i }
+        sorted_result = array.sort_by { |activity| activity["fromPrice"] }
       else
         sorted_result = []
       end
