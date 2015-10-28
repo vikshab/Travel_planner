@@ -406,6 +406,8 @@ function newWardrobe(element) {
           //  console.log(amount_sum)
           //  $(form_id).prepend(edit_amount)
           $(day).prepend(new_wardrobe)
+          installDelete(new_wardrobet.find('.delete'));
+
           // sum_id.hide();
           // $('.budget').prepend(edit_amount);
 

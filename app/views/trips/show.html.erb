@@ -201,11 +201,11 @@
         <tbody class="wardrobe">
           <% if !@wardrobe_items.empty?  %>
             <% @wardrobe_items.each do |item| %>
-              <tr id=<%= date %>>
+              <tr id=<%= item.date %>>
                 <td><%= item.date %></td>
                 <td><%= item.name %></td>
                 <td><%= item.quantity %></td>
-                <!-- <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td> -->
+                <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td>
               </tr>
             <% end %>
           <% else %>

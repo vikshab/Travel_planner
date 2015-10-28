@@ -4,8 +4,8 @@ class WardrobesController < ApplicationController
 
   def create
     @wardrobe = Wardrobe.new(wardrobe_params)
-    # @trip = Trip.find(params[:trip_id])
-    @wardrobe.trip_id = params[:trip_id]
+    @trip = Trip.find(params[:trip_id])
+    @wardrobe.trips << @trip
     @wardrobe.date = params[:date]
     if @wardrobe.save
       render partial: 'new_wardrobe'
@@ -15,6 +15,17 @@ class WardrobesController < ApplicationController
     end
   end
 
+  def remove_wardrobe_item_from_trip
+    wardrobe_item = Wardrobe.find(params[:wardrobe_id])
+    trip = wardrobe_item.trips.find(params[:trip_id])
+
+    if trip
+      wardrobe_item.trips.delete(trip)
+    end
+    # wardrobe_item = Wardrobe.find(params[:wardrobe_id])
+    # wardrobe_item.unassociate_trip
+    render nothing: true
+  end
 
   private
 
