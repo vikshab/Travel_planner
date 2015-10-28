@@ -48,7 +48,7 @@ CSV.foreach("db/budgets.csv", headers: true) do |row|
   )
 end
 
-trips_wardrobes = {10 => [1..74], 18 => [75..214] }
+trips_wardrobes = {10 => (1..74).to_a, 18 => (75..214).to_a } 
 
 trips_wardrobes.each do |trips, wardrobes|
   wardrobe = Wardrobe.find(trips)
