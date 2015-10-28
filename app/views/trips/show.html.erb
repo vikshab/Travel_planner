@@ -205,7 +205,7 @@
                 <% if !@wardrobe_items.empty?  %>
                   <% @wardrobe_items.each do |item| %>
                     <% if item.date == date %>
-                      <td><%= item.name %><%= item.quantity %><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td>
+                      <td><%= item.name %><%= item.quantity %><span class="delete_wardrobe_item"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td>
                     <% end %>
                   <% end %>
                 <% end %>
