@@ -209,8 +209,9 @@ var $window   = $(window),
   showDetails($('.show_details'));
   renderEditForm($('.edit_task'));
   addActivityToTasks($('.add'));
-  editAmount($('.edit_budget'))
-  newWardrobe($('.new_wardrobe'))
+  editAmount($('.edit_budget'));
+  newWardrobe($('.new_wardrobe'));
+  installDeleteWardrobeItems($('.delete_wardrobe_item'));
 });
 
 function removeDetails(element) {
@@ -381,7 +382,7 @@ function newWardrobe(element) {
     }).done(function(data) {
       var new_wardrobe= $(data);
       $('#' + form_id).append(new_wardrobe);
-      installDelete(new_wardrobe.find('.delete'));
+      installDeleteWardrobeItems(new_wardrobe.find('.delete_wardrobe_item'))
 
     }).fail(function(jqXHR){
       error.empty();
@@ -389,6 +390,22 @@ function newWardrobe(element) {
     });
   });
   };
+
+  // Delete Wardrobe
+  function installDeleteWardrobeItems(element) {
+    element.click(function(){
+    event.preventDefault();
+
+    var button = $(this);
+    var url = $(this).children('a').attr('href');
+      $.ajax({
+        url: url,
+        method: "DELETE"
+      }).done(function() {
+        button.parent().hide( 400 );
+      });
+    });
+  }
 
 // POST NEW TASK FROM THINGS ON THE SAME PAGE
 function addActivityToTasks(element) {
