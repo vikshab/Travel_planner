@@ -80,11 +80,10 @@
           <% end %>
         </tbody>
       </table>
-
+  </div>
     <div class="box-table">
       <span class="task_details"></span>
     </div>
-  </div>
 </section>
 
 <section id="budget" class="bodysec">
@@ -154,6 +153,7 @@
                 <%= form_for amount, url:("/trips/" + params[:trip_id] + "/budget/" + amount.id.to_s + "/" + amount["total"].to_s), id:"edit_budget_form", method: "put" do |f| %>
                   <%= f.text_field :total, class: "form-control" %>
                   <span class="edit_budget"><%= f.submit "+", class: "btn btn-default" %></span>
+                  <!-- <span class="subtract_budget"><%= f.submit "-", class: "btn btn-default" %></span> -->
                 <% end %>
               </td>
               <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/budget/" + amount.id.to_s %></span></td>

@@ -4,12 +4,13 @@
       <i class="fa fa-plus"><span class="addBudget"><%= f.submit "+", class: "btn btn-default" %></span></i>
   <% end %>
 </td> -->
-<tr>
+<!-- <tr>
   <td>Total:</td>
   <td>
     <%= form_for @budget, url:("/trips/" + params[:trip_id] + "/budget/" +  params[:budget_id] ), id:"edit_budget_form", method: "put" do |f| %>
       <%= f.text_field :total, class: "form-control" %>
-      <span class="addBudget"><%= f.submit "+", class: "btn btn-default" %></span>
+      <span class="add_budget"><%= f.submit "+", class: "btn btn-default" %></span>
+      <span class="subtract_budget"><%= f.submit "-", class: "btn btn-default" %></span>
     <% end %>
   </td>
-</tr>
+</tr> -->
