@@ -83,7 +83,6 @@ section {
 
 // background image
 #homesec {
-  // background: lighten(black, 8);
   background-image: url("background.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -99,10 +98,8 @@ section {
   margin-bottom: 80px;
 
 }
-// background image
+
 .homepage {
-  // background: lighten(black, 8);
-  // height: 100%;
   background-image: url("background.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -303,15 +300,16 @@ hoverblk {
 
 // WEATHER START----------------------------------------------------------------
 @font-face {
-    font-family: 'weather';
-    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.eot');
-    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.eot?#iefix') format('embedded-opentype'),
-         url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.woff') format('woff'),
-         url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.ttf') format('truetype'),
-         url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.svg#artill_clean_weather_iconsRg') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'weather';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.eot');
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.eot?#iefix') format('embedded-opentype'),
+       url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.woff') format('woff'),
+       url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.ttf') format('truetype'),
+       url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.svg#artill_clean_weather_iconsRg') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
+
 .weather {
   width: 600px;
   height: 400px;
@@ -392,7 +390,6 @@ hoverblk {
   font-size: 100px;
   color: white;
 }
-
 // SIGN UP START ---------------------------------------------------------------
 .signup {
   padding-top: 200px;
@@ -401,7 +398,6 @@ hoverblk {
 .signup h2 {
   color: white;
 }
-
 
 // TABLE START------------------------------------------------------------------
 .box-table table{

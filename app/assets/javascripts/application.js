@@ -362,78 +362,33 @@ function editAmount(element) {
   });
 };
 
-
-
 // NEW WARDROBE ITEM POST
 function newWardrobe(element) {
   element.submit(function(){
   event.preventDefault();
+  var error = $('.error_new_wardrobe');
+  error.empty();
 
-  // var editForm = this;
   var form_id = $(this).parents('tr').attr('id');
   var day = $(this).parents('td').siblings('td.wardrobe_day')
-  // var day = $(this).parents('td').siblings('td.date')
-      // var form_id = $(form.find('.edit_budget')[0]).attr('id');
-      // $('#new_task_field').hide();
-      //
-      // $('#' + form_id).submit(function(event){
-      // event.preventDefault();
-      //
-      //
-      var formUrl = $(this).attr('action');
-      var postData = $(this).serializeArray();
+  var formUrl = $(this).attr('action');
+  var postData = $(this).serializeArray();
 
-        $.ajax({
-          url: formUrl,
-          method: "POST",
-          data: postData,
-        }).done(function(data) {
-          // var error = $('.error_edit_budget');
-          // error.empty();
+    $.ajax({
+      url: formUrl,
+      method: "POST",
+      data: postData,
+    }).done(function(data) {
+      var new_wardrobe= $(data);
+      $('#' + form_id).append(new_wardrobe);
+      installDelete(new_wardrobe.find('.delete'));
 
-          var new_wardrobe= $(data);
-
-          console.log(new_wardrobe)
-          // console.log(sum_id);
-          // var amount_id = edit_amount.attr('id');
-          // console.log(amount_id)
-
-          // var old_amount = $('.budget').find('#' + amount_id );
-          // var old_amount = $('.budget').find('#' + amount_id );
-
-          // console.log(old_amount)
-          console.log(day)
-          //  console.log(amount_sum)
-          //  $(form_id).prepend(edit_amount)
-          $(day).prepend(new_wardrobe)
-          // sum_id.hide();
-          // $('.budget').prepend(edit_amount);
-
-
-
-          // installDelete(edit_task.find('.delete'));
-          // showDetails(edit_task.find('.show_details'));
-          // renderEditForm(edit_task.find('.edit_task'));
-          // editForm.empty();
-          // $('#new_task_field').show();
-    //
-        }).fail(function(jqXHR){
-          error.empty();
-          error.prepend(jqXHR.responseText);
-        });
-      });
-      // removeDetails(form.find('.remove'));
-
-    // }).fail(function(jqXHR){
-    //   error.prepend(jqXHR.responseText);
-    //
-    // });
+    }).fail(function(jqXHR){
+      error.empty();
+      error.prepend(jqXHR.responseText);
+    });
+  });
   };
-// }
-
-
-
-
 
 // POST NEW TASK FROM THINGS ON THE SAME PAGE
 function addActivityToTasks(element) {

@@ -46,9 +46,7 @@ Rails.application.routes.draw do
 
 
   post "/trips/:trip_id/wardrobe/:date", to: "wardrobes#create"
-
-
-
+  delete "/trips/:trip_id/wardrobe/:wardrobe_id", to: "wardrobes#remove_wardrobe_item_from_trip"
 
   # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.
