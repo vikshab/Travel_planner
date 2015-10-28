@@ -20,53 +20,6 @@
 
 $(document).ready(function() {
 
-       // Add button click handler
-      // $('#surveyForm').on('click', '.addButton', function() {
-      //      var $template = $('#optionTemplate'),
-      //          $clone    = $template
-      //                          .clone()
-      //                          .removeClass('hide')
-      //                          .removeAttr('id')
-      //                          .insertBefore($template),
-      //          $option   = $clone.find('[name="option[]"]');
-      //      // Add new field
-      //  })
-
-      //  // Remove button click handler
-      //  $('#surveyForm').on('click', '.removeButton', function() {
-      //      var $row    = $(this).parents('.form-group'),
-      //          $option = $row.find('[name="option[]"]');
-       //
-      //      // Remove element containing the option
-      //      $row.remove();
-       //
-      //      // Remove field
-      //  })
-
-    //    // Called after adding new field
-    //    $('#surveyForm').on('added.field.fv', function(e, data) {
-    //        // data.field   --> The field name
-    //        // data.element --> The new field element
-    //        // data.options --> The new field options
-     //
-    //        if (data.field === 'option[]') {
-    //            if ($('#surveyForm').find(':visible[name="option[]"]').length >= MAX_OPTIONS) {
-    //                $('#surveyForm').find('.addButton').attr('disabled', 'disabled');
-    //            }
-    //        }
-    //    })
-     //
-    //    // Called after removing the field
-    //    $('#surveyForm').on('removed.field.fv', function(e, data) {
-    //       if (data.field === 'option[]') {
-    //            if ($('#surveyForm').find(':visible[name="option[]"]').length < MAX_OPTIONS) {
-    //                $('#surveyForm').find('.addButton').removeAttr('disabled');
-    //            }
-    //        }
-    //  });
-
-
-
 // DISABLED BUTTON
   if($('#text_field').val() ==  "")
     $('#submitButtonId').attr('disabled', true);
@@ -141,6 +94,7 @@ $(document).ready(function() {
           var new_budget = $(data);
           $('.budget').prepend(new_budget);
           editAmount(new_budget.find('.edit_budget'));
+          // editAmount(new_budget.find('.subtract_budget'));
           installDelete(new_budget.find('.delete'));
         }).fail(function(jqXHR){
           error.prepend(jqXHR.responseText);
@@ -210,6 +164,7 @@ var $window   = $(window),
   renderEditForm($('.edit_task'));
   addActivityToTasks($('.add'));
   editAmount($('.edit_budget'));
+  // editAmount($('.subtract_budget'));
   newWardrobe($('.new_wardrobe'));
   installDeleteWardrobeItems($('.delete_wardrobe_item'));
 });
@@ -326,7 +281,6 @@ function renderEditForm(element) {
     });
   });
 }
-
 
 function editAmount(element) {
   element.submit(function(){
