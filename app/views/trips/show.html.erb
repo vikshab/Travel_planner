@@ -98,14 +98,27 @@
             <% @popular_things_todo.each do |activity| %>
             <% if activity != nil%>
               <tr id=<%= activity["id"] %>>
-                <td class="Destination_image"><%= image_tag(activity["imageUrl"], width: "300")%></td>
-                <td class="price"><% if activity["fromPrice"] != nil  %>
-                    <%= activity["fromPrice"] %>
-                    <% else %>
-                    Price is not available
+                <td class="Destination_image">
+                  <% if activity["imageUrl"] != nil  %>
+                    <%= image_tag(activity["imageUrl"], width: "300")%>
+                  <% else %>
+                    <%= image_tag("pin.png", width: "300")%>
                   <% end %>
                 </td>
-                <td><%= activity["title"] %></td>
+                <td class="price">
+                  <% if activity["fromPrice"] != nil  %>
+                      <%= activity["fromPrice"] %>
+                  <% else %>
+                      <%= activity["fromPrice"] = 0 %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if activity["title"] != nil  %>
+                      <%= activity["title"] %>
+                  <% else %>
+                      <%= activity["title"] = "Not available" %>
+                  <% end %>
+                </td>
                 <td>
                   <% if activity["duration"] != nil %>
                     <%= activity["duration"] %>
