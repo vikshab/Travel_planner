@@ -18,12 +18,9 @@ class WardrobesController < ApplicationController
   def remove_wardrobe_item_from_trip
     wardrobe_item = Wardrobe.find(params[:wardrobe_id])
     trip = wardrobe_item.trips.find(params[:trip_id])
-
     if trip
       wardrobe_item.trips.delete(trip)
     end
-    # wardrobe_item = Wardrobe.find(params[:wardrobe_id])
-    # wardrobe_item.unassociate_trip
     render nothing: true
   end
 
