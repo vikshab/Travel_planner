@@ -32,9 +32,18 @@ CSV.foreach("db/users.csv", headers: true) do |row|
      )
     end
 
-    CSV.foreach("db/wardrobes.csv", headers: true) do |row|
+  CSV.foreach("db/wardrobes.csv", headers: true) do |row|
 
-       Wardrobe.create(
-         name: row[0]
-       )
-      end
+     Wardrobe.create(
+       name: row[0]
+     )
+    end
+
+
+  CSV.foreach("db/budgets.csv", headers: true) do |row|
+
+     Budget.create(
+       total: row[0].to_i,
+       trip_id: row[1]
+     )
+    end

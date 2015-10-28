@@ -17,7 +17,7 @@
 /tmp
 coverage
 .env
-
+.elasticbeanstalk
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

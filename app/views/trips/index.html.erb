@@ -10,26 +10,25 @@
           <tbody class="all_trips">
             <span class="place_for_a_new_trip"></span>
             <% if !@trips.empty?  %>
-            <% @trips.each do |trip| %>
-              <tr>
-                <td class="Destination_image"><%= image_tag("pin.png", size: "30x30")%></td>
-                <td><%= trip.destination.capitalize %></td>
-                <td><%= trip.start_date %></td>
-                <td><%= trip.end_date %></td>
-                <td><%= link_to "See details", trip_path(trip.id) %></td>
-                <td><span class="delete"><%= link_to "x", "/" + current_user.user_name + "/trips/" + trip.id.to_s %></span></td>
-              </tr>
+              <% @trips.each do |trip| %>
+                <tr>
+                  <td class="Destination_image"><%= image_tag("pin.png", size: "30x30")%></td>
+                  <td><%= trip.destination.capitalize %></td>
+                  <td><%= trip.start_date %></td>
+                  <td><%= trip.end_date %></td>
+                  <td><%= link_to "See details", trip_path(trip.id) %></td>
+                  <td><span class="delete"><%= link_to "x", "/" + current_user.user_name + "/trips/" + trip.id.to_s %></span></td>
+                </tr>
+            <% end %>
+          <% else %>
+            <center><h1 class="no_trips_notification"></h1>
           <% end %>
-    <% else %>
-      <p>You don't have any trips yet.</p>
-    <% end %>
           </tbody>
         </table><br><br>
-        <!-- <span class="hide_all_trips">Hide</span><br>
-        <span class="show_all_trips">Show</span> -->
       </div>
   <div class="box-table">
     <div id="new_trip_box">
+      <h1>Create a new trip</h1>
       <%= image_tag("pin.png", size: "30x30")%>
       <%= form_for @trip, url:("/" + current_user.user_name + "/trips"), id:"new_trip_form" do |f| %>
         <%= f.search_field :destination, placeholder: "Destination...", id:"text_field" %>
@@ -40,6 +39,5 @@
     </div>
   </div>
   <div class="error_new_trip"></div>
-
  </div>
 </section>

@@ -2,13 +2,14 @@
     <div class="app_name">
       <h1>TripPlanner</h1>
     <% if !session[:user_id] %>
-      <%= link_to "Create a new account", new_user_path %> |
+      <center><%= link_to "Create a new account", new_user_path %> |
       <%= link_to "Sign up with Facebook", "/auth/facebook/" %> |
       <%= link_to "Log in", '/login', :method => "get" %><br>
       <a href="https://github.com/vikshab">Github</a> | <a href="https://www.linkedin.com/pub/victoria-shabunia/50/a28/799">Linkedin</a> | <a href="mailto:vikshab2010@hotmail.com">Email</a>
     <% else %>
-      <a href="https://github.com/vikshab">Github</a> | <a href="https://www.linkedin.com/pub/victoria-shabunia/50/a28/799">Linkedin</a> | <a href="mailto:vikshab2010@hotmail.com">Email</a> |
+      <center><a href="https://github.com/vikshab">Github</a> | <a href="https://www.linkedin.com/pub/victoria-shabunia/50/a28/799">Linkedin</a> | <a href="mailto:vikshab2010@hotmail.com">Email</a> |
       <%= link_to "Logout", logout_path, method: :delete %> | <%= link_to "Back to Accout", user_trips_path(current_user.user_name) %>
     <% end %>
+    <%= render "shared/footer" %>
     </div>
 </section>

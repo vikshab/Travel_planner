@@ -29,13 +29,17 @@ class TripsController < ApplicationController
   def show
     @items = Wardrobe.all
     @task = Task.new
+    @budget = Budget.new
+    @wardrobe = Wardrobe.new
     @trip = Trip.find(params[:trip_id])
     destination = @trip.destination
     start_date = @trip.start_date
     end_date = @trip.end_date
     @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
     @tasks = @trip.tasks.lattest
+    @expances_per_day= @trip.budgets
     @calendar = draw_calendar(@trip)
+    @wardrobe_items = @trip.wardrobes
   end
 
   def destroy
