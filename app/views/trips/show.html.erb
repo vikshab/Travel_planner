@@ -110,7 +110,7 @@
                   <% if activity["duration"] != nil %>
                     <%= activity["duration"] %>
                   <% else %>
-                  Duration is not available
+                    <%= activity["duration"] = "Not available" %>
                   <% end %>
                 </td>
                 <td>

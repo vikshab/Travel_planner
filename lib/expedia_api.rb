@@ -12,8 +12,12 @@ module TripPlannerAPIs
         array = []
           while i <= 30 do
             if result[i] != nil
-              result[i]["fromPrice"] = result[i]["fromPrice"].gsub(/(\$|,)/, "").to_i
-              result[i]["title"] = result[i]["title"].gsub(".", "")
+              if result[i]["fromPrice"] != nil
+                result[i]["fromPrice"] = result[i]["fromPrice"].gsub(/(\$|,)/, "").to_i
+              end
+              if result[i]["title"] != nil
+                result[i]["title"] = result[i]["title"].gsub(".", "")
+              end
               array.push(result[i])
               i += 1
             end
