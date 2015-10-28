@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
   validates :title, :date, presence: true
   # validates :due_date_cannot_be_less_than_current_date
 
-  scope :lattest, -> { order('date DESC') }
+  scope :lattest, -> { order('date') }
 
   def due_date_cannot_be_less_than_current_date
     if date <  Date.today.to_s
