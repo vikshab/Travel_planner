@@ -124,13 +124,11 @@ $(document).ready(function() {
       });
     });
 
-
     // POST BUDGET ON THE SAME PAGE
       $('#new_budget').submit(function(event){
       event.preventDefault();
       var error = $('.error_new_budget');
       error.empty();
-      console.log("hello")
 
       var formUrl = $(this).attr('action');
       var postData = $(this).serializeArray();
@@ -142,9 +140,8 @@ $(document).ready(function() {
         }).done(function(data) {
           var new_budget = $(data);
           $('.budget').prepend(new_budget);
+          editAmount(new_budget.find('.edit_budget'));
           installDelete(new_budget.find('.delete'));
-          // showDetails(new_task.find('.show_details'));
-          // renderEditForm(new_task.find('.edit_task'));
         }).fail(function(jqXHR){
           error.prepend(jqXHR.responseText);
         });
@@ -212,6 +209,8 @@ var $window   = $(window),
   showDetails($('.show_details'));
   renderEditForm($('.edit_task'));
   addActivityToTasks($('.add'));
+  editAmount($('.edit_budget'))
+  newWardrobe($('.new_wardrobe'))
 });
 
 function removeDetails(element) {
@@ -327,6 +326,115 @@ function renderEditForm(element) {
   });
 }
 
+
+function editAmount(element) {
+  element.submit(function(){
+  event.preventDefault();
+  // console.log($(this).serializeArray()[3])
+
+  var sum_id = $(this).parents('td').siblings('td.price')
+
+  var formUrl = $(this).attr('action');
+  var previousLink = formUrl.split("/");
+  previousLink.pop();
+  previousLink.push($(sum_id).text());
+  var newUrl = previousLink.join("/");
+
+
+  var postData = $(this).serializeArray();
+  console.log(formUrl)
+  console.log(newUrl)
+
+    $.ajax({
+      url: newUrl,
+      method: "PUT",
+      data: postData,
+    }).done(function(data) {
+
+      var edit_amount= $(data);
+
+      $(sum_id).replaceWith(edit_amount);
+
+    }).fail(function(jqXHR){
+      error.empty();
+      error.prepend(jqXHR.responseText);
+    });
+  });
+};
+
+
+
+// NEW WARDROBE ITEM POST
+function newWardrobe(element) {
+  element.submit(function(){
+  event.preventDefault();
+
+  // var editForm = this;
+  var form_id = $(this).parents('tr').attr('id');
+  var day = $(this).parents('td').siblings('td.wardrobe_day')
+  // var day = $(this).parents('td').siblings('td.date')
+      // var form_id = $(form.find('.edit_budget')[0]).attr('id');
+      // $('#new_task_field').hide();
+      //
+      // $('#' + form_id).submit(function(event){
+      // event.preventDefault();
+      //
+      //
+      var formUrl = $(this).attr('action');
+      var postData = $(this).serializeArray();
+
+        $.ajax({
+          url: formUrl,
+          method: "POST",
+          data: postData,
+        }).done(function(data) {
+          // var error = $('.error_edit_budget');
+          // error.empty();
+
+          var new_wardrobe= $(data);
+
+          console.log(new_wardrobe)
+          // console.log(sum_id);
+          // var amount_id = edit_amount.attr('id');
+          // console.log(amount_id)
+
+          // var old_amount = $('.budget').find('#' + amount_id );
+          // var old_amount = $('.budget').find('#' + amount_id );
+
+          // console.log(old_amount)
+          console.log(day)
+          //  console.log(amount_sum)
+          //  $(form_id).prepend(edit_amount)
+          $(day).prepend(new_wardrobe)
+          // sum_id.hide();
+          // $('.budget').prepend(edit_amount);
+
+
+
+          // installDelete(edit_task.find('.delete'));
+          // showDetails(edit_task.find('.show_details'));
+          // renderEditForm(edit_task.find('.edit_task'));
+          // editForm.empty();
+          // $('#new_task_field').show();
+    //
+        }).fail(function(jqXHR){
+          error.empty();
+          error.prepend(jqXHR.responseText);
+        });
+      });
+      // removeDetails(form.find('.remove'));
+
+    // }).fail(function(jqXHR){
+    //   error.prepend(jqXHR.responseText);
+    //
+    // });
+  };
+// }
+
+
+
+
+
 // POST NEW TASK FROM THINGS ON THE SAME PAGE
 function addActivityToTasks(element) {
   element.click(function(event){
@@ -351,7 +459,30 @@ function addActivityToTasks(element) {
       var budget = $("#money").attr('data-val');
       var setNewBudget = $('#money').attr('data-val', parseInt(price) + parseInt(budget));
       budget = setNewBudget;
-      $('#money').text($("#money").attr('data-val'))
+      $('#money').text($("#money").attr('data-val'));
+
+      //
+      // var error = $('.error_new_budget');
+      // error.empty();
+      //
+      // var formUrl = $('#new_budget').attr('action');
+      // var dataBudget = $('#money').attr('data-val');
+      // console.log(dataBudget)
+      //     $.ajax({
+      //       url: formUrl,
+      //       method: "POST",
+      //       // data: dataBudget,
+      //     }).done(function(data) {
+      //       var new_budget = $(data);
+      //       console.log(new_budget)
+      //       // $('.budget').prepend(new_budget);
+      //       // installDelete(new_budget.find('.delete'));
+      //       // showDetails(new_task.find('.show_details'));
+      //       // renderEditForm(new_task.find('.edit_task'));
+      //     }).fail(function(jqXHR){
+      //       error.prepend(jqXHR.responseText);
+      //     });
+
 
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));

@@ -120,9 +120,7 @@
             <% end %>
           <% end %>
           </tbody>
-
             <div id="money" data-val="0">
-
             </div>
         </table>
     <% else %>
@@ -137,8 +135,14 @@
           <% @expances_per_day.each do |amount| %>
           <% if amount.date != nil %>
             <tr id=<%= amount.id %>>
-              <td><%= amount.date %></td>
-              <td>$<%= amount.total %></td>
+              <td class="date"><%= amount.date %></td>
+              <td class="price"><%= amount.total %></td>
+              <td>
+                <%= form_for amount, url:("/trips/" + params[:trip_id] + "/budget/" + amount.id.to_s + "/" + amount["total"].to_s), id:"edit_budget_form", method: "put" do |f| %>
+                  <%= f.text_field :total, class: "form-control" %>
+                  <span class="edit_budget"><%= f.submit "+", class: "btn btn-default" %></span>
+                <% end %>
+              </td>
               <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/budget/" + amount.id.to_s %></span></td>
             </tr>
             <% end %>
@@ -149,14 +153,18 @@
             <td>Total:</td>
             <td>
               <%= form_for @budget, url:("/trips/" + @trip.id.to_s + "/budget"), id:"new_budget_form" do |f| %>
-                <%= f.text_field :total, class: "form-control" %>
+                <%= f.text_field :total, placeholder:"Enter your budget", class: "form-control" %>
                 <span class="addBudget"><%= f.submit "+", class: "btn btn-default" %></span>
               <% end %>
             </td>
+            <!-- <td><span class="edit_budget"><%= link_to "Change sum",  "/trips/" + params[:trip_id] + "/budget/" + @budget.id.to_s + "/edit" %></span></td> -->
           </tr>
+            <!-- <span class="edit_budget_form"></span> -->
         </tbody>
       </table>
       <div class="error_new_budget">
+      </div>
+      <div class="error_edit_budget">
       </div>
     </div>
   </div>
@@ -171,10 +179,16 @@
         <tbody class="wardrobe">
           <% if !@calendar.empty?  %>
             <% @calendar.each do |date| %>
-              <tr>
-                <td><%= date %></td>
-                <td></td>
-                <td></td>
+              <tr id=<%= date %>>
+                <td class="wardrobe_day"><%= date %></td>
+                <td class="empty">Orginize your wardrobe</td>
+                <td>
+                  <%= form_for @wardrobe, url:("/trips/" + params[:trip_id] + "/wardrobe/" + date.to_s), id:"new_wardrobe_form" do |f| %>
+                    <%= f.text_field :name, placeholder:"Outfit item", class: "form-control" %>
+                    <%= f.text_field :quantity, placeholder:"Quantity", class: "form-control" %>
+                    <span class="Add"><%= f.submit "Add", class: "btn btn-default" %></span>
+                  <% end %>
+                </td>
               </tr>
               <% end %>
           <% else %>
@@ -185,7 +199,19 @@
     <div class="box-table">
       <table data-fn="contacts" id="tasks_table">
         <tbody class="wardrobe">
-          <% if !@items.empty?  %>
+          <% if !@wardrobe_items.empty?  %>
+            <% @wardrobe_items.each do |item| %>
+              <tr id=<%= date %>>
+                <td><%= item.date %></td>
+                <td><%= item.name %></td>
+                <td><%= item.quantity %></td>
+                <!-- <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td> -->
+              </tr>
+            <% end %>
+          <% else %>
+          <% end %>
+
+          <!-- <% if !@items.empty?  %>
             <% @items.each do |item| %>
               <tr>
                 <td><%= item.name %></td>
@@ -194,7 +220,7 @@
               </tr>
               <% end %>
           <% else %>
-          <% end %>
+          <% end %> -->
         </tbody>
       </table>
     </div>

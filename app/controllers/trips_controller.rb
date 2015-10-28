@@ -30,6 +30,7 @@ class TripsController < ApplicationController
     @items = Wardrobe.all
     @task = Task.new
     @budget = Budget.new
+    @wardrobe = Wardrobe.new
     @trip = Trip.find(params[:trip_id])
     destination = @trip.destination
     start_date = @trip.start_date
@@ -38,6 +39,7 @@ class TripsController < ApplicationController
     @tasks = @trip.tasks.lattest
     @expances_per_day= @trip.budgets
     @calendar = draw_calendar(@trip)
+    @wardrobe_items = @trip.wardrobes
   end
 
   def destroy

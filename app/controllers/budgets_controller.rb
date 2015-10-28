@@ -4,6 +4,8 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = Budget.new(budget_params)
+
+    # @budget = Budget.create(total: params[:activity_price])
     @budget.trip_id = params[:trip_id]
     @trip = Trip.find(params[:trip_id])
     @calendar = draw_calendar(@trip)
@@ -21,6 +23,20 @@ class BudgetsController < ApplicationController
       render partial: 'error', :status => 400
     end
   end
+
+    def update
+    @amount = Budget.find(params[:amount_id])
+    total = (params[:budget][:total].to_i + params[:amount_total].to_i).to_s
+    @amount.trip_id = params[:trip_id]
+    @amount.update(total: "#{total}", trip_id: "#{@amount.trip_id}")
+
+      if @amount.save
+        render partial: 'updated_amount'
+      else
+        @error = "Error"
+        render partial: 'error', :status => 400
+      end
+    end
 
   def destroy
     budget = Budget.find(params[:budget_id])
