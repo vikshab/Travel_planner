@@ -189,40 +189,20 @@
                     <span class="Add"><%= f.submit "Add", class: "btn btn-default" %></span>
                   <% end %>
                 </td>
-              </tr>
-              <% end %>
-          <% else %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="box-table">
-      <table data-fn="contacts" id="tasks_table">
-        <tbody class="wardrobe">
-          <% if !@wardrobe_items.empty?  %>
-            <% @wardrobe_items.each do |item| %>
-              <tr id=<%= item.date %>>
-                <td><%= item.date %></td>
-                <td><%= item.name %></td>
-                <td><%= item.quantity %></td>
-                <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td>
+                <% if !@wardrobe_items.empty?  %>
+                  <% @wardrobe_items.each do |item| %>
+                    <% if item.date == date %>
+                      <td><%= item.name %><%= item.quantity %><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td>
+                    <% end %>
+                  <% end %>
+                <% end %>
               </tr>
             <% end %>
-          <% else %>
           <% end %>
-
-          <!-- <% if !@items.empty?  %>
-            <% @items.each do |item| %>
-              <tr>
-                <td><%= item.name %></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <% end %>
-          <% else %>
-          <% end %> -->
         </tbody>
       </table>
+      <div class="error_new_wardrobe">
+      </div>
     </div>
   </div>
 </section>
