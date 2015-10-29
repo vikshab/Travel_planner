@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "welcome#index"
   # get "/about", to: "welcome#about", as: "about"
   # Authorization route
-  get "auth/facebook/callback" => "sessions#create_facebook"
+  get "/auth/facebook/callback" => "sessions#create_facebook"
   get    "/login", to: "sessions#new"
   post   "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy", as: "logout"

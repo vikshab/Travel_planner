@@ -18,14 +18,9 @@
     <span class="destination_input">
       <h1 class="destination_name"><%= @trip.destination.capitalize %></h1>
     </span>
-      <%= link_to "Back to accout", user_trips_path(current_user.user_name) %>
+      <h1><%= link_to "Back to all trips", user_trips_path(current_user.user_name) %></h1>
         <div class="weather"></div>
   <br />
-    <div id="mainsocial">
-      <div class="icon-facebook-sign"></div>
-      <div class="icon-twitter-sign"></div>
-    </div>
-
     </div>
 </section><!--/home-->
 
