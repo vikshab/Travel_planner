@@ -90,7 +90,6 @@ $(document).ready(function() {
           method: "POST",
           data: postData,
         }).done(function(data) {
-          debugger
           var new_budget = $(data);
           $('.budget').prepend(new_budget);
           editAmount(new_budget.find('.edit_budget'));
