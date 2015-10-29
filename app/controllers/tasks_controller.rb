@@ -10,13 +10,13 @@ class TasksController < ApplicationController
       render partial: 'new_task'
     else
       @error = "Make sure you enter the title and date"
-      render partial: 'error', :status => 400
+      render partial: 'shared/error', :status => 400
     end
   end
 
   def create_from_things_todo
-    title = "Fun Time"
-    description = params[:activity_title] + " " + params[:activity_price] + " " + params[:activity_duration]
+    title = params[:activity_title]
+    description = "Price: $" + params[:activity_price] + ". Duration: " + params[:activity_duration]
     date = Date.today.to_s
     trip_id = params[:trip_id]
     @task = Task.new(title: title, description: description, date: date, trip_id: trip_id)
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
       render partial: 'new_task'
     else
       @error = "Couldn't add this activity to tasks"
-      render partial: 'error', :status => 400
+      render partial: 'shared/error', :status => 400
     end
 
   end
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
       render partial: 'show_task'
     else
       @error = "Task is not found"
-      render partial: "error", :status => 400
+      render partial: 'shared/error', :status => 400
     end
   end
 
@@ -56,7 +56,7 @@ class TasksController < ApplicationController
       render partial: 'updated_task'
     else
       @error = "Make sure date is entered"
-      render partial: 'error', :status => 400
+      render partial: 'shared/error', :status => 400
     end
   end
 

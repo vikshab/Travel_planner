@@ -4,8 +4,8 @@
   </div>
   <nav role='navigation'>
     <%= link_to "Back", id:"home" %><!--
-    ---><a href="#" id="Things_todo">Organize tasks</a><!--
-    ---><a href="#" id="Budget">PlanBudget</a><!--
+    ---><a href="#" id="Things_todo">Tasks</a><!--
+    ---><a href="#" id="Budget">Budget</a><!--
     ---><a href="#" id="Wardrobe">Wardrobe</a>
   </nav>
   <div id="social">
@@ -21,56 +21,21 @@
       <%= link_to "Back to accout", user_trips_path(current_user.user_name) %>
         <div class="weather"></div>
   <br />
-    <div id="mainsocial">
-      <div class="icon-facebook-sign"></div>
-      <div class="icon-twitter-sign"></div>
-    </div>
-
     </div>
 </section><!--/home-->
 
 <section id="things_todo" class="bodysec">
   <div id="copy">
-
-    <div class="box-table">
-      <div class="form-horizontal" id="new_task_field">
-        <%= form_for @task, url:("/trips/" + @trip.id.to_s + "/tasks"), id:"new_task_form" do |f| %>
-          <div class="form-group">
-            <label class="col-xs-1 control-label">Task(s)</label>
-            <div class="col-xs-3">
-              <%= f.text_field :title, class: "form-control" %>
-            </div>
-            <div class="col-xs-3">
-              <%= f.text_area :description, class: "form-control" %>
-            </div>
-            <div class="col-xs-4">
-              <span class="glyphicon glyphicon-calendar"></span>
-              <%= f.date_field :date, class: 'datepicker' %>
-              <i class="fa fa-plus"><span class="addTask"><%= f.submit "+", class: "btn btn-default" %></span></i>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <div class="error_new_task">
-      </div>
-      <div class="error_edit_task">
-      </div>
-    </div>
-    <div class="box-table">
-      <span class="edit_task_form"></span>
-    </div>
-
     <div class="box-table">
       <table data-fn="contacts" id="tasks_table">
         <tbody class="all_tasks">
-          <!-- <span class="place_for_a_new_task"></span> -->
           <% if !@tasks.empty?  %>
             <% @tasks.each do |task| %>
               <tr id=<%= task.id %>>
-                <td><strong><%= task.date %></td>
+                <td><%= task.date %></td>
                 <td><%= task.title %></td>
                 <td><span class="show_details"><%= link_to "See details",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
-                <td><span class="edit_task"><%= link_to "Edit",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s + "/edit" %></span></td>
+                <!-- <td><span class="edit_task"><%= link_to "Edit",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s + "/edit" %></span></td> -->
                 <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
               </tr>
               <% end %>
@@ -87,20 +52,20 @@
 
 <section id="budget" class="bodysec">
   <div id="copy">
-    <div class="box-table">
+    <!-- <div class="box-table">
 
     <% if !@popular_things_todo.empty?  %>
+        <center><h1>These are activities we found in <%= @trip.destination.capitalize %></h1>
         <table data-fn="contacts">
           <tbody class="popular_things_todo">
-        <!-- <center><h1>These are activities we found in <%= @trip.destination.capitalize %></h1> -->
             <% @popular_things_todo.each do |activity| %>
             <% if activity != nil%>
               <tr id=<%= activity["id"] %>>
                 <td class="Destination_image">
                   <% if activity["imageUrl"] != nil  %>
-                    <%= image_tag(activity["imageUrl"], width: "280")%>
+                    <%= image_tag(activity["imageUrl"], width: "300")%>
                   <% else %>
-                    <%= image_tag("pin.png", width: "280")%>
+                    <%= image_tag("pin.png", width: "300")%>
                   <% end %>
                 </td>
                 <td class="price">
@@ -131,55 +96,59 @@
             <% end %>
           <% end %>
           </tbody>
-            <h1 class ="activities_section">Activities cost total $<span id="money" data-val="0"></span></h1>
+            <div id="money" data-val="0">
+            </div>
         </table>
     <% else %>
         Unfortunately, no activities were found in <%= @trip.destination.capitalize %>
     <% end %>
-    </div>
+    </div> -->
 
     <div class="box-table">
       <table data-fn="contacts">
         <tbody class="budget">
-          <h1>Total amount:  $<span class="total_amount"><%= @total_budget %></span></h1>
+          <h1>Total amount: $<%= @total_budget %></h1>
+
         <% if !@expances_per_day.empty?  %>
           <% @expances_per_day.each do |amount| %>
+
+
+
           <% if amount.date != nil %>
             <tr id=<%= amount.id %>>
-              <td class="date"><strong><%= amount.date %></td>
+              <td class="date"><%= amount.date %></td>
               <td class="price"><%= amount.total %></td>
-              <td>
+              <!-- <td>
                 <%= form_for amount, url:("/trips/" + params[:trip_id] + "/budget/" + amount.id.to_s + "/" + amount["total"].to_s), id:"edit_budget_form", method: "put" do |f| %>
                   <%= f.text_field :total, class: "form-control" %>
                   <span class="edit_budget"><%= f.submit "+", class: "btn btn-default" %></span>
-                  <span class="edit_budget"><%= f.submit "-", class: "btn btn-default" %></span>
+                  <span class="subtract_budget"><%= f.submit "-", class: "btn btn-default" %></span>
                 <% end %>
               </td>
-              <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/budget/" + amount.id.to_s %></span></td>
+              <td><spsan class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/budget/" + amount.id.to_s %></span></td> -->
             </tr>
             <% end %>
           <% end %>
+        <% else %>
         <% end %>
-          <tr>
+          <!-- <tr>
             <td>Total:</td>
             <td>
               <%= form_for @budget, url:("/trips/" + @trip.id.to_s + "/budget"), id:"new_budget_form" do |f| %>
                 <%= f.text_field :total, placeholder:"Enter your budget", class: "form-control" %>
                 <span class="addBudget"><%= f.submit "+", class: "btn btn-default" %></span>
-
               <% end %>
-              <span class="deleteBudget"><%= link_to "Reset", "/trips/" + @trip.id.to_s + "/budget"%></span>
-            </td>
+            </td> -->
             <!-- <td><span class="edit_budget"><%= link_to "Change sum",  "/trips/" + params[:trip_id] + "/budget/" + @budget.id.to_s + "/edit" %></span></td> -->
-          </tr>
+          <!-- </tr> -->
             <!-- <span class="edit_budget_form"></span> -->
         </tbody>
       </table>
-      <div class="error_new_budget">
+      <!-- <div class="error_new_budget">
       </div>
       <div class="error_edit_budget">
       </div>
-    </div>
+    </div> -->
   </div>
   </div>
 </section>
@@ -193,23 +162,11 @@
           <% if !@calendar.empty?  %>
             <% @calendar.each do |date| %>
               <tr id=<%= date %>>
-                <td class="wardrobe_day"><strong><%= date %></td>
-                <td class="empty">Orginize your wardrobe</td>
-                <td>
-                  <%= form_for @wardrobe, url:("/trips/" + params[:trip_id] + "/wardrobe/" + date.to_s), id:"new_wardrobe_form" do |f| %>
-                    <%= f.text_field :name, placeholder:"Outfit item", class: "form-control" %>
-                    <%= f.text_field :quantity, placeholder:"Quantity", class: "form-control" %>
-                    <span class="Add"><%= f.submit "Add", class: "btn btn-default" %></span>
-                  <% end %>
-                </td>
+                <td class="wardrobe_day"><%= date %></td>
                 <% if !@wardrobe_items.empty?  %>
                   <% @wardrobe_items.each do |item| %>
                     <% if item.date == date %>
-                      <td><%= item.name %>
-                        <% if item.quantity %>
-                        <%= "(" + "#{item.quantity}" + ")" %>
-                        <% end %>
-                        <span class="delete_wardrobe_item"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + item.id.to_s %></span></td>
+                      <td><%= item.name %><%= item.quantity %></td>
                     <% end %>
                   <% end %>
                 <% end %>
@@ -218,8 +175,8 @@
           <% end %>
         </tbody>
       </table>
-      <div class="error_new_wardrobe">
-      </div>
+      <!-- <div class="error_new_wardrobe">
+      </div> -->
     </div>
   </div>
 </section>

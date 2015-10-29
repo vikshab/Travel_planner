@@ -1,6 +1,6 @@
-<!-- <td class="item"><%= @wardrobe["name"].capitalize %>: <%= @wardrobe["quantity"] %></td> -->
-<!-- <tr id=<%= @wardrobe.id %>> -->
-  <td><%= @wardrobe["name"] %><%= @wardrobe["quantity"]  %><span class="delete_wardrobe_item"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + @wardrobe.id.to_s %></span></td>
-  <!-- <td><%= @wardrobe["quantity"]  %></td> -->
-  <!-- <td><span class="delete"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + @wardrobe.id.to_s %></span></td> -->
-<!-- </tr> -->
+<td><%= @wardrobe["name"] %>
+  <% if @wardrobe["quantity"] %>
+  <%= "(" + "#{@wardrobe["quantity"]}" + ")" %>
+  <% end %>
+<span class="delete_wardrobe_item"><%= link_to "x", "/trips/" + @trip.id.to_s + "/wardrobe/" + @wardrobe.id.to_s %></span>
+</td>

@@ -11,7 +11,7 @@ class WardrobesController < ApplicationController
       render partial: 'new_wardrobe'
     else
       @error = "Enter wardrobe item"
-      render partial: 'error', :status => 400
+      render partial: 'shared/error', :status => 400
     end
   end
 
