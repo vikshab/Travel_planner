@@ -67,7 +67,7 @@
           <% if !@tasks.empty?  %>
             <% @tasks.each do |task| %>
               <tr id=<%= task.id %>>
-                <td><%= task.date %></td>
+                <td><strong><%= task.date %></td>
                 <td><%= task.title %></td>
                 <td><span class="show_details"><%= link_to "See details",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s %></span></td>
                 <td><span class="edit_task"><%= link_to "Edit",  "/trips/" + @trip.id.to_s + "/tasks/" + task.id.to_s + "/edit" %></span></td>
@@ -146,7 +146,7 @@
           <% @expances_per_day.each do |amount| %>
           <% if amount.date != nil %>
             <tr id=<%= amount.id %>>
-              <td class="date"><%= amount.date %></td>
+              <td class="date"><strong><%= amount.date %></td>
               <td class="price"><%= amount.total %></td>
               <td>
                 <%= form_for amount, url:("/trips/" + params[:trip_id] + "/budget/" + amount.id.to_s + "/" + amount["total"].to_s), id:"edit_budget_form", method: "put" do |f| %>
@@ -192,7 +192,7 @@
           <% if !@calendar.empty?  %>
             <% @calendar.each do |date| %>
               <tr id=<%= date %>>
-                <td class="wardrobe_day"><%= date %></td>
+                <td class="wardrobe_day"><strong><%= date %></td>
                 <td class="empty">Orginize your wardrobe</td>
                 <td>
                   <%= form_for @wardrobe, url:("/trips/" + params[:trip_id] + "/wardrobe/" + date.to_s), id:"new_wardrobe_form" do |f| %>
