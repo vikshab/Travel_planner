@@ -90,17 +90,14 @@ $(document).ready(function() {
           method: "POST",
           data: postData,
         }).done(function(data) {
-
+          debugger
           var new_budget = $(data);
           $('.budget').prepend(new_budget);
           editAmount(new_budget.find('.edit_budget'));
           var quantityOfdays = parseInt(new_budget.find('td.price').length);
-          // var value = $(new_budget.find('td.price'))[0].text();
-          console.log(quantityOfdays)
-          console.log($('.price').text())
-          $('.total_amount').text()
+          var new_total_amount = new_budget.find('.edit_budget input[name="budget[total]"]').val() * quantityOfdays
+          $('.total_amount').text(new_total_amount)
           // installResetBudget(new_budget.find('.deleteBudget'))
-          // editAmount(new_budget.find('.subtract_budget'));
           installDelete(new_budget.find('.delete'));
         }).fail(function(jqXHR){
           error.prepend(jqXHR.responseText);
@@ -293,17 +290,20 @@ function renderEditForm(element) {
 }
 
 function editAmount(element) {
-  element.submit(function(){
+  $(element).find('input[type=submit]').on('click', function(event) {
+  // element.submit(function(event){
   event.preventDefault();
+  var form = $(this).parents('form.edit_budget');
+  var sum_id = form.parents('td').siblings('td.price')
 
-  var sum_id = $(this).parents('td').siblings('td.price')
-
-  var formUrl = $(this).attr('action');
+  var formUrl = form.attr('action');
   var previousLink = formUrl.split("/");
   previousLink.pop();
   previousLink.push($(sum_id).text());
   var newUrl = previousLink.join("/");
-  var postData = $(this).serializeArray();
+  var postData = form.serializeArray();
+  postData.push({name: 'commit', value: $(this).val()})
+
 
     $.ajax({
       url: newUrl,

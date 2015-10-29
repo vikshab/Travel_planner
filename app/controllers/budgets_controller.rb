@@ -24,11 +24,11 @@ class BudgetsController < ApplicationController
 
     def update
       @amount = Budget.find(params[:amount_id])
-      # if params[:commit] == '+'
+      if params[:commit] == '+'
         total = (params[:budget][:total].to_i + params[:amount_total].to_i).to_s
-      # elsif params[:commit] == '-'
-        # total = (params[:amount_total].to_i - params[:budget][:total].to_i).to_s
-      # end
+      elsif params[:commit] == '-'
+        total = (params[:amount_total].to_i - params[:budget][:total].to_i).to_s
+      end
 
       @amount.trip_id = params[:trip_id]
       @amount.update(total: "#{total}", trip_id: "#{@amount.trip_id}")
