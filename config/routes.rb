@@ -10,30 +10,14 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   get '/:user/trips', to: "trips#index", as: "user_trips"
-  # get '/:user/trips/new', to: "trips#new", as: "new_trip"
   post '/:user/trips', to: "trips#create"
   get '/trips/:trip_id', to: "trips#show", as: "trip_path"
   delete '/:user/trips/:trip_id', to: "trips#destroy"
-  # get '/:user/trips', to: "users#show", as: "dashboard"
-
-  # get '/:user/dashboard/things_todo', to: "users#things_todo"
-
-  # post "/trips/search", to: "trips#search", as: "search"
-  # get "/trips/:destination/:start_date/:end_date", to: "expedia#results", as: "expedia_results"
 
   resources :trips, except: [:new, :create, :show, :destroy]
 
-
-  # get "/:user/:trip/tasks", to: "trips#show_tasks"
-  # get "/:user/:trip/tasks", to: "tasks#index"
-  # resources :tasks
-
-  # get "/:user/:trip/tasks/new", to: "tasks#new"
-  # post "/:user/:trip/tasks", to: "tasks#create"
   post "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#create_from_things_todo", as: "new_task_from_things_todo"
   post "/trips/:trip_id/tasks", to: "tasks#create"
-  # get "/trips/:trip_id/activity/:activity_id/:activity_title/:activity_price/:activity_duration/tasks", to: "tasks#new", as: "new_task_from_things_todo"
-  # post '/trips/:trip_id/tasks', to: "tasks#create_from_things_todo"
 
   get "/trips/:trip_id/tasks/:task_id", to: "tasks#show"
   delete "/trips/:trip_id/tasks/:task_id", to: "tasks#destroy"
@@ -44,7 +28,6 @@ Rails.application.routes.draw do
   post "/trips/:trip_id/budget", to: "budgets#create"
   delete "/trips/:trip_id/budget/:budget_id", to: "budgets#destroy_amount_per_day"
   delete "/trips/:trip_id/budget", to: "budgets#destroy_budget"
-
 
   post "/trips/:trip_id/wardrobe/:date", to: "wardrobes#create"
   delete "/trips/:trip_id/wardrobe/:wardrobe_id", to: "wardrobes#remove_wardrobe_item_from_trip"

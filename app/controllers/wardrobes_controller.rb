@@ -7,6 +7,7 @@ class WardrobesController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @wardrobe.trips << @trip
     @wardrobe.date = params[:date]
+
     if @wardrobe.save
       render partial: 'new_wardrobe'
     else
@@ -18,6 +19,7 @@ class WardrobesController < ApplicationController
   def remove_wardrobe_item_from_trip
     wardrobe_item = Wardrobe.find(params[:wardrobe_id])
     trip = wardrobe_item.trips.find(params[:trip_id])
+
     if trip
       wardrobe_item.trips.delete(trip)
     end

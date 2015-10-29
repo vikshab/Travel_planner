@@ -63,15 +63,8 @@ section {
   }
 }
 
-#budget {
+#budget, #wardrobe {
   background-image: url(image-path("4.jpeg"));
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-#wardrobe {
-  background-image: url(image-path("4.jpg"));
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -156,13 +149,6 @@ nav a:nth-child(4) {
 nav a:hover {
   border-top: 5px solid #4a4a4a;
   transition: .4s;
-}
-
-#test {
-  z-index: 99;
-  background: white;
-  position: fixed;
-  top: 0;
 }
 
 .sticky {
@@ -265,19 +251,6 @@ img.right {
   padding: 20px 80px;
   font-size: 24px;
   text-align: justify;
-}
-
-#iconrow {
-  font-size: 130px;
-  text-align: justify;
-  margin-top: 50px;
-  color: #505050;
-}
-
-#iconrow::after {
-  content:'';
-  display: inline-block;
-  width: 100%;
 }
 
 .center {
@@ -421,7 +394,6 @@ hoverblk {
 .box-table table tbody td,
 .box-table table tbody tr{
   font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
-  // font-family: 'Vollkor', serif;
   font-size:1em;
   border:none;
   padding:1em;
@@ -644,7 +616,7 @@ div.alert.alert-error {
   font-size: 50px;
 }
 
-.add {
+.add, .add_to_budget {
   text-decoration: none;
   font-weight: bold;
   background: #e0e0e0;
@@ -706,21 +678,6 @@ div.alert.alert-error {
 .details {
   width: 100%;
   transition: .5s;
-}
-
-.add_to_budget {
-  text-decoration: none;
-  font-weight: bold;
-  background: #e0e0e0;
-  padding: .5em;
-  font-size: .75em;
-  display: inline-block;
-  border-radius: 100%;
-  line-height: .50;
-   @include transition(all, .25s, linear);
-  &:hover {
-    background: #00FF99;
-  }
 }
 
 #copyright p {

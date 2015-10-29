@@ -63,7 +63,6 @@
     <div class="box-table">
       <table data-fn="contacts" id="tasks_table">
         <tbody class="all_tasks">
-          <!-- <span class="place_for_a_new_task"></span> -->
           <% if !@tasks.empty?  %>
             <% @tasks.each do |task| %>
               <tr id=<%= task.id %>>
@@ -92,7 +91,6 @@
     <% if !@popular_things_todo.empty?  %>
         <table data-fn="contacts">
           <tbody class="popular_things_todo">
-        <!-- <center><h1>These are activities we found in <%= @trip.destination.capitalize %></h1> -->
             <% @popular_things_todo.each do |activity| %>
             <% if activity != nil%>
               <tr id=<%= activity["id"] %>>
@@ -170,9 +168,7 @@
               <% end %>
               <span class="deleteBudget"><%= link_to "Reset", "/trips/" + @trip.id.to_s + "/budget"%></span>
             </td>
-            <!-- <td><span class="edit_budget"><%= link_to "Change sum",  "/trips/" + params[:trip_id] + "/budget/" + @budget.id.to_s + "/edit" %></span></td> -->
           </tr>
-            <!-- <span class="edit_budget_form"></span> -->
         </tbody>
       </table>
       <div class="error_new_budget">
@@ -218,8 +214,7 @@
           <% end %>
         </tbody>
       </table>
-      <div class="error_new_wardrobe">
-      </div>
+      <div class="error_new_wardrobe"></div>
     </div>
   </div>
 </section>

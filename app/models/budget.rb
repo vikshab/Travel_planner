@@ -4,6 +4,4 @@ class Budget < ActiveRecord::Base
   validates :total, :trip_id, presence: true
 
   scope :sort_by_day, -> { order('date') }
-
-
 end

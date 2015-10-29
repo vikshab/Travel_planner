@@ -41,7 +41,6 @@ class TripsController < ApplicationController
     @total_budget = total_budget(@expances_per_day)
     @calendar = draw_calendar(@trip)
     @wardrobe_items = @trip.wardrobes
-    # render "show_copy"
   end
 
   def destroy
@@ -55,34 +54,4 @@ class TripsController < ApplicationController
   def trip_params
     params.require(:trip).permit(:destination, :start_date, :end_date)
   end
-
-  def draw_calendar(trip)
-    trip_beginning = trip.start_date
-    trip_end = trip.end_date
-
-    start_date = Date.strptime(trip_beginning, "%Y-%m-%d")
-    end_date = Date.strptime(trip_end, "%Y-%m-%d")
-
-    calendar = []
-    date = start_date
-
-    while date <= end_date do
-      calendar.push(date.strftime("%Y-%m-%d"))
-      date += 1
-    end
-    return calendar
-  end
-
-  # def total_budget(expances_per_day)
-  #   i = 0
-  #   total_sum = []
-  #
-  #   while i < expances_per_day.length do
-  #     if expances_per_day[i]["date"] != nil
-  #       total_sum.push(expances_per_day[i]["total"].to_i)
-  #     end
-  #       i += 1
-  #   end
-  #   return total_sum.inject(0, :+)
-  # end
 end
