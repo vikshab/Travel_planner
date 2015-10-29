@@ -38,8 +38,10 @@ class TripsController < ApplicationController
     @popular_things_todo = ExpediaAPI.things_todo(destination, start_date, end_date)
     @tasks = @trip.tasks.lattest
     @expances_per_day= @trip.budgets.sort_by_day
+    @total_budget = total_budget(@expances_per_day)
     @calendar = draw_calendar(@trip)
     @wardrobe_items = @trip.wardrobes
+    # render "show_copy"
   end
 
   def destroy
@@ -69,5 +71,18 @@ class TripsController < ApplicationController
       date += 1
     end
     return calendar
+  end
+
+  def total_budget(expances_per_day)
+    i = 0
+    total_sum = []
+
+    while i < expances_per_day.length do
+      if expances_per_day[i]["date"] != nil
+        total_sum.push(expances_per_day[i]["total"].to_i)
+      end
+        i += 1
+    end
+    return total_sum.inject(0, :+)
   end
 end

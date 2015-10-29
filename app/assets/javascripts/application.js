@@ -285,7 +285,6 @@ function renderEditForm(element) {
 function editAmount(element) {
   element.submit(function(){
   event.preventDefault();
-  // console.log($(this).serializeArray()[3])
 
   var sum_id = $(this).parents('td').siblings('td.price')
 
@@ -294,11 +293,7 @@ function editAmount(element) {
   previousLink.pop();
   previousLink.push($(sum_id).text());
   var newUrl = previousLink.join("/");
-
-
   var postData = $(this).serializeArray();
-  console.log(formUrl)
-  console.log(newUrl)
 
     $.ajax({
       url: newUrl,
@@ -306,8 +301,12 @@ function editAmount(element) {
       data: postData,
     }).done(function(data) {
 
+      var total = $('.total_amount').text();
       var edit_amount= $(data);
-
+      var new_amount = edit_amount.text();
+      var old_amount = sum_id.text();
+      var new_total = parseInt(total) - parseInt(old_amount) + parseInt(new_amount);
+      $('.total_amount').text(new_total.toString());
       $(sum_id).replaceWith(edit_amount);
 
     }).fail(function(jqXHR){
