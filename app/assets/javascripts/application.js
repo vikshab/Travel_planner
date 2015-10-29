@@ -33,12 +33,12 @@ $(document).ready(function() {
 
 // POST NEW TRIP ON THE SAME PAGE
   $('#new_trip').submit(function(event){
-  event.preventDefault();
-  var error = $('.error_new_trip');
-  error.empty();
+    event.preventDefault();
+    var error = $('.error_new_trip');
+    error.empty();
 
-  var formUrl = $(this).attr('action');
-  var postData = $(this).serializeArray();
+    var formUrl = $(this).attr('action');
+    var postData = $(this).serializeArray();
 
     $.ajax({
       url: formUrl,
@@ -53,8 +53,8 @@ $(document).ready(function() {
     });
   });
 
-  // POST NEW TASK ON THE SAME PAGE
-    $('#new_task').submit(function(event){
+// POST NEW TASK ON THE SAME PAGE
+  $('#new_task').submit(function(event){
     event.preventDefault();
     var error = $('.error_new_task');
     error.empty();
@@ -62,48 +62,46 @@ $(document).ready(function() {
     var formUrl = $(this).attr('action');
     var postData = $(this).serializeArray();
 
-      $.ajax({
-        url: formUrl,
-        method: "POST",
-        data: postData,
-      }).done(function(data) {
-        var new_task = $(data);
-        $('.all_tasks').prepend(new_task);
-        installDelete(new_task.find('.delete'));
-        showDetails(new_task.find('.show_details'));
-        renderEditForm(new_task.find('.edit_task'));
-      }).fail(function(jqXHR){
-        error.prepend(jqXHR.responseText);
-      });
+    $.ajax({
+      url: formUrl,
+      method: "POST",
+      data: postData,
+    }).done(function(data) {
+      var new_task = $(data);
+      $('.all_tasks').prepend(new_task);
+      installDelete(new_task.find('.delete'));
+      showDetails(new_task.find('.show_details'));
+      renderEditForm(new_task.find('.edit_task'));
+    }).fail(function(jqXHR){
+      error.prepend(jqXHR.responseText);
     });
+  });
 
-    // POST BUDGET ON THE SAME PAGE
-      $('#new_budget').submit(function(event){
-      event.preventDefault();
-      var error = $('.error_new_budget');
-      error.empty();
-      var formUrl = $(this).attr('action');
-      var postData = $(this).serializeArray();
+// POST BUDGET ON THE SAME PAGE
+  $('#new_budget').submit(function(event){
+    event.preventDefault();
+    var error = $('.error_new_budget');
+    error.empty();
+    var formUrl = $(this).attr('action');
+    var postData = $(this).serializeArray();
 
-        $.ajax({
-          url: formUrl,
-          method: "POST",
-          data: postData,
-        }).done(function(data) {
-          debugger
-          var new_budget = $(data);
-          $('.budget').prepend(new_budget);
-          editAmount(new_budget.find('.edit_budget'));
-          var quantityOfdays = parseInt(new_budget.find('td.price').length);
-          var new_total_amount = new_budget.find('.edit_budget input[name="budget[total]"]').val() * quantityOfdays
-          $('.total_amount').text(new_total_amount)
-          // installResetBudget(new_budget.find('.deleteBudget'))
-          installDelete(new_budget.find('.delete'));
-        }).fail(function(jqXHR){
-          error.prepend(jqXHR.responseText);
-        });
-      });
-
+    $.ajax({
+      url: formUrl,
+      method: "POST",
+      data: postData,
+    }).done(function(data) {
+      var new_budget = $(data);
+      $('.budget').prepend(new_budget);
+      editAmount(new_budget.find('.edit_budget'));
+      var quantityOfdays = parseInt(new_budget.find('td.price').length);
+      var new_total_amount = new_budget.find('.edit_budget input[name="budget[total]"]').val() * quantityOfdays
+      $('.total_amount').text(new_total_amount)
+      // installResetBudget(new_budget.find('.deleteBudget'))
+      installDelete(new_budget.find('.delete'));
+    }).fail(function(jqXHR){
+      error.prepend(jqXHR.responseText);
+    });
+  });
 
 // SCROLLING
 var $window   = $(window),
@@ -161,13 +159,13 @@ var $window   = $(window),
       scrollTop : $('section').eq(menuPlace).offset().top - $('nav').height()
     }, 700);
   });
+
   installDelete($('.delete'));
   weather();
   showDetails($('.show_details'));
   renderEditForm($('.edit_task'));
   addActivityToTasks($('.add'));
   editAmount($('.edit_budget'));
-  // editAmount($('.subtract_budget'));
   newWardrobe($('.new_wardrobe'));
   installDeleteWardrobeItems($('.delete_wardrobe_item'));
   installResetBudget($('.deleteBudget'));
@@ -202,7 +200,6 @@ function installDelete(element) {
       details.empty();
       editForm.empty();
       edit_error.empty();
-
       $('#new_task_field').show();
     });
   });
@@ -284,26 +281,23 @@ function renderEditForm(element) {
 
     }).fail(function(jqXHR){
       error.prepend(jqXHR.responseText);
-
     });
   });
 }
 
 function editAmount(element) {
   $(element).find('input[type=submit]').on('click', function(event) {
-  // element.submit(function(event){
-  event.preventDefault();
-  var form = $(this).parents('form.edit_budget');
-  var sum_id = form.parents('td').siblings('td.price')
+    event.preventDefault();
+    var form = $(this).parents('form.edit_budget');
+    var sum_id = form.parents('td').siblings('td.price')
 
-  var formUrl = form.attr('action');
-  var previousLink = formUrl.split("/");
-  previousLink.pop();
-  previousLink.push($(sum_id).text());
-  var newUrl = previousLink.join("/");
-  var postData = form.serializeArray();
-  postData.push({name: 'commit', value: $(this).val()})
-
+    var formUrl = form.attr('action');
+    var previousLink = formUrl.split("/");
+    previousLink.pop();
+    previousLink.push($(sum_id).text());
+    var newUrl = previousLink.join("/");
+    var postData = form.serializeArray();
+    postData.push({name: 'commit', value: $(this).val()})
 
     $.ajax({
       url: newUrl,
@@ -336,7 +330,6 @@ function installResetBudget(element) {
       button.parents('tr').siblings().hide();
       console.log(data)
       $('.total_amount').text(data)
-
     });
   });
 }
@@ -344,14 +337,14 @@ function installResetBudget(element) {
 // NEW WARDROBE ITEM POST
 function newWardrobe(element) {
   element.submit(function(){
-  event.preventDefault();
-  var error = $('.error_new_wardrobe');
-  error.empty();
+    event.preventDefault();
+    var error = $('.error_new_wardrobe');
+    error.empty();
 
-  var form_id = $(this).parents('tr').attr('id');
-  var day = $(this).parents('td').siblings('td.wardrobe_day')
-  var formUrl = $(this).attr('action');
-  var postData = $(this).serializeArray();
+    var form_id = $(this).parents('tr').attr('id');
+    var day = $(this).parents('td').siblings('td.wardrobe_day')
+    var formUrl = $(this).attr('action');
+    var postData = $(this).serializeArray();
 
     $.ajax({
       url: formUrl,
@@ -372,17 +365,17 @@ function newWardrobe(element) {
   // Delete Wardrobe
   function installDeleteWardrobeItems(element) {
     element.click(function(){
-    event.preventDefault();
+      event.preventDefault();
 
-    var button = $(this);
-    var url = $(this).children('a').attr('href');
-      $.ajax({
-        url: url,
-        method: "DELETE"
-      }).done(function() {
-        button.parent().hide( 400 );
+      var button = $(this);
+      var url = $(this).children('a').attr('href');
+        $.ajax({
+          url: url,
+          method: "DELETE"
+        }).done(function() {
+          button.parent().hide( 400 );
+        });
       });
-    });
   }
 
 // POST NEW TASK FROM THINGS ON THE SAME PAGE
@@ -408,30 +401,6 @@ function addActivityToTasks(element) {
       var setNewBudget = $('#money').attr('data-val', parseInt(price) + parseInt(budget));
       budget = setNewBudget;
       $('#money').text($("#money").attr('data-val'));
-
-      //
-      // var error = $('.error_new_budget');
-      // error.empty();
-      //
-      // var formUrl = $('#new_budget').attr('action');
-      // var dataBudget = $('#money').attr('data-val');
-      // console.log(dataBudget)
-      //     $.ajax({
-      //       url: formUrl,
-      //       method: "POST",
-      //       // data: dataBudget,
-      //     }).done(function(data) {
-      //       var new_budget = $(data);
-      //       console.log(new_budget)
-      //       // $('.budget').prepend(new_budget);
-      //       // installDelete(new_budget.find('.delete'));
-      //       // showDetails(new_task.find('.show_details'));
-      //       // renderEditForm(new_task.find('.edit_task'));
-      //     }).fail(function(jqXHR){
-      //       error.prepend(jqXHR.responseText);
-      //     });
-
-
       installDelete(new_task.find('.delete'));
       showDetails(new_task.find('.show_details'));
       renderEditForm(new_task.find('.edit_task'));

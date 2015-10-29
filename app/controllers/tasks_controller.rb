@@ -20,13 +20,13 @@ class TasksController < ApplicationController
     date = Date.today.to_s
     trip_id = params[:trip_id]
     @task = Task.new(title: title, description: description, date: date, trip_id: trip_id)
+
     if @task.save
       render partial: 'new_task'
     else
       @error = "Couldn't add this activity to tasks"
       render partial: 'shared/error', :status => 400
     end
-
   end
 
   def show
@@ -59,7 +59,6 @@ class TasksController < ApplicationController
       render partial: 'shared/error', :status => 400
     end
   end
-
 
   def destroy
     task = Task.find(params[:task_id])

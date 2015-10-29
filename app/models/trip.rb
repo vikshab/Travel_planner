@@ -22,9 +22,4 @@ class Trip < ActiveRecord::Base
       errors.add(:star_date, "can't be in the past")
     end
   end
-
-  def unassociate_user
-    self.user_id = nil
-    self.save
-  end
 end

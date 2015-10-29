@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   # validates :email, uniqueness: { case_sensitive: false }, format: /@/
   has_secure_password
 
-
   def self.create_with_omniauth(auth)
     create! do |user|
       user.uid = auth["uid"]

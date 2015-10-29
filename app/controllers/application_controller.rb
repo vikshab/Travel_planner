@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_path unless session[:user_id]
     end
 
-
     def draw_calendar(trip)
       trip_beginning = trip.start_date
       trip_end = trip.end_date
@@ -46,18 +45,4 @@ class ApplicationController < ActionController::Base
       end
       return total_sum.inject(0, :+)
     end
-
-    # def user_exist?
-    #   if current_user
-    #     if User.where(user_name: params[:user]).any? && current_user[:user_name] != params[:user]
-    #       flash[:error] = "You are not '" + params[:user].capitalize + "'"
-    #       redirect_to "/" + current_user[:user_name] + "/dashboard"
-    #     elsif !User.where(user_name: params[:user]).any?
-    #       flash[:error] = "The user '" + params[:user].capitalize + "' does not exist"
-    #       redirect_to "/" + current_user[:user_name] +"/dashboard"
-    #     end
-    #   else
-    #     redirect_to root_path
-    #   end
-    # end
 end

@@ -22,26 +22,26 @@ class BudgetsController < ApplicationController
     end
   end
 
-    def update
-      @amount = Budget.find(params[:amount_id])
-      if params[:commit] == '+'
-        total = (params[:budget][:total].to_i + params[:amount_total].to_i).to_s
-      elsif params[:commit] == '-'
-        total = (params[:amount_total].to_i - params[:budget][:total].to_i).to_s
-      end
-
-      @amount.trip_id = params[:trip_id]
-      @amount.update(total: "#{total}", trip_id: "#{@amount.trip_id}")
-      trip = Trip.find(params[:trip_id])
-      @total_budget = total_budget(trip.budgets)
-
-      if @amount.save
-        render json: {total_amount: @total_budget, amount: @amount["total"]}
-      else
-        @error = "Error"
-        render partial: 'shared/error', :status => 400
-      end
+  def update
+    @amount = Budget.find(params[:amount_id])
+    if params[:commit] == '+'
+      total = (params[:budget][:total].to_i + params[:amount_total].to_i).to_s
+    elsif params[:commit] == '-'
+      total = (params[:amount_total].to_i - params[:budget][:total].to_i).to_s
     end
+
+    @amount.trip_id = params[:trip_id]
+    @amount.update(total: "#{total}", trip_id: "#{@amount.trip_id}")
+    trip = Trip.find(params[:trip_id])
+    @total_budget = total_budget(trip.budgets)
+
+    if @amount.save
+      render json: {total_amount: @total_budget, amount: @amount["total"]}
+    else
+      @error = "Error"
+      render partial: 'shared/error', :status => 400
+    end
+  end
 
   def destroy_amount_per_day
     @budget = Budget.find(params[:budget_id])
