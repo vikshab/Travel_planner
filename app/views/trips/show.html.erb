@@ -144,6 +144,8 @@
         <tbody class="budget">
           <h1>Total amount:  $<span class="total_amount"><%= @total_budget %></span></h1>
 
+          <!-- <h1>Total amount:  $<span class="total_amount"><%= @total_budget %></span></h1> -->
+
         <% if !@expances_per_day.empty?  %>
           <% @expances_per_day.each do |amount| %>
           <% if amount.date != nil %>

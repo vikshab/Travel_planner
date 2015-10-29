@@ -73,16 +73,16 @@ class TripsController < ApplicationController
     return calendar
   end
 
-  def total_budget(expances_per_day)
-    i = 0
-    total_sum = []
-
-    while i < expances_per_day.length do
-      if expances_per_day[i]["date"] != nil
-        total_sum.push(expances_per_day[i]["total"].to_i)
-      end
-        i += 1
-    end
-    return total_sum.inject(0, :+)
-  end
+  # def total_budget(expances_per_day)
+  #   i = 0
+  #   total_sum = []
+  #
+  #   while i < expances_per_day.length do
+  #     if expances_per_day[i]["date"] != nil
+  #       total_sum.push(expances_per_day[i]["total"].to_i)
+  #     end
+  #       i += 1
+  #   end
+  #   return total_sum.inject(0, :+)
+  # end
 end

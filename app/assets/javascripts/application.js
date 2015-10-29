@@ -188,7 +188,10 @@ function installDelete(element) {
     $.ajax({
       url: url,
       method: "DELETE"
-    }).done(function() {
+    }).done(function(data) {
+
+      console.log(data)
+
       button.parent().parent().hide( 400 );
       var editForm = $('.edit_task_form');
       var details = $('.task_details');
@@ -196,6 +199,7 @@ function installDelete(element) {
       details.empty();
       editForm.empty();
       edit_error.empty();
+
       $('#new_task_field').show();
     });
   });
@@ -300,14 +304,11 @@ function editAmount(element) {
       method: "PUT",
       data: postData,
     }).done(function(data) {
+      var edit_amount = data.amount;
+      var new_total_amount = data.total_amount;
 
-      var total = $('.total_amount').text();
-      var edit_amount= $(data);
-      var new_amount = edit_amount.text();
-      var old_amount = sum_id.text();
-      var new_total = parseInt(total) - parseInt(old_amount) + parseInt(new_amount);
-      $('.total_amount').text(new_total.toString());
-      $(sum_id).replaceWith(edit_amount);
+      $('.total_amount').text(new_total_amount);
+      $(sum_id).replaceWith($('<td class="price">' + edit_amount + '</td>'));
 
     }).fail(function(jqXHR){
       error.empty();
@@ -365,8 +366,6 @@ function addActivityToTasks(element) {
   element.click(function(event){
     event.preventDefault();
     var this_element = $(this);
-
-    // console.log(this_element)
     var price = (this_element.parents('tr').children('.price').text());
 
     var url = $(this).children('a').attr('href');

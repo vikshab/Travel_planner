@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # before_action :require_login
   helper_method :current_user
   helper_method :draw_calendar
+  helper_method :total_budget
 
   private
     def current_user
@@ -31,6 +32,19 @@ class ApplicationController < ActionController::Base
         date += 1
       end
       return calendar
+    end
+
+    def total_budget(expances_per_day)
+      i = 0
+      total_sum = []
+
+      while i < expances_per_day.length do
+        if expances_per_day[i]["date"] != nil
+          total_sum.push(expances_per_day[i]["total"].to_i)
+        end
+          i += 1
+      end
+      return total_sum.inject(0, :+)
     end
 
     # def user_exist?

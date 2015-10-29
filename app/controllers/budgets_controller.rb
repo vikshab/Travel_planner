@@ -34,9 +34,12 @@ class BudgetsController < ApplicationController
 
     @amount.trip_id = params[:trip_id]
     @amount.update(total: "#{total}", trip_id: "#{@amount.trip_id}")
+    trip = Trip.find(params[:trip_id])
+    @total_budget = total_budget(trip.budgets)
 
       if @amount.save
-        render partial: 'updated_amount'
+        render json: {total_amount: @total_budget, amount: @amount["total"]}
+        # render partial: 'updated_amount'
       else
         @error = "Error"
         render partial: 'error', :status => 400
