@@ -22,7 +22,7 @@ class TripsController < ApplicationController
       render partial: 'new_trip'
     else
       @error = "Please, check the dates you enter"
-      render partial: 'error', :status => 400
+      render partial: 'shared/error', :status => 400
     end
   end
 

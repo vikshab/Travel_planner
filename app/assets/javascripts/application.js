@@ -82,7 +82,6 @@ $(document).ready(function() {
       event.preventDefault();
       var error = $('.error_new_budget');
       error.empty();
-
       var formUrl = $(this).attr('action');
       var postData = $(this).serializeArray();
 
@@ -91,9 +90,16 @@ $(document).ready(function() {
           method: "POST",
           data: postData,
         }).done(function(data) {
+
           var new_budget = $(data);
           $('.budget').prepend(new_budget);
           editAmount(new_budget.find('.edit_budget'));
+          var quantityOfdays = parseInt(new_budget.find('td.price').length);
+          // var value = $(new_budget.find('td.price'))[0].text();
+          console.log(quantityOfdays)
+          console.log($('.price').text())
+          $('.total_amount').text()
+          // installResetBudget(new_budget.find('.deleteBudget'))
           // editAmount(new_budget.find('.subtract_budget'));
           installDelete(new_budget.find('.delete'));
         }).fail(function(jqXHR){
@@ -167,6 +173,7 @@ var $window   = $(window),
   // editAmount($('.subtract_budget'));
   newWardrobe($('.new_wardrobe'));
   installDeleteWardrobeItems($('.delete_wardrobe_item'));
+  installResetBudget($('.deleteBudget'));
 });
 
 function removeDetails(element) {
@@ -189,9 +196,8 @@ function installDelete(element) {
       url: url,
       method: "DELETE"
     }).done(function(data) {
-
-      console.log(data)
-
+      var total_budget = data.total_budget
+      $('.total_amount').text(total_budget)
       button.parent().parent().hide( 400 );
       var editForm = $('.edit_task_form');
       var details = $('.task_details');
@@ -317,6 +323,24 @@ function editAmount(element) {
   });
 };
 
+function installResetBudget(element) {
+  element.click(function(){
+  event.preventDefault();
+
+  var button = $(this);
+  var url = $(this).children('a').attr('href');
+    $.ajax({
+      url: url,
+      method: "DELETE"
+    }).done(function(data) {
+      button.parents('tr').siblings().hide();
+      console.log(data)
+      $('.total_amount').text(data)
+
+    });
+  });
+}
+
 // NEW WARDROBE ITEM POST
 function newWardrobe(element) {
   element.submit(function(){
@@ -377,7 +401,7 @@ function addActivityToTasks(element) {
       var activity_id = this_element.parents('tr').attr('id');
       var activity = $('.popular_things_todo').find('#' + activity_id );
       this_element.toggleClass('added')
-      activity.hide(600);
+      // activity.hide(600);
       $('.all_tasks').prepend(new_task);
 
       var budget = $("#money").attr('data-val');

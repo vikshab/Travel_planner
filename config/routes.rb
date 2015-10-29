@@ -42,11 +42,13 @@ Rails.application.routes.draw do
 
   put "/trips/:trip_id/budget/:amount_id/:amount_total", to: "budgets#update"
   post "/trips/:trip_id/budget", to: "budgets#create"
-  delete "/trips/:trip_id/budget/:budget_id", to: "budgets#destroy"
+  delete "/trips/:trip_id/budget/:budget_id", to: "budgets#destroy_amount_per_day"
+  delete "/trips/:trip_id/budget", to: "budgets#destroy_budget"
 
 
   post "/trips/:trip_id/wardrobe/:date", to: "wardrobes#create"
   delete "/trips/:trip_id/wardrobe/:wardrobe_id", to: "wardrobes#remove_wardrobe_item_from_trip"
+
 
   # post "/trips/:trip", to: "tasks#create"
   # The priority is based upon order of creation: first created -> highest priority.
