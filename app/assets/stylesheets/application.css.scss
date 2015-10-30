@@ -53,18 +53,18 @@ section {
 }
 
 #things_todo {
-  background-image: url(image-path("4.jpeg"));
+  background-image: url(image-path("sky.jpeg"));
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-size: 12px;
   a {
-    color: black;
+    color: white;
   }
 }
 
 #budget, #wardrobe {
-  background-image: url(image-path("4.jpeg"));
+  background-image: url(image-path("sky.jpeg"));
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -84,7 +84,7 @@ section {
 }
 
 .trips {
-  background-image: url(image-path("4.jpeg"));
+  background-image: url(image-path("sky.jpeg"));
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -399,22 +399,33 @@ hoverblk {
   padding:1em;
   background: #444;
   background: rgba(0,0,0,.2);
-  border: 1px solid #fff;
+  // border: 1px solid #fff;
   padding: 10px 5px;
   color: white;
-  border-radius: 3px 0 0 3px;
+  // border-radius: 3px 0 0 3px;
 }
 
 .box-table table tbody tr:nth-child(odd){
-  background:#95a5a6;
-  background:#ecf0f1;
+  // background:#95a5a6;
+  // background:#ecf0f1;
+  background: fade(#444, 40%);
+
+  // background: transparent;
 
 }
 .box-table table tbody tr:nth-child(even){
-  background:#bdc3c7;
-  color:#7f8c8d;
+  // background:#bdc3c7;
+  // color:#7f8c8d;
+  background: fade(#444, 40%);
+  // background: transparent;
+
 }
 .box-table table tbody tr a{
+  color: white;
+  text-decoration:none;
+}
+
+.box-table td a{
   color: white;
   text-decoration:none;
 }

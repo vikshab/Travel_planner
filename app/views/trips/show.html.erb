@@ -185,7 +185,7 @@
             <% @calendar.each do |date| %>
               <tr id=<%= date %>>
                 <td class="wardrobe_day"><strong><%= date %></td>
-                <td class="empty">Orginize your wardrobe</td>
+                <td class="empty">Organize your wardrobe</td>
                 <td>
                   <%= form_for @wardrobe, url:("/trips/" + params[:trip_id] + "/wardrobe/" + date.to_s), id:"new_wardrobe_form" do |f| %>
                     <%= f.text_field :name, placeholder:"Outfit item", class: "form-control" %>
